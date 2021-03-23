@@ -2,7 +2,7 @@ const settings = {
   "name": "muzeum",
   "state": {
     "frontity": {
-      "url": "http://lucanus.ayz.pl",
+      "url": "https://lucanus.ayz.pl",
       "title": "Test Frontity Blog",
       "description": "WordPress installation for Frontity development"
     }
@@ -45,7 +45,7 @@ const settings = {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "url": "http://lucanus.ayz.pl"
+          "url": "https://lucanus.ayz.pl"
         }
       }
     },
