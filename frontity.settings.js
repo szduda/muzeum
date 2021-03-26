@@ -3,8 +3,8 @@ const settings = {
   "state": {
     "frontity": {
       "url": "https://lucanus.ayz.pl",
-      "title": "Test Frontity Blog",
-      "description": "WordPress installation for Frontity development"
+      "title": "Visit Auschwitz",
+      "description": "Clear and useful information on numerous aspects of the visit - in order to save time and help both the visitors and the Museum staff."
     }
   },
   "packages": [
@@ -14,24 +14,28 @@ const settings = {
         "theme": {
           "menu": [
             [
-              "Home",
-              "/"
+              "Arrival",
+              "/arrival/"
             ],
             [
-              "Nature",
-              "/category/nature/"
+              "Before entering",
+              "/before-entering/"
             ],
             [
-              "Travel",
-              "/category/travel/"
+              "Auschwitz",
+              "/auschwitz/"
             ],
             [
-              "Japan",
-              "/tag/japan/"
+              "Birkenau",
+              "/birkenau/"
             ],
             [
-              "About Us",
-              "/about-us/"
+              "After visiting",
+              "/after-visiting/"
+            ],
+            [
+              "more...",
+              "/more/"
             ]
           ],
           "featured": {

@@ -28,12 +28,10 @@ export default connect(Nav);
 const NavContainer = styled.nav`
   list-style: none;
   display: flex;
-  width: 848px;
   max-width: 100%;
   box-sizing: border-box;
-  padding: 0 24px;
+  padding: 0 0 0 24px;
   margin: 0;
-  overflow-x: auto;
 
   @media screen and (max-width: 560px) {
     display: none;
