@@ -13,7 +13,8 @@ export default Logo;
 
 const StyledImage = styled(Image)`
   display: block;
-  height: 100%;
-  width: 100%;
+  height: 69px;
+  width: 126px;
+  margin: 2px 0 1px;
   object-fit: cover;
 `;

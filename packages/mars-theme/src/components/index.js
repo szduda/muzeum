@@ -6,6 +6,8 @@ import Post from "./post";
 import Loading from "./loading";
 import Title from "./title";
 import PageError from "./page-error";
+import bgLeftUrl from '../assets/bg.jpg'
+import bgRightUrl from '../assets/bg2.jpg'
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -17,32 +19,28 @@ const Theme = ({ state }) => {
 
   return (
     <>
-      {/* Add some metatags to the <head> of the HTML. */}
       <Title />
       <Head>
         <meta name="description" content={state.frontity.description} />
         <html lang="en" />
       </Head>
 
-      {/* Add some global styles for the whole site, like body or a's. 
-      Not classes here because we use CSS-in-JS. Only global HTML tags. */}
       <Global styles={globalStyles} />
 
-      {/* Add the header of the site. */}
-      <HeadContainer>
+      <Wrapper>
         <Header />
-      </HeadContainer>
+        <Hero><h2><small>How to visit</small>Auschwitz-Birkenau<small>memorial &amp; museum</small></h2></Hero>
+        <Main>
+          <Switch>
+            <Loading when={data.isFetching} />
+            <List when={data.isArchive} />
+            <Post when={data.isPostType} />
+            <PageError when={data.isError} />
+          </Switch>
+        </Main>
 
-      {/* Add the main section. It renders a different component depending
-      on the type of URL we are in. */}
-      <Main>
-        <Switch>
-          <Loading when={data.isFetching} />
-          <List when={data.isArchive} />
-          <Post when={data.isPostType} />
-          <PageError when={data.isError} />
-        </Switch>
-      </Main>
+        {/* <Footer /> */}
+      </Wrapper>
     </>
   );
 };
@@ -54,19 +52,40 @@ const globalStyles = css`
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: linear-gradient(to bottom, #f9c95988, #444), url('${bgLeftUrl}');
+    background-size: auto 100vh;
+    background-position: -50vw 0;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    color: #444;
   }
-  a,
-  a:visited {
+
+  a, a:visited {
     color: inherit;
     text-decoration: none;
   }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  div {
+    box-sizing: border-box;
+  }
 `;
 
-const HeadContainer = styled.div`
+const Wrapper = styled.div`
   display: flex;
-  align-items: center;
   flex-direction: column;
-  background-color: #1f38c5;
+  align-items: center;
+  background-color: #FCFCFC;
+  width: 100vw;
+  flex-grow: 1;
+  max-width: max(800px, 70vw);
+  min-height: 100vh;
+  margin-bottom: 400px;
+  box-shadow: 0 2px 12px 4px;
 `;
 
 const Main = styled.div`
@@ -74,7 +93,38 @@ const Main = styled.div`
   justify-content: center;
   background-image: linear-gradient(
     180deg,
-    rgba(66, 174, 228, 0.1),
-    rgba(66, 174, 228, 0)
+    #F9C95911,
+    #fcfcfc
   );
+`;
+
+const Hero = styled.div`
+  padding: 30vh 16px;
+  width: 100%;
+  background: #444;
+  
+  h2 {
+    display: flex;
+    font-size: 4rem;
+    flex-direction: column;
+    max-width: 600px;
+    text-align: center;
+    color: #fcfcfc;
+    margin: 0 auto;
+    width: fit-content;
+    position: relative;
+    line-height: 2.5rem;
+    font-variant: all-small-caps;
+
+    small {
+      font-size: 2.5rem;
+    }
+
+    > *:first-child {
+      position: absolute;
+      top: -1em;
+      left: 0;
+      font-size: 1.5rem
+    }
+  }
 `;

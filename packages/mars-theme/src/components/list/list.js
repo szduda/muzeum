@@ -37,9 +37,8 @@ const List = ({ state }) => {
 export default connect(List);
 
 const Container = styled.section`
-  width: 800px;
   margin: 0;
-  padding: 24px;
+  padding: 0 16px;
   list-style: none;
 `;
 

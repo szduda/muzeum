@@ -12,9 +12,8 @@ const Nav = ({ state }) => (
       // Check if the link matched the current page url
       const isCurrentPage = state.router.link === link;
       return (
-        <NavItem key={name}>
-          {/* If link url is the current page, add `aria-current` for a11y */}
-          <Link link={link} aria-current={isCurrentPage ? "page" : undefined}>
+        <NavItem key={name} aria-current={isCurrentPage ? "page" : undefined}>
+          <Link link={link}>
             {name}
           </Link>
         </NavItem>
@@ -33,27 +32,42 @@ const NavContainer = styled.nav`
   padding: 0 0 0 24px;
   margin: 0;
 
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 768px) {
     display: none;
   }
 `;
 
 const NavItem = styled.div`
-  padding: 0;
-  margin: 0 16px;
-  color: #fff;
-  font-size: 0.9em;
+  font-size: 18px;
   box-sizing: border-box;
-  flex-shrink: 0;
+  align-items: center;
+  display: flex;
+  padding: 0 16px;
 
+  &[aria-current="page"] {
+    background: #444;
+    color: #F9C959;
+    border-bottom: 4px solid #f9c959;
+
+    & > a:hover {
+      border-bottom-color: transparent !important;
+    }
+  }
+  
   & > a {
-    display: inline-block;
-    line-height: 2em;
+    font-weight: 600;
+    display: inline-flex;
+    align-items:center;
+    padding: 0;
+    line-height: 1;
+    text-align: center;
     border-bottom: 2px solid;
     border-bottom-color: transparent;
-    /* Use for semantic approach to style the current link */
-    &[aria-current="page"] {
-      border-bottom-color: #fff;
+    font-variant: all-small-caps;
+
+    &:hover {
+      text-decoration: none;
+      border-bottom-color: #F9C959;
     }
   }
 
@@ -62,7 +76,7 @@ const NavItem = styled.div`
   }
 
   &:last-of-type {
-    margin-right: 0;
+    margin-right: 16px;
 
     &:after {
       content: "";
