@@ -73,24 +73,29 @@ const globalStyles = css`
   div {
     box-sizing: border-box;
   }
+
+  div#root {
+    width: 100%;
+  }
 `;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #FCFCFC;
-  width: 100vw;
+  width: 100%;
   flex-grow: 1;
-  max-width: max(800px, 70vw);
   min-height: 100vh;
   margin-bottom: 400px;
-  box-shadow: 0 2px 12px 4px;
 `;
 
 const Main = styled.div`
   display: flex;
   justify-content: center;
+  width: 100%;
+  min-height: 80vh;
+  background: #fcfcfc;
+  box-shadow: 0 2px 12px 4px;
   background-image: linear-gradient(
     180deg,
     #F9C95911,
@@ -99,11 +104,13 @@ const Main = styled.div`
 `;
 
 const Hero = styled.div`
-  padding: 30vh 16px;
+  padding: 16px;
+  height: 71vh;
   width: 100%;
-  background: #444;
+  display: flex;
   
   h2 {
+    align-self: center;
     display: flex;
     font-size: 4rem;
     flex-direction: column;

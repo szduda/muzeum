@@ -29,6 +29,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: 0 2px 12px 4px;
+  background: #fcfcfc;
 `;
 
 const Title = styled.h2`

@@ -40,6 +40,8 @@ const Container = styled.section`
   margin: 0;
   padding: 0 16px;
   list-style: none;
+  padding: 32px 16px;
+  max-width: 960px;
 `;
 
 const Header = styled.h3`
