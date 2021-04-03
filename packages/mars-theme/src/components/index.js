@@ -29,7 +29,15 @@ const Theme = ({ state }) => {
 
       <Wrapper>
         <Header />
-        <Hero><h2><small>How to visit</small>Auschwitz-Birkenau<small>memorial &amp; museum</small></h2></Hero>
+        <Hero>
+          <h2>
+            <small>How to visit</small>
+            <span css={css`@media(min-width: 768px) { display: none }`}>Auschwitz Birkenau</span>
+            <span css={css`@media(max-width: 767px) { display: none }`}>Auschwitz-Birkenau</span>
+            <small>memorial &amp; museum</small>
+          </h2>
+
+        </Hero>
         <Main>
           <Switch>
             <Loading when={data.isFetching} />
@@ -87,6 +95,7 @@ const Wrapper = styled.div`
   flex-grow: 1;
   min-height: 100vh;
   margin-bottom: 400px;
+  background: linear-gradient(to bottom, #fcfcfc 72px, transparent 40vh);
 `;
 
 const Main = styled.div`
@@ -105,33 +114,45 @@ const Main = styled.div`
 
 const Hero = styled.div`
   padding: 16px;
+  max-width: 960px;
   height: 71vh;
   width: 100%;
   display: flex;
   
   h2 {
-    align-self: center;
     display: flex;
     font-size: 4rem;
+    line-height: 0.6;
     flex-direction: column;
-    max-width: 600px;
-    text-align: center;
     color: #fcfcfc;
-    margin: 0 auto;
-    width: fit-content;
     position: relative;
-    line-height: 2.5rem;
     font-variant: all-small-caps;
+    text-shadow: 0 2px 4px #543a;
+    text-align: right;
+
+    span {
+      padding-bottom: 12px;
+    }
 
     small {
-      font-size: 2.5rem;
+      font-size: 1.5rem;
+      line-height: 1.75;
+      font-variant: normal;
+      text-transform: lowercase;
     }
 
-    > *:first-child {
-      position: absolute;
-      top: -1em;
-      left: 0;
-      font-size: 1.5rem
+  }
+
+  @media(min-width: 768px) {
+    justify-content: center;
+    padding: 120px 16px 64px;
+
+    h2 {
+      text-align: center;
     }
+  }
+
+  @media(min-width: 1400px) {
+    max-width: 1288px;
   }
 `;
