@@ -36,7 +36,7 @@ const Theme = ({ state }) => {
             <span css={css`@media(max-width: 767px) { display: none }`}>Auschwitz-Birkenau</span>
             <small>memorial &amp; museum</small>
           </h2>
-
+          <CTA><span>Essential info</span></CTA>
         </Hero>
         <Main>
           <Switch>
@@ -60,7 +60,7 @@ const globalStyles = css`
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background: linear-gradient(to bottom, #f9c95988, #444), url('${bgLeftUrl}');
+    background: linear-gradient(to bottom, #f9c95988 50%, #444), url('${bgLeftUrl}');
     background-size: auto 100vh;
     background-position: -50vw 0;
     background-attachment: fixed;
@@ -115,13 +115,18 @@ const Main = styled.div`
 const Hero = styled.div`
   padding: 16px;
   max-width: 960px;
-  height: 71vh;
+  height: calc(100vh - 72px);
   width: 100%;
   display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: linear-gradient(180deg, transparent, #a72a 50%, transparent);
   
   h2 {
     display: flex;
-    font-size: 4rem;
+    margin: 32px 0;
+    align-self: flex-end;
+    font-size: 3.5rem;
     line-height: 0.6;
     flex-direction: column;
     color: #fcfcfc;
@@ -144,11 +149,15 @@ const Hero = styled.div`
   }
 
   @media(min-width: 768px) {
+    height: 71vh;
     justify-content: center;
     padding: 120px 16px 64px;
 
     h2 {
       text-align: center;
+      font-size: 4rem;
+      align-self: center;
+      margin: 72px;
     }
   }
 
@@ -156,3 +165,23 @@ const Hero = styled.div`
     max-width: 1288px;
   }
 `;
+
+const CTA = styled.button`
+  align-self: flex-end;
+  background: #4444;
+  border: 2px solid #f9c959;
+  color: #f9c959;
+  padding: 4px 12px;
+  display: inline-block;
+  width: 240px;
+  font-size: 1.5rem;
+  line-height: 1;
+  font-weight: 400;
+  padding: 4px 16px;
+  text-transform: uppercase;
+  margin-bottom: 72px;
+
+  @media(min-width: 768px) {
+    align-self: center;
+  }
+`
