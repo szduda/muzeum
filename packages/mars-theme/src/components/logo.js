@@ -14,7 +14,7 @@ export default Logo;
 const StyledImage = styled(Image)`
   display: block;
   height: 69px;
-  width: 126px;
+  width: 100%
   margin: 2px 0 1px;
   object-fit: cover;
 `;

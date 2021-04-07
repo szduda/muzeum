@@ -6,8 +6,7 @@ import Post from "./post";
 import Loading from "./loading";
 import Title from "./title";
 import PageError from "./page-error";
-import bgLeftUrl from '../assets/bg.jpg'
-import bgRightUrl from '../assets/bg2.jpg'
+import bgUrl from '../assets/gate.jpg'
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -36,7 +35,7 @@ const Theme = ({ state }) => {
             <span css={css`@media(max-width: 767px) { display: none }`}>Auschwitz-Birkenau</span>
             <small>memorial &amp; museum</small>
           </h2>
-          <CTA><span>Essential info</span></CTA>
+          <CTA className="btn--nuka"><span>Essential info</span></CTA>
         </Hero>
         <Main>
           <Switch>
@@ -60,9 +59,8 @@ const globalStyles = css`
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background: linear-gradient(to bottom, #f9c95988 50%, #444), url('${bgLeftUrl}');
-    background-size: auto 100vh;
-    background-position: -50vw 0;
+    background: linear-gradient(to bottom, #543a, #444), url('${bgUrl}') center 72px;
+    background-size: cover;
     background-attachment: fixed;
     display: flex;
     justify-content: center;
@@ -95,7 +93,7 @@ const Wrapper = styled.div`
   flex-grow: 1;
   min-height: 100vh;
   margin-bottom: 400px;
-  background: linear-gradient(to bottom, #fcfcfc 72px, transparent 40vh);
+  background: linear-gradient(to bottom, #fff 72px, transparent 40vh) fixed;
 `;
 
 const Main = styled.div`
@@ -114,13 +112,11 @@ const Main = styled.div`
 
 const Hero = styled.div`
   padding: 16px;
-  max-width: 960px;
   height: calc(100vh - 72px);
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  background: linear-gradient(180deg, transparent, #a72a 50%, transparent);
   
   h2 {
     display: flex;
@@ -160,26 +156,81 @@ const Hero = styled.div`
       margin: 72px;
     }
   }
-
-  @media(min-width: 1400px) {
-    max-width: 1288px;
-  }
 `;
 
 const CTA = styled.button`
   align-self: flex-end;
-  background: #4444;
-  border: 2px solid #f9c959;
+  border-color: #f9c959;
+  border-radius: 2rem;
   color: #f9c959;
-  padding: 4px 12px;
-  display: inline-block;
-  width: 240px;
   font-size: 1.5rem;
-  line-height: 1;
-  font-weight: 400;
-  padding: 4px 16px;
-  text-transform: uppercase;
-  margin-bottom: 72px;
+  padding: 0.25rem 2rem;
+  text-transform: lowercase;
+  margin: 0 0.25rem 72px;
+  cursor: pointer;
+  box-shadow: 0 0px 12px #f9c95966;
+  font-variant: all-small-caps;
+  line-height: 1.5;
+
+	min-width: 150px;
+	display: block;
+	border: none;
+	background: none;
+	vertical-align: middle;
+	position: relative;
+	z-index: 1;
+  transition: color 300ms;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+
+  &:focus {
+	  outline: none;
+  }
+
+  & > span {
+	  vertical-align: middle;
+    transform: translateY(-2px);
+    display: inline-block;
+  }
+
+  &::before, &::after {
+    content: '';	
+    position: absolute;
+    border-radius: inherit;	
+    z-index: -1;
+    transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  }
+
+  &::before {
+    top: -4px;	
+    bottom: -4px;
+    left: -4px;	
+    right: -4px;
+    transform: scale3d(0.7, 1, 1);
+    transition: transform 300ms, opacity 300ms;
+    background-color: #f9c959;
+  }
+
+  &::after {
+    top: 0;	
+    left: 0;
+    width: 100%;	
+    height: 100%;
+    transform: scale3d(1.1, 1, 1);
+    transition: transform 300ms, background-color 300ms;
+    background: #444;
+  }
+
+  &:hover {
+    &::before {
+      transform: scale3d(1, 1, 1);
+      opacity: 1;
+    }
+
+    &::after {
+      transform: scale3d(1, 1, 1);
+      background-color: #444;
+    }
+  }
 
   @media(min-width: 768px) {
     align-self: center;

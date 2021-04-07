@@ -39,7 +39,7 @@ const Title = styled.h2`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  margin-left: 4px;
+  margin-left: 6px;
 `;
 
 const Row = styled.div`
