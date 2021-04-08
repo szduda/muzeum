@@ -52,7 +52,6 @@ const Container = styled.div`
         height: 300px;
         object-position: center;
         width: 288px;
-    }
       }
     }
   }
@@ -78,8 +77,4 @@ const Container = styled.div`
       }
     }
   }
-`
-
-const Section = styled.section`
-  background: #d4d4d4;
 `
