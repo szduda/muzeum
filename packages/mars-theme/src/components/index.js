@@ -152,9 +152,9 @@ const Hero = styled.div`
   }
 
   @media(min-width: 768px) {
-    height: 71vh;
+    height: 100vh;
     justify-content: center;
-    padding: 120px 16px 64px;
+    padding: 120px 16px 8rem;
 
     h2 {
       text-align: center;

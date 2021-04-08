@@ -21,17 +21,29 @@ const Container = styled.div`
 
   h2 {
     text-align: center;
+    font-size: 2.5rem;
+    margin: 4rem 0 1rem;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+    font-weight: normal;
+    margin-bottom: 0;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+    font-weight: normal;
   }
 
   .wp-block-columns {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    margin: 4rem auto;
   }
 
   .wp-block-column {
-    margin: 1rem;
+    margin: 2rem 1rem;
   }
 
   .wp-block-image {
@@ -57,12 +69,18 @@ const Container = styled.div`
   }
 
   @media (min-width: 768px) {
+    h2 {
+      margin: 8rem 0 6rem;
+    }
+
     .wp-block-columns {
       flex-direction: row;
+      margin: 4rem auto;
     }
 
     .wp-block-column {
       width: 100%;
+      margin: 1rem;
       padding: 1rem;
     }
 
