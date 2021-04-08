@@ -50,7 +50,9 @@ const Container = styled.div`
       img {
         object-fit: cover;
         height: 300px;
-        width: 400px;
+        object-position: center;
+        width: 288px;
+    }
       }
     }
   }
@@ -69,6 +71,10 @@ const Container = styled.div`
       .wp-block-column {
         width: 50%;
         max-width: 50%;
+      }
+
+      .wp-block-image img {
+        width: 400px;
       }
     }
   }
