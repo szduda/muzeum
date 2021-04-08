@@ -1,12 +1,15 @@
+import React from 'react'
 import { Global, css, connect, styled, Head } from "frontity";
 import Switch from "@frontity/components/switch";
 import Header from "./header";
+import Home from "./home";
 import List from "./list";
 import Post from "./post";
 import Loading from "./loading";
 import Title from "./title";
 import PageError from "./page-error";
 import bgUrl from '../assets/gate.jpg'
+import {scrollToAnchor} from '../helpers'
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -15,7 +18,6 @@ import bgUrl from '../assets/gate.jpg'
 const Theme = ({ state }) => {
   // Get information about the current URL.
   const data = state.source.get(state.router.link);
-
   return (
     <>
       <Title />
@@ -35,11 +37,12 @@ const Theme = ({ state }) => {
             <span css={css`@media(max-width: 767px) { display: none }`}>Auschwitz-Birkenau</span>
             <small>memorial &amp; museum</small>
           </h2>
-          <CTA className="btn--nuka"><span>Essential info</span></CTA>
+          <CTA className="btn--nuka" onClick={() => scrollToAnchor('#key-info')}><span>key info</span></CTA>
         </Hero>
         <Main>
           <Switch>
             <Loading when={data.isFetching} />
+            <Home when={data.isHome} />
             <List when={data.isArchive} />
             <Post when={data.isPostType} />
             <PageError when={data.isError} />
@@ -82,6 +85,10 @@ const globalStyles = css`
 
   div#root {
     width: 100%;
+  }
+
+  p {
+    line-height: 1.5;
   }
 `;
 

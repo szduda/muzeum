@@ -49,7 +49,8 @@ const settings = {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "url": "https://lucanus.ayz.pl"
+          "url": "https://lucanus.ayz.pl",
+          "homepage": "home"
         }
       }
     },
