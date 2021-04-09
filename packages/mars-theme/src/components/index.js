@@ -18,6 +18,7 @@ import {scrollToAnchor} from '../helpers'
 const Theme = ({ state }) => {
   // Get information about the current URL.
   const data = state.source.get(state.router.link);
+
   return (
     <>
       <Title />
@@ -42,7 +43,7 @@ const Theme = ({ state }) => {
         <Main>
           <Switch>
             <Loading when={data.isFetching} />
-            <Home when={data.isHome} />
+            <Home when={data.isHome || data.route === '/arrival/'} />
             <List when={data.isArchive} />
             <Post when={data.isPostType} />
             <PageError when={data.isError} />

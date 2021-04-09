@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect, styled } from "frontity"
+import { scrollToAnchor } from '../helpers'
 
 const Home = ({ state }) => {
   const { type, id } = state.source.get(state.router.link)
@@ -34,6 +35,32 @@ const Container = styled.div`
   h4 {
     font-size: 1.25rem;
     font-weight: normal;
+    display: flex;
+
+    & img {
+      margin-left: 1rem;
+    }
+  }
+
+  .cover img {
+    object-fit: cover;
+  }
+
+  a {
+    display: inline-block;
+    font-size: 1.15rem;
+    border-bottom: 2px solid #f9c959;
+
+    &:hover {
+      text-decoration: none;
+      border-color: transparent;
+      color: #f9c959;
+    }
+  }
+
+  .clean-links a {
+    padding: inherit;
+    border: inherit;
   }
 
   .wp-block-columns {
@@ -46,13 +73,33 @@ const Container = styled.div`
     margin: 2rem 1rem;
   }
 
+  .wp-block-narrow-text {
+    padding: 0 1rem;
+    max-width: min(100%, 640px);
+    margin: 4rem auto;
+
+    @media (min-width: 768px) {
+      text-align: center;
+    }
+  }
+
+  .single-section {
+    padding: 0 1rem;
+
+    a {
+      font-size: inherit;
+    }
+  }
+
   .wp-block-image {
     margin: 0;
+    overflow: hidden;
   }
 
   .wp-block-articles {
     p {
       max-width: 400px;
+      margin-top: 0.5rem;
     }
 
     .wp-block-image {
