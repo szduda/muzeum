@@ -1,7 +1,7 @@
 import Theme from "./components";
 import image from "@frontity/html2react/processors/image";
 import iframe from "@frontity/html2react/processors/iframe";
-import link from "@frontity/html2react/processors/link";
+import { init } from './components/html2react'
 
 const marsTheme = {
   name: "@frontity/mars-theme",
@@ -34,6 +34,7 @@ const marsTheme = {
    */
   actions: {
     theme: {
+      init,
       toggleMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = !state.theme.isMobileMenuOpen;
       },
@@ -49,7 +50,7 @@ const marsTheme = {
        * and internal link inside the content HTML.
        * You can add your own processors too.
        */
-      processors: [image, iframe, link],
+      processors: [image, iframe],
     },
   },
 };

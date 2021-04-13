@@ -6,13 +6,13 @@ import Link from "./link";
  *
  * It renders the navigation links
  */
-const Nav = ({ state }) => (
+const Nav = ({ state, sticky }) => (
   <NavContainer>
     {state.theme.menu.map(([name, link]) => {
       // Check if the link matched the current page url
       const isCurrentPage = state.router.link === link;
       return (
-        <NavItem key={name} aria-current={isCurrentPage ? "page" : undefined}>
+        <NavItem key={name} sticky={sticky} aria-current={isCurrentPage ? "page" : undefined}>
           <Link link={link}>
             {name}
           </Link>
@@ -45,13 +45,7 @@ const NavItem = styled.div`
   padding: 0 16px;
 
   &[aria-current="page"] {
-    background: #444;
-    color: #F9C959;
-    border-bottom: 4px solid #f9c959;
-
-    & > a:hover {
-      border-bottom-color: transparent !important;
-    }
+    ${({sticky}) => sticky && 'background: #f2eedd'};
   }
   
   & > a {

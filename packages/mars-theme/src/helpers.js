@@ -1,5 +1,5 @@
 export const scrollToAnchor = id => {
-  const yOffset = -32;
+  const yOffset = 0;
   const element = document.querySelector(id);
   const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 

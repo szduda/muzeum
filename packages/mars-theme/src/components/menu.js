@@ -2,11 +2,11 @@ import { styled, connect, Global } from "frontity";
 import { CloseIcon, HamburgerIcon } from "./menu-icon";
 import MenuModal from "./menu-modal";
 
-function MobileMenu({ state, actions }) {
+function MobileMenu({ sticky, state, actions }) {
   const { isMobileMenuOpen } = state.theme;
   return (
     <>
-      <MenuToggle onClick={actions.theme.toggleMobileMenu}>
+      <MenuToggle sticky={sticky} onClick={actions.theme.toggleMobileMenu}>
         {isMobileMenuOpen ? (
           <>
             {/* Add some style to the body when menu is open,
@@ -26,8 +26,10 @@ function MobileMenu({ state, actions }) {
 
 const MenuToggle = styled.button`
   position: absolute;
-  right: 16px;
-  top: 20px;
+  right: 0.5rem;
+  transition: top 300ms ease-out;
+  top: ${({sticky}) => sticky ? '0.25rem' : '1rem'};
+  padding: 0.5rem;
   background: transparent;
   border: 0;
   color: white;

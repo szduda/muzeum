@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Global, css, connect, styled, Head } from "frontity";
 import Switch from "@frontity/components/switch";
 import Header from "./header";
@@ -9,7 +9,7 @@ import Loading from "./loading";
 import Title from "./title";
 import PageError from "./page-error";
 import bgUrl from '../assets/gate.jpg'
-import {scrollToAnchor} from '../helpers'
+import { scrollToAnchor } from '../helpers'
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -17,7 +17,20 @@ import {scrollToAnchor} from '../helpers'
  */
 const Theme = ({ state }) => {
   // Get information about the current URL.
-  const data = state.source.get(state.router.link);
+  const data = state.source.get(state.router.link)
+
+  const [isSticky, setSticky] = useState(false)
+  const ref = useRef(null);
+  const handleScroll = () => {
+    if (ref.current) {
+      setSticky(ref.current.getBoundingClientRect().top <= 72)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', () => handleScroll)
+  }, [])
 
   return (
     <>
@@ -30,17 +43,14 @@ const Theme = ({ state }) => {
       <Global styles={globalStyles} />
 
       <Wrapper>
-        <Header />
-        <Hero>
-          <h2>
-            <small>How to visit</small>
-            <span css={css`@media(min-width: 768px) { display: none }`}>Auschwitz Birkenau</span>
-            <span css={css`@media(max-width: 767px) { display: none }`}>Auschwitz-Birkenau</span>
-            <small>memorial &amp; museum</small>
-          </h2>
-          <CTA className="btn--nuka" onClick={() => scrollToAnchor('#key-info')}><span>key info</span></CTA>
+        <Header sticky={isSticky} />
+        <Hero fullHeight={data.isHome}>
+          <Switch>
+            <HomepageHero when={data.isHome} />
+            <GenericHero when={data.route === '/arrival/'} title="Arrival" cta="find your transport" ctaId="opening-hours" />
+          </Switch>
         </Hero>
-        <Main>
+        <Main ref={ref}>
           <Switch>
             <Loading when={data.isFetching} />
             <Home when={data.isHome || data.route === '/arrival/'} />
@@ -59,6 +69,10 @@ const Theme = ({ state }) => {
 export default connect(Theme);
 
 const globalStyles = css`
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -101,13 +115,14 @@ const Wrapper = styled.div`
   flex-grow: 1;
   min-height: 100vh;
   margin-bottom: 400px;
-  background: linear-gradient(to bottom, #fff 72px, transparent 40vh) fixed;
+  background: linear-gradient(to bottom, #fcfcfc 72px, transparent 40vh) fixed;
 `;
 
 const Main = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
+  overflow-y: hidden;
   min-height: 80vh;
   background: #fcfcfc;
   box-shadow: 0 2px 12px 4px;
@@ -120,7 +135,7 @@ const Main = styled.div`
 
 const Hero = styled.div`
   padding: 16px;
-  height: calc(100vh - 72px);
+  ${props => props.fullHeight && 'height: calc(100vh - 72px)'};
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -153,7 +168,7 @@ const Hero = styled.div`
   }
 
   @media(min-width: 768px) {
-    height: 100vh;
+    ${props => props.fullHeight && 'height: 100vh;'}
     justify-content: center;
     padding: 120px 16px 8rem;
 
@@ -166,13 +181,38 @@ const Hero = styled.div`
   }
 `;
 
+const GenericHero = ({ title, cta, ctaId }) => (
+  <>
+    <h2>
+      {title}
+    </h2>
+    <CTA onClick={() => scrollToAnchor(`#${ctaId}`)}>
+      <span>{cta}</span>
+    </CTA>
+  </>
+)
+
+const HomepageHero = () => (
+  <>
+    <h2>
+      <small>How to visit</small>
+      <span css={css`@media(min-width: 768px) { display: none }`}>Auschwitz Birkenau</span>
+      <span css={css`@media(max-width: 767px) { display: none }`}>Auschwitz-Birkenau</span>
+      <small>memorial &amp; museum</small>
+    </h2>
+    <CTA onClick={() => scrollToAnchor('#key-info')}>
+      <span>key info</span>
+    </CTA>
+  </>
+)
+
 const CTA = styled.button`
   align-self: flex-end;
   border-color: #f9c959;
   border-radius: 2rem;
   color: #f9c959;
   font-size: 1.5rem;
-  padding: 0.25rem 2rem;
+  padding: 0.25rem 1rem;
   text-transform: lowercase;
   margin: 0 0.25rem 72px;
   cursor: pointer;

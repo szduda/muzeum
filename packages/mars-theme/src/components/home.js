@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { connect, styled } from "frontity"
-import { scrollToAnchor } from '../helpers'
 
-const Home = ({ state }) => {
+const Home = ({ state, libraries }) => {
   const { type, id } = state.source.get(state.router.link)
   const content = state.source[type][id].content.rendered
+  const Html2React = libraries.html2react.Component;
 
   return (
-    <Container dangerouslySetInnerHTML={{ __html: content }} />
+    <Container>
+      <Html2React html={content} />
+    </Container>
   )
 }
 
@@ -16,29 +18,69 @@ export default connect(Home);
 const Container = styled.div`
   margin: 0;
   list-style: none;
-  padding: 1rem 0;
+  padding: 1rem 0 8rem;
   max-width: 960px;
   width: 100%;
 
-  h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin: 4rem 0 1rem;
+  > h2:first-of-type {
+    margin-bottom: 2rem;
   }
 
-  h3 {
-    font-size: 1.75rem;
-    font-weight: normal;
-    margin-bottom: 0;
+  .has-medium-font-size {
+    font-size: 20px;
   }
 
-  h4 {
-    font-size: 1.25rem;
-    font-weight: normal;
-    display: flex;
+  .means-of-transport {
+    .wp-block-image {
+      height: 128px;
+      width: 128px;
+      margin: 0;
+    }
 
-    & img {
-      margin-left: 1rem;
+    .wp-block-column {
+      flex-basis: 128px;
+    }
+
+    &.wp-block-columns {
+      flex-wrap: wrap;
+      flex-direction: row;
+    }
+  }
+
+  #opening-hours {
+    background: #f2eedd;
+    margin-top: 2rem;
+    overflow: hidden;
+
+    sub {
+      color: #888;
+      font-size: 1rem;
+      font-weight: 600;
+      vertical-align: baseline;
+      font-variant: all-small-caps;
+      display: inline-block;
+      
+      &:nth-of-type(n+2) {
+        padding-top: 1rem;
+      }
+    }
+
+    p:first-of-type {
+      margin-top: 0;
+
+      br {
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    @media (min-width: 960px) {
+      margin: 0 calc(-50vw + 480px) -2rem;
+      
+      > div {
+        max-width: 960px;
+        margin: 0 auto;
+        padding 0 16px;
+      }
     }
   }
 
@@ -46,31 +88,39 @@ const Container = styled.div`
     object-fit: cover;
   }
 
-  a {
-    display: inline-block;
-    font-size: 1.15rem;
-    border-bottom: 2px solid #f9c959;
-
-    &:hover {
-      text-decoration: none;
-      border-color: transparent;
-      color: #f9c959;
-    }
-  }
-
   .clean-links a {
-    padding: inherit;
-    border: inherit;
+    padding: unset;
+    border: unset;
   }
 
   .wp-block-columns {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      margin: 4rem auto;
+    }
+  }
+
+  #key-info {
+    .wp-block-image {
+      height: 64px;
+      width: 64px;
+    }
   }
 
   .wp-block-column {
     margin: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: 768px) {
+      width: 100%;
+      margin: 1rem;
+      padding: 0 1rem;
+    }
   }
 
   .wp-block-narrow-text {
@@ -85,15 +135,15 @@ const Container = styled.div`
 
   .single-section {
     padding: 0 1rem;
-
-    a {
-      font-size: inherit;
-    }
   }
 
   .wp-block-image {
-    margin: 0;
+    margin: 0 0 1rem;
     overflow: hidden;
+  }
+
+  .shadow {
+    box-shadow: 0 2px 4px #afafaf;
   }
 
   .wp-block-articles {
@@ -103,8 +153,7 @@ const Container = styled.div`
     }
 
     .wp-block-image {
-      overflow: hidden;
-      margin: 0;
+      box-shadow: 0 2px 4px #afafaf;
   
       img {
         object-fit: cover;
@@ -113,32 +162,15 @@ const Container = styled.div`
         width: 288px;
       }
     }
-  }
 
-  @media (min-width: 768px) {
-    h2 {
-      margin: 8rem 0 6rem;
-    }
-
-    .wp-block-columns {
-      flex-direction: row;
-      margin: 4rem auto;
-    }
-
-    .wp-block-column {
-      width: 100%;
-      margin: 1rem;
-      padding: 1rem;
-    }
-
-    .wp-block-articles {
+    @media (min-width: 768px) {
       .wp-block-column {
         width: 50%;
         max-width: 50%;
       }
 
       .wp-block-image img {
-        width: 400px;
+        width: 416px;
       }
     }
   }
