@@ -28,6 +28,7 @@ const Theme = ({ state }) => {
   }
 
   useEffect(() => {
+    handleScroll()
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', () => handleScroll)
   }, [])
@@ -135,7 +136,7 @@ const Main = styled.div`
 
 const Hero = styled.div`
   padding: 16px;
-  ${props => props.fullHeight && 'height: calc(100vh - 72px)'};
+  min-height: calc(100vh - 68px);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -168,6 +169,7 @@ const Hero = styled.div`
   }
 
   @media(min-width: 768px) {
+    min-height: 55vh;
     ${props => props.fullHeight && 'height: 100vh;'}
     justify-content: center;
     padding: 120px 16px 8rem;
