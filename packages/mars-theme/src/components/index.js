@@ -123,7 +123,7 @@ const Main = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  overflow-y: hidden;
+  overflow-x: hidden;
   min-height: 80vh;
   background: #fcfcfc;
   box-shadow: 0 2px 12px 4px;

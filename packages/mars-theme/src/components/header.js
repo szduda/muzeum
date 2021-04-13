@@ -32,6 +32,7 @@ const Container = styled.div`
   background: #fcfcfc;
   ${props => props.sticky && `
     border-bottom: 2px solid #888;
+    box-shadow: 0 2px 4px #8884;
   `}
 `;
 
