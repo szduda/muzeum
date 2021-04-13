@@ -154,15 +154,12 @@ const Container = styled.div`
       margin-top: 0.5rem;
     }
 
-    .wp-block-image {
+    .wp-block-image img {
       box-shadow: 0 2px 4px #444a;
-  
-      img {
-        object-fit: cover;
-        height: 300px;
-        object-position: center;
-        width: 100%;
-      }
+      object-fit: cover;
+      height: 300px;
+      object-position: center;
+      width: 100%;
     }
 
     @media (min-width: 768px) {

@@ -23,7 +23,7 @@ const Theme = ({ state }) => {
   const ref = useRef(null);
   const handleScroll = () => {
     if (ref.current) {
-      setSticky(ref.current.getBoundingClientRect().top <= 38)
+      setSticky(ref.current.getBoundingClientRect().top <= 42)
     }
   }
 
@@ -78,7 +78,7 @@ const globalStyles = css`
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background: linear-gradient(to bottom, #543a, #444), url('${bgUrl}') center 72px;
+    background: linear-gradient(to bottom, #543a, #444), url('${bgUrl}') center 0px;
     background-size: cover;
     background-attachment: fixed;
     display: flex;
@@ -116,7 +116,6 @@ const Wrapper = styled.div`
   flex-grow: 1;
   min-height: 100vh;
   margin-bottom: 400px;
-  background: linear-gradient(to bottom, #fcfcfc 72px, transparent 40vh) fixed;
 `;
 
 const Main = styled.div`
@@ -135,7 +134,7 @@ const Main = styled.div`
 `;
 
 const Hero = styled.div`
-  padding: 16px;
+  padding: 0 1rem;
   min-height: calc(100vh - 68px);
   width: 100%;
   display: flex;
@@ -144,7 +143,7 @@ const Hero = styled.div`
   
   h2 {
     display: flex;
-    margin: 32px 0;
+    margin: 0 0 2rem 0;
     align-self: flex-end;
     font-size: 3.5rem;
     line-height: 0.6;
@@ -170,9 +169,8 @@ const Hero = styled.div`
 
   @media(min-width: 768px) {
     min-height: 55vh;
-    ${props => props.fullHeight && 'height: 100vh;'}
     justify-content: center;
-    padding: 120px 16px 8rem;
+    ${props => props.fullHeight && 'height: 100vh;'}
 
     h2 {
       text-align: center;
