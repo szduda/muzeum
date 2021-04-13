@@ -23,7 +23,7 @@ const Theme = ({ state }) => {
   const ref = useRef(null);
   const handleScroll = () => {
     if (ref.current) {
-      setSticky(ref.current.getBoundingClientRect().top <= 72)
+      setSticky(ref.current.getBoundingClientRect().top <= 38)
     }
   }
 
@@ -216,7 +216,7 @@ const CTA = styled.button`
   font-size: 1.5rem;
   padding: 0.25rem 1rem;
   text-transform: lowercase;
-  margin: 0 0.25rem 72px;
+  margin: 0 0.25rem 6rem;
   cursor: pointer;
   box-shadow: 0 0px 12px #f9c95966;
   font-variant: all-small-caps;

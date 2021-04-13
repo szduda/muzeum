@@ -31,8 +31,7 @@ const Container = styled.div`
   z-index: 10;
   background: #fcfcfc;
   ${props => props.sticky && `
-    border-bottom: 2px solid #888;
-    box-shadow: 0 2px 4px #8884;
+    box-shadow: 0 2px 4px #444a;
   `}
 `;
 

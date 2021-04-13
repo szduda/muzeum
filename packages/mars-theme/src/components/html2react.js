@@ -26,7 +26,7 @@ const H2 = styled.h2`
   margin: 0 0 2rem;
   display: flex;
   flex-direction: column;
-  padding-top: 4rem;
+  padding-top: 5rem;
 
   & span:first-of-type {
     font-size: 0.75rem;

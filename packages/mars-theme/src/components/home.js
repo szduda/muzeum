@@ -44,6 +44,7 @@ const Container = styled.div`
     &.wp-block-columns {
       flex-wrap: wrap;
       flex-direction: row;
+      justify-content: space-evenly;
     }
   }
 
@@ -134,7 +135,8 @@ const Container = styled.div`
   }
 
   .single-section {
-    padding: 0 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .wp-block-image {
@@ -143,7 +145,7 @@ const Container = styled.div`
   }
 
   .shadow {
-    box-shadow: 0 2px 4px #afafaf;
+    box-shadow: 0 2px 4px #444a;
   }
 
   .wp-block-articles {
@@ -153,13 +155,13 @@ const Container = styled.div`
     }
 
     .wp-block-image {
-      box-shadow: 0 2px 4px #afafaf;
+      box-shadow: 0 2px 4px #444a;
   
       img {
         object-fit: cover;
         height: 300px;
         object-position: center;
-        width: 288px;
+        width: 100%;
       }
     }
 
