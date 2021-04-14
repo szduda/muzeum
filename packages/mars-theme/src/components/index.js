@@ -21,17 +21,17 @@ const Theme = ({ state }) => {
 
   const [isSticky, setSticky] = useState(false)
   const ref = useRef(null);
-  const handleScroll = () => {
-    if (ref.current) {
-      setSticky(ref.current.getBoundingClientRect().top <= 42)
-    }
-  }
-
+  
   useEffect(() => {
+    const handleScroll = () => {
+      if (ref.current) {
+        setSticky(ref.current.getBoundingClientRect().top <= 42)
+      }
+    }
     handleScroll()
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', () => handleScroll)
-  }, [])
+  }, [ref])
 
   return (
     <>
@@ -48,7 +48,7 @@ const Theme = ({ state }) => {
         <Hero fullHeight={data.isHome}>
           <Switch>
             <HomepageHero when={data.isHome} />
-            <GenericHero when={data.route === '/arrival/'} title="Arrival" cta="find your transport" ctaId="opening-hours" />
+            <GenericHero when={data.route === '/arrival/'} title="Arrival" cta="match my ride" ctaId="Find the best transport" />
           </Switch>
         </Hero>
         <Main ref={ref}>
@@ -72,6 +72,7 @@ export default connect(Theme);
 const globalStyles = css`
   html {
     scroll-behavior: smooth;
+    height: 100%;
   }
 
   body {
@@ -125,7 +126,7 @@ const Main = styled.div`
   overflow-x: hidden;
   min-height: 80vh;
   background: #fcfcfc;
-  box-shadow: 0 2px 12px 4px;
+  box-shadow: 0 0 24px 16px #444;
   background-image: linear-gradient(
     180deg,
     #F9C95911,
@@ -135,7 +136,7 @@ const Main = styled.div`
 
 const Hero = styled.div`
   padding: 0 1rem;
-  min-height: calc(100vh - 68px);
+  min-height: calc(100vh - 48px);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -206,7 +207,7 @@ const HomepageHero = () => (
   </>
 )
 
-const CTA = styled.button`
+export const CTA = styled.button`
   align-self: flex-end;
   border-color: #f9c959;
   border-radius: 2rem;
@@ -219,6 +220,7 @@ const CTA = styled.button`
   box-shadow: 0 0px 12px #f9c95966;
   font-variant: all-small-caps;
   line-height: 1.5;
+  font-weight: 600;
 
 	min-width: 150px;
 	display: block;

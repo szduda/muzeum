@@ -28,9 +28,11 @@ const MenuToggle = styled.button`
   position: absolute;
   right: 0.5rem;
   transition: top 300ms ease-out;
-  top: ${({sticky}) => sticky ? '0.25rem' : '1rem'};
+  top: 1rem;
   padding: 0.5rem;
-  background: transparent;
+  border-radius: 8px;
+  transition: background-color 300ms ease-out 150ms;
+  background-color: ${props => props.sticky ? '#fcfcfc' : 'transparent'};
   border: 0;
   color: white;
   z-index: 5;

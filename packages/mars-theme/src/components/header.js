@@ -29,33 +29,20 @@ const Container = styled.div`
   position: sticky;
   top: 0;
   z-index: 10;
+  background: transparent;
+  transition: background-color 600ms ease-out, color 600ms ease-out;
+  color: ${props => props.sticky ? '#444' : '#fcfcfc'};
 
-  :before {
-    content: ' ';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: min(50vh, 14rem);
-    z-index: -1;
-    background: linear-gradient(to bottom, #fcfcfc 32px, transparent);
-    opacity: 1;
-    transition: opacity 1s ease-out 450ms;
-    pointer-events: none;
+  @media (min-width: 768px) {
+    background-color: #fcfcfc11;
+    backdrop-filter: blur(2px);
+    ${props => props.sticky && `
+    backdrop-filter: blur(2px) saturate(0.3) contrast(0.4) brightness(1.4);
+    background-color: #fcfcfc88;
+    box-shadow: 0 2px 4px #444a;
+    `}
   }
-
-  transition: background-color 300ms ease-out 150ms;
-  background-color: transparent;
-  ${props => props.sticky && `
-  transition-delay: 0;
-  background-color: #fcfcfc;
-  box-shadow: 0 2px 4px #444a;
-  :before {
-    opacity: 0;
-  }
-  `}
 `
-
 
 const StyledLink = styled(Link)`
   text-decoration: none;
