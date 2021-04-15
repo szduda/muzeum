@@ -47,6 +47,9 @@ const Container = styled.div`
 const StyledLink = styled(Link)`
   text-decoration: none;
   margin-left: 6px;
+  @media (min-width: 768px) {
+    margin-left: 16px;
+  }
 `
 
 const Row = styled.div`

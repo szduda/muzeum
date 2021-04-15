@@ -45,6 +45,7 @@ const Container = styled.div`
       flex-wrap: wrap;
       flex-direction: row;
       justify-content: space-evenly;
+      margin-bottom: 2rem;
     }
   }
 
@@ -75,7 +76,7 @@ const Container = styled.div`
     }
 
     @media (min-width: 960px) {
-      margin: 0 calc(-50vw + 480px) -2rem;
+      margin: 0 calc(-50vw + 480px);
       
       > div {
         max-width: 960px;

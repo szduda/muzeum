@@ -37,26 +37,43 @@ const MenuOverlay = styled.div`
 
 const MenuContent = styled.div`
   z-index: 3;
+  position: fixed;
+  top: 0;
+  padding: 72px 0;
+  overflow-y: scroll;
+  height: calc(100vh - 52px);
 `;
 
 const MenuLink = styled(Link)`
   width: 100%;
   display: inline-block;
   outline: 0;
-  font-size: 20px;
   text-align: center;
-  padding: 1.2rem 0;
+  padding: 1rem;
   color: #fffff0 !important;
+
+  font-size: 2rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items:center;
+  line-height: 1;
+  text-align: center;
+  border: 2px solid transparent;
+  font-variant: all-small-caps;
+
+  &:last-of-type {
+    color: #f9c959 !important;
+    margin-bottom: 2rem;
+  }
 
   &:hover,
   &:focus {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: #f9c959;
+    text-decoration: none;
   }
-  /* styles for active link */
+
   &[aria-current="page"] {
-    color: #F9C959;
-    font-weight: bold;
-    /* border-bottom: 4px solid yellow; */
+    background-color: #888;
   }
 `;
 

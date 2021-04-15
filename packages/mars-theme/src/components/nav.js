@@ -9,7 +9,7 @@ const Nav = ({ state, sticky }) => (
       const isCurrentPage = state.router.link === link
       return (
         <NavItem key={name} sticky={sticky} aria-current={isCurrentPage ? "page" : undefined}>
-          <Link link={link}>
+          <Link className={icon ? 'icon' : ''} link={link}>
             {icon
               ? '?'
               : name
@@ -48,6 +48,18 @@ const NavItem = styled.div`
     color: #fffff0;
   `};
   }
+
+  .icon {
+    border-radius: 50%;
+    background-color: #444;
+    padding: 1px 8px 4px;
+    ${({ sticky }) => sticky && `color: #fffff0;`}
+
+    :hover {
+      background-color: #654;
+      border-color: transparent;
+    }
+  }
   
   & > a {
     padding: 6px 8px;
@@ -57,8 +69,7 @@ const NavItem = styled.div`
     align-items:center;
     line-height: 1;
     text-align: center;
-    border-bottom: 2px solid;
-    border-bottom-color: transparent;
+    border: 2px solid transparent;
     font-variant: all-small-caps;
 
     &:hover {
@@ -73,11 +84,22 @@ const NavItem = styled.div`
 
   &:last-of-type {
     margin-right: 16px;
-    
+
     a {
       border-radius: 8px;
       border: 2px solid #f9c959;
       color: #f9c959;
+      ${({ sticky }) => sticky ? `
+      :not(:hover) {
+        color: #654;
+        border-color: #654;
+      }
+      ` : `
+      :hover {
+        border-color: #654;
+        color: #654;
+      }
+      `}
     }
   }
 `

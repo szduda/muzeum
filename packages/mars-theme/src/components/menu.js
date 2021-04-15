@@ -6,17 +6,16 @@ function MobileMenu({ sticky, state, actions }) {
   const { isMobileMenuOpen } = state.theme;
   return (
     <>
-      <MenuToggle sticky={sticky} onClick={actions.theme.toggleMobileMenu}>
-        {isMobileMenuOpen ? (
+      <MenuToggle sticky={sticky} isOpen={isMobileMenuOpen} onClick={actions.theme.toggleMobileMenu}>
+        {isMobileMenuOpen && (
           <>
             {/* Add some style to the body when menu is open,
             to prevent body scroll */}
             <Global styles={{ body: { overflowY: "hidden" } }} />
-            <CloseIcon color="white" size="20px" />
+            {/* <CloseIcon color="white" size="20px" /> */}
           </>
-        ) : (
-          <HamburgerIcon color="#444" size="24px" />
-        )}
+        )}          
+          <HamburgerIcon color="#444" size="24px" open={isMobileMenuOpen} />
       </MenuToggle>
       {/* If the menu is open, render the menu modal */}
       {isMobileMenuOpen && <MenuModal />}
@@ -32,7 +31,7 @@ const MenuToggle = styled.button`
   padding: 0.5rem;
   border-radius: 8px;
   transition: background-color 300ms ease-out 150ms;
-  background-color: ${props => props.sticky ? '#fffff0' : 'transparent'};
+  background-color: ${props => props.sticky && !props.isOpen ? '#fffff0' : 'transparent'};
   border: 0;
   color: white;
   z-index: 5;

@@ -1,4 +1,6 @@
-export const HamburgerIcon = ({ size, color }) => {
+import { css } from 'frontity'
+
+export const HamburgerIcon = ({ size, color, open }) => {
   return (
     <svg
       height={size}
@@ -6,9 +8,24 @@ export const HamburgerIcon = ({ size, color }) => {
       color={color}
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
+      css={css`
+      rect {
+        transition: transform 300ms ease-out, opacity 300ms ease-out;
+      }
+      ${open && `
+        rect:nth-of-type(1) {
+          transform: translate3d(4px, 2px, 0) rotateZ(45deg);
+        }
+        rect:nth-of-type(2) {
+          opacity: 0;
+        }
+        rect:nth-of-type(3) {
+          transform: translate3d(-13px, 7px, 0) rotateZ(-45deg);
+        }
+      `}`}
     >
       <title>Open menu</title>
-      <g fill="currentColor">
+      <g fill={open ? '#fffff0' : 'currentColor'}>
         <rect height="3" width="23" rx="1" ry="1" x=".5" y="2.5" />
         <rect height="3" width="23" rx="1" ry="1" x=".5" y="10.5" />
         <rect height="3" width="23" rx="1" ry="1" x=".5" y="18.5" />

@@ -26,7 +26,7 @@ const H2 = styled.h2`
   margin: 0 0 2rem;
   display: flex;
   flex-direction: column;
-  padding-top: 5rem;
+  padding-top: 3.5rem;
 
   & span:first-of-type {
     font-size: 0.75rem;
@@ -34,8 +34,7 @@ const H2 = styled.h2`
   }
 
   @media (min-width: 768px) {
-    margin: 2rem 0 6rem;
-    padding-top: 6rem;
+    margin: 2rem 0;
 
     & span:first-of-type {
       font-size: 1rem;
@@ -46,7 +45,7 @@ const H2 = styled.h2`
 const H3 = styled.h3`
   font-size: 1.75rem;
   font-weight: normal;
-  margin: 0;
+  margin: 0.5rem 0;
 `
 
 const H4 = styled.h4`
