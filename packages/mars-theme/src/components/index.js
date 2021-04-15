@@ -125,12 +125,12 @@ const Main = styled.div`
   width: 100%;
   overflow-x: hidden;
   min-height: 80vh;
-  background: #fcfcfc;
+  background: #fffff0;
   box-shadow: 0 0 24px 16px #444;
   background-image: linear-gradient(
     180deg,
     #F9C95911,
-    #fcfcfc
+    #fffff0
   );
 `;
 
@@ -149,7 +149,7 @@ const Hero = styled.div`
     font-size: 3.5rem;
     line-height: 0.6;
     flex-direction: column;
-    color: #fcfcfc;
+    color: #fffff0;
     position: relative;
     font-variant: all-small-caps;
     text-shadow: 0 2px 4px #543a;

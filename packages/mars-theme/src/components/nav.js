@@ -1,28 +1,27 @@
-import { connect, styled } from "frontity";
-import Link from "./link";
+import { connect, styled } from "frontity"
+import Link from "./link"
+import { Icon } from "../components/theme"
 
-/**
- * Navigation Component
- *
- * It renders the navigation links
- */
 const Nav = ({ state, sticky }) => (
   <NavContainer>
-    {state.theme.menu.map(([name, link]) => {
-      // Check if the link matched the current page url
-      const isCurrentPage = state.router.link === link;
+    {state.theme.menu.map(([name, link, icon]) => {
+      console.log(Icon.Help)
+      const isCurrentPage = state.router.link === link
       return (
         <NavItem key={name} sticky={sticky} aria-current={isCurrentPage ? "page" : undefined}>
           <Link link={link}>
-            {name}
+            {icon
+              ? '?'
+              : name
+            }
           </Link>
         </NavItem>
-      );
+      )
     })}
   </NavContainer>
-);
+)
 
-export default connect(Nav);
+export default connect(Nav)
 
 const NavContainer = styled.nav`
   list-style: none;
@@ -35,24 +34,27 @@ const NavContainer = styled.nav`
   @media screen and (max-width: 768px) {
     display: none;
   }
-`;
+`
 
 const NavItem = styled.div`
   font-size: 18px;
   box-sizing: border-box;
   align-items: center;
   display: flex;
-  padding: 0 16px;
-
+  
   &[aria-current="page"] {
-    ${({sticky}) => sticky && 'background: #f2eedd'};
+    ${({ sticky }) => sticky && `
+    background: #444;
+    color: #fffff0;
+  `};
   }
   
   & > a {
+    padding: 6px 8px;
+    margin: 0 8px;
     font-weight: 600;
     display: inline-flex;
     align-items:center;
-    padding: 0;
     line-height: 1;
     text-align: center;
     border-bottom: 2px solid;
@@ -71,11 +73,11 @@ const NavItem = styled.div`
 
   &:last-of-type {
     margin-right: 16px;
-
-    &:after {
-      content: "";
-      display: inline-block;
-      width: 24px;
+    
+    a {
+      border-radius: 8px;
+      border: 2px solid #f9c959;
+      color: #f9c959;
     }
   }
-`;
+`

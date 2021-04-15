@@ -31,14 +31,14 @@ const Container = styled.div`
   z-index: 10;
   background: transparent;
   transition: background-color 600ms ease-out, color 600ms ease-out;
-  color: ${props => props.sticky ? '#444' : '#fcfcfc'};
+  color: ${props => props.sticky ? '#444' : '#fffff0'};
 
   @media (min-width: 768px) {
-    background-color: #fcfcfc11;
+    background-color: #fffff011;
     backdrop-filter: blur(2px);
     ${props => props.sticky && `
     backdrop-filter: blur(2px) saturate(0.3) contrast(0.4) brightness(1.4);
-    background-color: #fcfcfc88;
+    background-color: #fffff088;
     box-shadow: 0 2px 4px #444a;
     `}
   }

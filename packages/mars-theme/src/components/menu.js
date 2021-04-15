@@ -32,7 +32,7 @@ const MenuToggle = styled.button`
   padding: 0.5rem;
   border-radius: 8px;
   transition: background-color 300ms ease-out 150ms;
-  background-color: ${props => props.sticky ? '#fcfcfc' : 'transparent'};
+  background-color: ${props => props.sticky ? '#fffff0' : 'transparent'};
   border: 0;
   color: white;
   z-index: 5;

@@ -14,12 +14,16 @@ const settings = {
         "theme": {
           "menu": [
             [
+              "Tickets & Guide",
+              "/tickets-and-guide/",
+            ],
+            [
               "Arrival",
               "/arrival/"
             ],
             [
-              "Before entering",
-              "/before-entering/"
+              "Before tour",
+              "/before-tour/"
             ],
             [
               "Auschwitz",
@@ -30,12 +34,17 @@ const settings = {
               "/birkenau/"
             ],
             [
-              "After visiting",
-              "/after-visiting/"
+              "After visit",
+              "/after-visit/"
             ],
             [
-              "more...",
-              "/more/"
+              "Help",
+              "/help/",
+              "help"
+            ],
+            [
+              "Mission",
+              "/mission/"
             ]
           ],
           "featured": {

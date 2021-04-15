@@ -46,7 +46,7 @@ const MenuLink = styled(Link)`
   font-size: 20px;
   text-align: center;
   padding: 1.2rem 0;
-  color: #FCFCFC !important;
+  color: #fffff0 !important;
 
   &:hover,
   &:focus {
