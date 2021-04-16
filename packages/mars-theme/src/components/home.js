@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect, styled } from "frontity"
+import Map from './map'
 
 const Home = ({ state, libraries }) => {
   const { type, id } = state.source.get(state.router.link)
@@ -9,6 +10,7 @@ const Home = ({ state, libraries }) => {
   return (
     <Container>
       <Html2React html={content} />
+      {state.theme.isHeaderSticky && <Map />}
     </Container>
   )
 }

@@ -1,5 +1,5 @@
 import { styled, connect, Global } from "frontity";
-import { CloseIcon, HamburgerIcon } from "./menu-icon";
+import { HamburgerIcon } from "./menu-icon";
 import MenuModal from "./menu-modal";
 
 function MobileMenu({ sticky, state, actions }) {
@@ -12,12 +12,10 @@ function MobileMenu({ sticky, state, actions }) {
             {/* Add some style to the body when menu is open,
             to prevent body scroll */}
             <Global styles={{ body: { overflowY: "hidden" } }} />
-            {/* <CloseIcon color="white" size="20px" /> */}
           </>
         )}          
           <HamburgerIcon color="#444" size="24px" open={isMobileMenuOpen} />
       </MenuToggle>
-      {/* If the menu is open, render the menu modal */}
       {isMobileMenuOpen && <MenuModal />}
     </>
   );

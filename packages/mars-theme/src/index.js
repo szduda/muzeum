@@ -21,6 +21,8 @@ const marsTheme = {
       autoPrefetch: "in-view",
       menu: [],
       isMobileMenuOpen: false,
+      isMapOpen: false,
+      isHeaderSticky: false,
       featured: {
         showOnList: false,
         showOnPost: false,
@@ -41,6 +43,15 @@ const marsTheme = {
       closeMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = false;
       },
+      toggleMap: ({ state }) => {
+        state.theme.isMapOpen = !state.theme.isMapOpen;
+      },
+      setSticky: ({ state }) => {
+        state.theme.isHeaderSticky = true
+      },
+      unsetSticky: ({ state }) => {
+        state.theme.isHeaderSticky = false
+      }
     },
   },
   libraries: {

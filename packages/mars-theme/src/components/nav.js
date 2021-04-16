@@ -5,7 +5,6 @@ import { Icon } from "../components/theme"
 const Nav = ({ state, sticky }) => (
   <NavContainer>
     {state.theme.menu.map(([name, link, icon]) => {
-      console.log(Icon.Help)
       const isCurrentPage = state.router.link === link
       return (
         <NavItem key={name} sticky={sticky} aria-current={isCurrentPage ? "page" : undefined}>

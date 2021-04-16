@@ -10,28 +10,33 @@ import Title from "./title";
 import PageError from "./page-error";
 import bgUrl from '../assets/gate.jpg'
 import { scrollToAnchor } from '../helpers'
+import { useDebouncedCallback } from "use-debounce";
 
 /**
  * Theme is the root React component of our theme. The one we will export
  * in roots.
  */
-const Theme = ({ state }) => {
+const Theme = ({ state, actions }) => {
   // Get information about the current URL.
   const data = state.source.get(state.router.link)
+  const isSticky = state.theme.isHeaderSticky
+  const ref = useRef(null)
 
-  const [isSticky, setSticky] = useState(false)
-  const ref = useRef(null);
-  
-  useEffect(() => {
-    const handleScroll = () => {
-      if (ref.current) {
-        setSticky(ref.current.getBoundingClientRect().top <= 42)
-      }
+  const handleScroll = () => {
+    if (ref.current) {
+      if (ref.current.getBoundingClientRect().top <= 42)
+        actions.theme.setSticky()
+      else
+        actions.theme.unsetSticky()
     }
+  }
+  const debouncedHandleScroll = useDebouncedCallback(handleScroll, 100)
+
+  useEffect(() => {
     handleScroll()
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', () => handleScroll)
-  }, [ref])
+    window.addEventListener('scroll', debouncedHandleScroll)
+    return () => window.removeEventListener('scroll', () => debouncedHandleScroll)
+  }, [debouncedHandleScroll])
 
   return (
     <>
@@ -39,6 +44,13 @@ const Theme = ({ state }) => {
       <Head>
         <meta name="description" content={state.frontity.description} />
         <html lang="en" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+          crossorigin="" />
+        {/* <!-- Make sure you put this AFTER Leaflet's CSS --> */}
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" type="text/javascript" async
+          integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+          crossorigin="" />
       </Head>
 
       <Global styles={globalStyles} />

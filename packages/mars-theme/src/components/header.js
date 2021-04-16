@@ -28,7 +28,7 @@ const Container = styled.div`
   justify-content: space-between;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 5;
   background: transparent;
   transition: background-color 600ms ease-out, color 600ms ease-out;
   color: ${props => props.sticky ? '#444' : '#fffff0'};

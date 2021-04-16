@@ -22,6 +22,9 @@
     "@frontity/mars-theme": "./packages/mars-theme",
     "@frontity/tiny-router": "^1.4.1",
     "@frontity/wp-source": "^1.11.2",
-    "frontity": "^1.14.3"
+    "frontity": "^1.14.3",
+    "leaflet": "^1.7.1",
+    "react-leaflet": "^3.1.0",
+    "use-debounce": "^6.0.1"
   }
 }
