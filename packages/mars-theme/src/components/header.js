@@ -33,7 +33,7 @@ const Container = styled.div`
   transition: background-color 600ms ease-out, color 600ms ease-out;
   color: ${props => props.sticky ? '#444' : '#fffff0'};
 
-  @media (min-width: 768px) {
+  @media (min-width: 960px) {
     background-color: #fffff011;
     backdrop-filter: blur(2px);
     ${props => props.sticky && `
@@ -47,7 +47,7 @@ const Container = styled.div`
 const StyledLink = styled(Link)`
   text-decoration: none;
   margin-left: 6px;
-  @media (min-width: 768px) {
+  @media (min-width: 960px) {
     margin-left: 16px;
   }
 `

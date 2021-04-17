@@ -2,16 +2,18 @@ import { styled, connect, Global } from "frontity";
 import { Icon } from "./theme";
 import MapModal from "./map-modal";
 import { CloseIcon } from './menu-icon'
+import { useMediaQuery } from '../helpers'
 
 function Map({ state, actions }) {
   const { isMapOpen } = state.theme;
+  const isWideScreen = useMediaQuery('(min-width: 768px)');
   return (
     <>
-      <MapToggle isOpen={isMapOpen} onClick={actions.theme.toggleMap}>
+      <MapToggle isOpen={isMapOpen} onClick={actions.theme.toggleMap} isWideScreen={isWideScreen}>
         {isMapOpen
           ? (
             <>
-              <Global styles={{ body: { overflowY: "hidden", paddingRight: '15px' } }} />
+              <Global styles={getBodyLockStyle({ padRight: isWideScreen })} />
               <CloseIcon size="24px" color="#444" />
             </>
           ) : <Icon.Map />}
@@ -20,6 +22,13 @@ function Map({ state, actions }) {
     </>
   );
 }
+
+const getBodyLockStyle = ({ padRight }) => ({
+  body: {
+    overflowY: "hidden",
+    paddingRight: padRight ? '15px' : 0
+  }
+})
 
 const MapToggle = styled.button`
   position: fixed;
@@ -35,7 +44,7 @@ const MapToggle = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  ${({ isOpen }) => isOpen && 'right: calc(0.5rem + 15px);'}
+  ${({ isOpen, isWideScreen }) => isOpen && `right: calc(0.5rem + ${isWideScreen ? '15px' : 0});`}
 `;
 
 export default connect(Map);

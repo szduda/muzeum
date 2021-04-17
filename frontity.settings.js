@@ -38,9 +38,19 @@ const settings = {
               "/after-visit/"
             ],
             [
+              "Search",
+              "#",
+              "Search"
+            ],
+            [
+              "Change language",
+              "#",
+              "Lang"
+            ],
+            [
               "Help",
               "/help/",
-              "help"
+              "Help"
             ],
             [
               "Mission",

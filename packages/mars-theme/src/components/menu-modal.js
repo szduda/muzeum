@@ -1,16 +1,21 @@
 import { styled, connect } from "frontity";
 import Link from "./link";
+import { Icon } from './theme'
 
 const MenuModal = ({ state }) => {
   const { menu } = state.theme;
   const isThereLinks = menu != null && menu.length > 0;
 
+  const textItems = menu.filter(([, , icon]) => !!!icon)
+  const iconItems = menu.filter(([, , icon]) => !!icon)
+
   return (
     <>
       <MenuOverlay />
       <MenuContent as="nav">
+        <MenuLink link="/">Home</MenuLink>
         {isThereLinks &&
-          menu.map(([name, link]) => (
+          textItems.map(([name, link]) => (
             <MenuLink
               key={name}
               link={link}
@@ -19,10 +24,36 @@ const MenuModal = ({ state }) => {
               {name}
             </MenuLink>
           ))}
+        <IconRow icons={iconItems} />
       </MenuContent>
     </>
   );
 };
+
+const IconRow = ({ icons }) => (
+  <IconRowWrapper>
+    {icons.map(([name, link, icon]) => {
+      const CurrentIcon = Icon[icon]
+      return <CurrentIcon key={name} />
+    })}
+  </IconRowWrapper>
+)
+
+const IconRowWrapper = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1rem 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #444;
+
+  > * {
+    height: 40px;
+    width: 40px;
+    margin-right: 1rem;
+  }
+`
 
 const MenuOverlay = styled.div`
   background-color: #444;
@@ -42,6 +73,7 @@ const MenuContent = styled.div`
   padding: 72px 0;
   overflow-y: scroll;
   height: calc(100vh - 52px);
+  box-sizing: border-box;
 `;
 
 const MenuLink = styled(Link)`
@@ -51,8 +83,9 @@ const MenuLink = styled(Link)`
   text-align: center;
   padding: 1rem;
   color: #fffff0 !important;
+  box-sizing: border-box;
 
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 600;
   display: inline-flex;
   align-items:center;

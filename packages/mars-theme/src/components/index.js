@@ -24,7 +24,7 @@ const Theme = ({ state, actions }) => {
 
   const handleScroll = () => {
     if (ref.current) {
-      if (ref.current.getBoundingClientRect().top <= 42)
+      if (ref.current.getBoundingClientRect().top <= 300)
         actions.theme.setSticky()
       else
         actions.theme.unsetSticky()
@@ -61,19 +61,51 @@ const Theme = ({ state, actions }) => {
           <Switch>
             <HomepageHero when={data.isHome} />
             <GenericHero when={data.route === '/arrival/'} title="Arrival" cta="match my ride" ctaId="Find the best transport" />
-          </Switch>
-        </Hero>
-        <Main ref={ref}>
-          <Switch>
-            <Loading when={data.isFetching} />
-            <Home when={data.isHome || data.route === '/arrival/'} />
-            <List when={data.isArchive} />
-            <Post when={data.isPostType} />
             <PageError when={data.isError} />
           </Switch>
-        </Main>
+        </Hero>
+        {!!!data.isError && (
+          <Main ref={ref}>
+            <Switch>
+              <Loading when={data.isFetching} />
+              <Home when={data.isHome || data.route === '/arrival/'} />
+              <List when={data.isArchive} />
+              <Post when={data.isPostType} />
+            </Switch>
+          </Main>
+        )}
 
-        {/* <Footer /> */}
+        <FooterWrapper>
+          <Footer>
+            <div>
+              <ul>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Useful maps</a></li>
+                <li><a href="#">Useful docs</a></li>
+                <li>&nbsp;</li>
+                <li><a href="#">Learn history</a></li>
+                <li>&nbsp;</li>
+                <li><a href="#">Wiki</a></li>
+                <li><a href="#">Books</a></li>
+                <li><a href="#">Amazing stories</a></li>
+              </ul>
+            </div>
+            <div>
+              <ul>
+                <li><a href="#">Search</a></li>
+                <li>&nbsp;</li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Know more</a></li>
+                <li><a href="#">Get help</a></li>
+              </ul>
+            </div>
+            <div id="contact">
+              <h4>Contact</h4>
+              <span>+48 123 456 789</span>
+              <span>info@visit-auschwitz.info</span>
+            </div>
+          </Footer>
+        </FooterWrapper>
       </Wrapper>
     </>
   );
@@ -128,7 +160,6 @@ const Wrapper = styled.div`
   width: 100%;
   flex-grow: 1;
   min-height: 100vh;
-  margin-bottom: 400px;
 `;
 
 const Main = styled.div`
@@ -145,6 +176,78 @@ const Main = styled.div`
     #fffff0
   );
 `;
+
+const FooterWrapper = styled.div`
+  width: 100%;
+  background: #4448;
+  border-top: 2px solid #888;
+`
+
+const Footer = styled.div`
+  min-height: 400px;
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  color: #d4d4d4;
+  padding: 4rem 1rem;
+  margin: 0 auto;
+  flex-wrap: wrap;
+
+  > div {
+    flex-basis: 128px;
+    margin: 0 1rem 2rem 0;
+    box-sizing: border-box;
+  }
+
+  div#contact {
+    background: #888a;
+    margin-right: 0;
+    flex-grow: 1;
+    border-radius: 12px;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+
+    span {
+      font-size: 1.4rem;
+      line-height: 3rem;
+    }
+
+    h4 {
+      margin-top: 0;
+      color: #afafaf;
+
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      padding: 0;
+      margin: 0 0 0.5rem;
+    }
+  }
+
+  @media(min-width: 768px) {
+    padding: 8rem 1rem;
+    
+    > div {
+      flex-basis: 200px;
+    }
+
+    div#contact {
+      padding: 2rem;
+
+      span {
+        font-size: 2rem;
+      }
+    }
+  }
+`
 
 const Hero = styled.div`
   padding: 0 1rem;

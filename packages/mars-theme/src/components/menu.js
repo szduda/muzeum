@@ -37,7 +37,7 @@ const MenuToggle = styled.button`
   width: 40px;
   display: none;
 
-  @media (max-width: 768px) {
+  @media (max-width: 959px) {
     display: flex;
     align-items: center;
     justify-content: center;

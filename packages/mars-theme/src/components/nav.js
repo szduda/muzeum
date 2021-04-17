@@ -6,11 +6,12 @@ const Nav = ({ state, sticky }) => (
   <NavContainer>
     {state.theme.menu.map(([name, link, icon]) => {
       const isCurrentPage = state.router.link === link
+      const ItemIcon = Icon?.[icon]
       return (
         <NavItem key={name} sticky={sticky} aria-current={isCurrentPage ? "page" : undefined}>
-          <Link className={icon ? 'icon' : ''} link={link}>
+          <Link className={icon ? 'icon' : ''} aria-label={icon ?? undefined} link={link}>
             {icon
-              ? '?'
+              ? <ItemIcon />
               : name
             }
           </Link>
@@ -30,7 +31,7 @@ const NavContainer = styled.nav`
   padding: 0 0 0 24px;
   margin: 0;
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 959px) {
     display: none;
   }
 `
@@ -50,13 +51,20 @@ const NavItem = styled.div`
 
   .icon {
     border-radius: 50%;
-    background-color: #444;
-    padding: 1px 8px 4px;
-    ${({ sticky }) => sticky && `color: #fffff0;`}
+    padding: 4px;
+    margin: 0 2px;
+    border-color: transparent !important;
+    
+    svg {
+      height: 24px;
+    }
+    
+    svg path {
+      fill: #444;
+    }
 
-    :hover {
-      background-color: #654;
-      border-color: transparent;
+    &[aria-label="Help"]:not(:hover) svg path {
+      fill: #afafaf;
     }
   }
   
@@ -74,6 +82,10 @@ const NavItem = styled.div`
     &:hover {
       text-decoration: none;
       border-bottom-color: #F9C959;
+
+      svg path {
+        fill: #f9c959;
+      }
     }
   }
 
