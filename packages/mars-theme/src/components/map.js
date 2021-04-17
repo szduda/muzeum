@@ -5,11 +5,11 @@ import { CloseIcon } from './menu-icon'
 import { useMediaQuery } from '../helpers'
 
 function Map({ state, actions }) {
-  const { isMapOpen } = state.theme;
+  const { isMapOpen, isMenuOpen } = state.theme;
   const isWideScreen = useMediaQuery('(min-width: 768px)');
   return (
     <>
-      <MapToggle isOpen={isMapOpen} onClick={actions.theme.toggleMap} isWideScreen={isWideScreen}>
+      {!isMenuOpen && <MapToggle isOpen={isMapOpen} onClick={actions.theme.toggleMap} isWideScreen={isWideScreen}>
         {isMapOpen
           ? (
             <>
@@ -17,7 +17,7 @@ function Map({ state, actions }) {
               <CloseIcon size="24px" color="#444" />
             </>
           ) : <Icon.Map />}
-      </MapToggle>
+      </MapToggle>}
       {isMapOpen && <MapModal />}
     </>
   );

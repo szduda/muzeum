@@ -140,6 +140,19 @@ const globalStyles = css`
     text-decoration: underline;
   }
 
+  a, button {
+    -webkit-tap-highlight-color: #f9c95944;
+  }
+
+  button:focus {
+    outline: 2px solid #f9c959;
+  }
+
+  a:focus {
+    outline: 2px solid #f9c959;
+    background: #f9c95944;
+  }
+
   div {
     box-sizing: border-box;
   }
@@ -203,7 +216,7 @@ const Footer = styled.div`
     background: #888a;
     margin-right: 0;
     flex-grow: 1;
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
@@ -348,7 +361,8 @@ export const CTA = styled.button`
   transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 
   &:focus {
-	  outline: none;
+	  outline-offset: 12px;
+    background: transparent;
   }
 
   & > span {

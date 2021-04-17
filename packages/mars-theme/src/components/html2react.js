@@ -34,7 +34,7 @@ const H2 = styled.h2`
   }
 
   @media (min-width: 768px) {
-    margin: 2rem 0;
+    padding-top: 5.5rem;
 
     & span:first-of-type {
       font-size: 1rem;

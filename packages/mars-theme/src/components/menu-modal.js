@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { styled, connect } from "frontity";
 import Link from "./link";
 import { Icon } from './theme'
@@ -8,6 +9,8 @@ const MenuModal = ({ state }) => {
 
   const textItems = menu.filter(([, , icon]) => !!!icon)
   const iconItems = menu.filter(([, , icon]) => !!icon)
+
+  const bottomRef = useRef()
 
   return (
     <>
@@ -25,10 +28,28 @@ const MenuModal = ({ state }) => {
             </MenuLink>
           ))}
         <IconRow icons={iconItems} />
+        <span ref={bottomRef} />
       </MenuContent>
+      <ScrollDownButton onClick={() => bottomRef.current.scrollIntoView({ behavior: 'smooth' })}>
+        <Icon.Arrow angle={180} />
+      </ScrollDownButton>
     </>
   );
 };
+
+const ScrollDownButton = styled.button`
+  border: 0;
+  background: 0;
+  position: fixed;
+  z-index: 300;
+  right: 0.75rem;
+  bottom: 6rem;
+
+  svg {
+    height: 32px;
+    fill: #afafaf;
+  }
+`
 
 const IconRow = ({ icons }) => (
   <IconRowWrapper>
@@ -51,7 +72,6 @@ const IconRowWrapper = styled.div`
   > * {
     height: 40px;
     width: 40px;
-    margin-right: 1rem;
   }
 `
 
@@ -99,10 +119,13 @@ const MenuLink = styled(Link)`
     margin-bottom: 2rem;
   }
 
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: #f9c959;
     text-decoration: none;
+  }
+
+  :focus {
+    background-color: #f9c95922;
   }
 
   &[aria-current="page"] {
