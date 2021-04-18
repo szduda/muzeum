@@ -45,6 +45,10 @@ const MapToggle = styled.button`
   align-items: center;
   justify-content: center;
   ${({ isOpen, isWideScreen }) => isOpen && `right: calc(0.5rem + ${isWideScreen ? '15px' : 0});`}
+
+  @media (min-width: 768px) {
+    right: calc(0.5rem + 15px);
+  }
 `;
 
 export default connect(Map);

@@ -21,6 +21,11 @@ const Theme = ({ state, actions }) => {
   const data = state.source.get(state.router.link)
   const isSticky = state.theme.isHeaderSticky
   const ref = useRef(null)
+  const route = state.router.link
+
+  useEffect(() => {
+    document && document.querySelector('#root').scrollTo(0, 0)
+  }, [route])
 
   const handleScroll = () => {
     if (ref.current) {
@@ -173,6 +178,7 @@ const globalStyles = css`
     width: 100%;
     height: 100vh;
     overflow-y: scroll;
+    scroll-behavior: smooth;
   }
 
   p {
