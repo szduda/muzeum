@@ -59,12 +59,19 @@ const NavItem = styled.div`
       height: 24px;
     }
     
-    svg path {
-      fill: #444;
+    svg {
+      fill: ${({ sticky }) => sticky ? `#afafaf` : `#d4d4d4`};
     }
 
-    &[aria-label="Help"]:not(:hover) svg path {
-      fill: #afafaf;
+    &[aria-label="Help"]:not(:hover) svg {
+      fill: ${({ sticky }) => sticky ? `#afafaf` : `#d4d4d4`};
+    }
+
+    &[aria-label="Lang"]:not(:hover) div {
+      background: ${({ sticky }) => sticky ? `#afafaf` : `#d4d4d4`};
+      span {
+        color: ${({ sticky }) => sticky ? `#fffff0` : `#888`};        
+      }
     }
   }
   
@@ -83,7 +90,7 @@ const NavItem = styled.div`
       text-decoration: none;
       border-bottom-color: #F9C959;
 
-      svg path {
+      svg {
         fill: #f9c959;
       }
     }
@@ -100,17 +107,18 @@ const NavItem = styled.div`
       border-radius: 8px;
       border: 2px solid #f9c959;
       color: #f9c959;
-      ${({ sticky }) => sticky ? `
-      :not(:hover) {
-        color: #654;
-        border-color: #654;
-      }
-      ` : `
-      :hover {
-        border-color: #654;
-        color: #654;
-      }
+      ${({ sticky }) => sticky && `
+        border-color: #d4d4d4;
+        color: #444;
+        background: #d4d4d4;
       `}
+
+      :hover {
+        border-color: #f9c959;
+        color: #444;
+        background: #f9c959
+      }
+      
     }
   }
 `

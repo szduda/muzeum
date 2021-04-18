@@ -13,8 +13,8 @@ function MobileMenu({ sticky, state, actions }) {
             to prevent body scroll */}
             <Global styles={{ body: { overflowY: "hidden" } }} />
           </>
-        )}          
-          <HamburgerIcon color="#444" size="24px" open={isMobileMenuOpen} />
+        )}
+        <HamburgerIcon color="#444" size="24px" open={isMobileMenuOpen} />
       </MenuToggle>
       {isMobileMenuOpen && <MenuModal />}
     </>
@@ -28,7 +28,7 @@ const MenuToggle = styled.button`
   top: 1rem;
   padding: 0.5rem;
   border-radius: 8px;
-  transition: background-color 300ms ease-out 150ms;
+  ${props => !props.isOpen && `transition: background-color 300ms ease-out 150ms;`}
   background-color: ${props => props.sticky && !props.isOpen ? '#fffff0' : 'transparent'};
   border: 0;
   color: white;

@@ -47,7 +47,7 @@ const ScrollDownButton = styled.button`
 
   svg {
     height: 32px;
-    fill: #afafaf;
+    fill: #d4d4d4;
   }
 `
 
@@ -72,6 +72,10 @@ const IconRowWrapper = styled.div`
   > * {
     height: 40px;
     width: 40px;
+  }
+
+  svg {
+    fill: #d4d4d4;
   }
 `
 

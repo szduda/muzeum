@@ -22,20 +22,16 @@ const settings = {
               "/arrival/"
             ],
             [
-              "Before tour",
-              "/before-tour/"
+              "Get ready",
+              "/get-ready/"
             ],
             [
-              "Auschwitz",
-              "/auschwitz/"
+              "Auschwitz-Birkenau",
+              "/auschwitz-birkenau/"
             ],
             [
-              "Birkenau",
-              "/birkenau/"
-            ],
-            [
-              "After visit",
-              "/after-visit/"
+              "See more",
+              "/see-more/"
             ],
             [
               "Search",

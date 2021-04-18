@@ -36,7 +36,7 @@ export default connect(Page404);
 
 const Container = styled.div`
   margin: 0;
-  padding: 2rem 1rem;
+  padding: 2rem 1rem 8rem;
   text-align: center;
   color: #fffff0;
 `;

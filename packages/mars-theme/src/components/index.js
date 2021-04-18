@@ -9,7 +9,7 @@ import Loading from "./loading";
 import Title from "./title";
 import PageError from "./page-error";
 import bgUrl from '../assets/gate.jpg'
-import { scrollToAnchor } from '../helpers'
+import { scrollToAnchor, useMousedown } from '../helpers'
 import { useDebouncedCallback } from "use-debounce";
 
 /**
@@ -24,7 +24,7 @@ const Theme = ({ state, actions }) => {
 
   const handleScroll = () => {
     if (ref.current) {
-      if (ref.current.getBoundingClientRect().top <= 300)
+      if (ref.current.getBoundingClientRect().top <= 100)
         actions.theme.setSticky()
       else
         actions.theme.unsetSticky()
@@ -34,9 +34,12 @@ const Theme = ({ state, actions }) => {
 
   useEffect(() => {
     handleScroll()
-    window.addEventListener('scroll', debouncedHandleScroll)
-    return () => window.removeEventListener('scroll', () => debouncedHandleScroll)
+    const root = document.querySelector('#root')
+    root.addEventListener('scroll', debouncedHandleScroll)
+    return () => root.removeEventListener('scroll', () => debouncedHandleScroll)
   }, [debouncedHandleScroll])
+
+  const mousedown = useMousedown()
 
   return (
     <>
@@ -55,7 +58,7 @@ const Theme = ({ state, actions }) => {
 
       <Global styles={globalStyles} />
 
-      <Wrapper>
+      <Wrapper className={mousedown ? 'mousedown' : ''}>
         <Header sticky={isSticky} />
         <Hero fullHeight={data.isHome}>
           <Switch>
@@ -116,7 +119,7 @@ export default connect(Theme);
 const globalStyles = css`
   html {
     scroll-behavior: smooth;
-    height: 100%;
+    height: 100vh;
   }
 
   body {
@@ -125,10 +128,18 @@ const globalStyles = css`
       "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     background: linear-gradient(to bottom, #543a, #444), url('${bgUrl}') center 0px;
     background-size: cover;
-    background-attachment: fixed;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     color: #444;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    
+    // @media (min-width: 960px) {
+    //   background-attachment: fixed;
+    // }
   }
 
   a, a:visited {
@@ -144,13 +155,14 @@ const globalStyles = css`
     -webkit-tap-highlight-color: #f9c95944;
   }
 
-  button:focus {
+
+  button:focus, a:focus {
     outline: 2px solid #f9c959;
   }
-
-  a:focus {
-    outline: 2px solid #f9c959;
-    background: #f9c95944;
+  .mousedown {
+    a:focus, button:focus {
+      outline: none;
+    }
   }
 
   div {
@@ -159,6 +171,8 @@ const globalStyles = css`
 
   div#root {
     width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
   }
 
   p {
@@ -172,7 +186,6 @@ const Wrapper = styled.div`
   align-items: center;
   width: 100%;
   flex-grow: 1;
-  min-height: 100vh;
 `;
 
 const Main = styled.div`
@@ -192,7 +205,7 @@ const Main = styled.div`
 
 const FooterWrapper = styled.div`
   width: 100%;
-  background: #4448;
+  background: #444a;
   border-top: 2px solid #888;
 `
 
@@ -264,7 +277,7 @@ const Footer = styled.div`
 
 const Hero = styled.div`
   padding: 0 1rem;
-  min-height: calc(100vh - 48px);
+  min-height: calc(100vh - 52px);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -337,78 +350,41 @@ const HomepageHero = () => (
 
 export const CTA = styled.button`
   align-self: flex-end;
-  border-color: #f9c959;
-  border-radius: 2rem;
+  border: 2px solid #f9c959;
+  border-radius: 6px;
   color: #f9c959;
+  background-color: #444;
   font-size: 1.5rem;
   padding: 0.25rem 1rem;
   text-transform: lowercase;
-  margin: 0 0.25rem 6rem;
+  margin: 0 0 8rem;
   cursor: pointer;
   box-shadow: 0 0px 12px #f9c95966;
   font-variant: all-small-caps;
   line-height: 1.5;
   font-weight: 600;
-
 	min-width: 150px;
 	display: block;
-	border: none;
-	background: none;
 	vertical-align: middle;
 	position: relative;
 	z-index: 1;
-  transition: color 300ms;
+  transition: color 300ms, background-color 300ms;
   transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 
-  &:focus {
+  :focus {
 	  outline-offset: 12px;
-    background: transparent;
   }
 
-  & > span {
+  > span {
 	  vertical-align: middle;
     transform: translateY(-2px);
     display: inline-block;
   }
 
-  &::before, &::after {
-    content: '';	
-    position: absolute;
-    border-radius: inherit;	
-    z-index: -1;
-    transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-  }
-
-  &::before {
-    top: -4px;	
-    bottom: -4px;
-    left: -4px;	
-    right: -4px;
-    transform: scale3d(0.7, 1, 1);
-    transition: transform 300ms, opacity 300ms;
-    background-color: #f9c959;
-  }
-
-  &::after {
-    top: 0;	
-    left: 0;
-    width: 100%;	
-    height: 100%;
-    transform: scale3d(1.1, 1, 1);
-    transition: transform 300ms, background-color 300ms;
-    background: #444;
-  }
-
-  &:hover {
-    &::before {
-      transform: scale3d(1, 1, 1);
-      opacity: 1;
-    }
-
-    &::after {
-      transform: scale3d(1, 1, 1);
-      background-color: #444;
-    }
+  :hover {
+    border-color: #f9c959;
+    background: #f9c959;
+    color: #444;
   }
 
   @media(min-width: 768px) {
