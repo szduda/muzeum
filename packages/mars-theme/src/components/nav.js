@@ -2,24 +2,27 @@ import { connect, styled } from "frontity"
 import Link from "./link"
 import { Icon } from "../components/theme"
 
-const Nav = ({ state, sticky }) => (
-  <NavContainer>
-    {state.theme.menu.map(([name, link, icon]) => {
-      const isCurrentPage = state.router.link === link
-      const ItemIcon = Icon?.[icon]
-      return (
-        <NavItem key={name} sticky={sticky} aria-current={isCurrentPage ? "page" : undefined}>
-          <Link className={icon ? 'icon' : ''} aria-label={icon ?? undefined} link={link}>
-            {icon
-              ? <ItemIcon />
-              : name
-            }
-          </Link>
-        </NavItem>
-      )
-    })}
-  </NavContainer>
-)
+const Nav = ({ state }) => {
+  const sticky = state.theme.isHeaderSticky
+  return (
+    <NavContainer>
+      {state.theme.menu.map(([name, link, icon]) => {
+        const isCurrentPage = state.router.link === link
+        const ItemIcon = Icon?.[icon]
+        return (
+          <NavItem key={name} sticky={sticky} aria-current={isCurrentPage ? "page" : undefined}>
+            <Link className={icon ? 'icon' : ''} aria-label={icon ?? undefined} link={link}>
+              {icon
+                ? <ItemIcon />
+                : name
+              }
+            </Link>
+          </NavItem>
+        )
+      })}
+    </NavContainer>
+  )
+}
 
 export default connect(Nav)
 

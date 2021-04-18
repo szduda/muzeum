@@ -2,8 +2,8 @@ import { styled, connect, Global } from "frontity";
 import { HamburgerIcon } from "./menu-icon";
 import MenuModal from "./menu-modal";
 
-function MobileMenu({ sticky, state, actions }) {
-  const { isMobileMenuOpen } = state.theme;
+function MobileMenu({ state, actions }) {
+  const { isMobileMenuOpen, isHeaderSticky: sticky } = state.theme;
   return (
     <>
       <MenuToggle sticky={sticky} isOpen={isMobileMenuOpen} onClick={actions.theme.toggleMobileMenu}>

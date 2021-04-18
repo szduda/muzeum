@@ -5,19 +5,21 @@ import Nav from "./nav";
 import MobileMenu from "./menu";
 import Logo from './logo'
 
-const Header = ({ sticky = false }) => (
-  <Container sticky={sticky}>
-    <Row>
-      <StyledLink link="/">
-        <Logo sticky={sticky} />
-      </StyledLink>
-      <Nav sticky={sticky} />
-    </Row>
-    <MobileMenu sticky={sticky} />
-  </Container>
-)
+const Header = ({ state }) => {
+  const sticky = state.theme.isHeaderSticky
+  return (
+    <Container sticky={sticky}>
+      <Row>
+        <StyledLink href="/" sticky={sticky}>
+          <Logo />
+        </StyledLink>
+        <Nav />
+      </Row>
+      <MobileMenu />
+    </Container>
+  )
+}
 
-// Connect the Header component to get access to the `state` in it's `props`
 export default connect(Header)
 
 const Container = styled.div`
@@ -44,11 +46,20 @@ const Container = styled.div`
   }
 `
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   text-decoration: none;
   margin-left: 6px;
+  transition: opacity 300ms ease-out;
+
   @media (min-width: 960px) {
     margin-left: 16px;
+  }
+
+  @media (max-width: 767px) {
+    ${props => props.sticky && `
+    pointer-events: none;
+    opacity: 0;
+    `}
   }
 `
 
