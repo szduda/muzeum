@@ -20,7 +20,7 @@ export default connect(Home);
 const Container = styled.div`
   margin: 0;
   list-style: none;
-  padding: 1rem 0 8rem;
+  padding: 1rem 0 4rem;
   max-width: 960px;
   width: 100%;
 
@@ -175,5 +175,9 @@ const Container = styled.div`
         width: 416px;
       }
     }
+  }
+
+  @media (min-width: 768px) {
+    padding: 1rem 0 7rem;
   }
 `

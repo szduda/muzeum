@@ -1,4 +1,4 @@
-import { styled } from "frontity";
+import { connect, styled } from "frontity";
 import Image from "@frontity/components/image";
 import logoUrl from '../assets/visit-auschwitz-logo.svg'
 
@@ -10,7 +10,7 @@ const Logo = () => (
   />
 )
 
-export default Logo;
+export default connect(Logo);
 
 const StyledImage = styled(Image)`
   display: block;

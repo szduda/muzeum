@@ -65,7 +65,13 @@ const settings = {
       "state": {
         "source": {
           "url": "https://lucanus.ayz.pl",
-          "homepage": "home"
+          "homepage": "home",
+          postTypes: [
+            {
+              type: "common",
+              endpoint: "common"
+            }
+          ]
         }
       }
     },

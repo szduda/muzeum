@@ -11,12 +11,15 @@ export const scrollToAnchor = id => {
 }
 
 export const useMediaQuery = (query) => {
-  const mediaMatch = window.matchMedia(query);
-  const [matches, setMatches] = useState(mediaMatch.matches);
-
+  const [matches, setMatches] = useState();
   useEffect(() => {
+    const mediaMatch = window.matchMedia(query);
+    if (!mediaMatch) return
+    setMatches(mediaMatch.matches)
+
     const handler = e => setMatches(e.matches)
     mediaMatch.addEventListener('change', handler)
+
     return () => mediaMatch.removeEventListener('change', handler)
   })
 

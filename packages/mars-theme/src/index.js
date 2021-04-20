@@ -37,6 +37,9 @@ const marsTheme = {
   actions: {
     theme: {
       init,
+      beforeSSR: ({ state, actions }) => async ({ ctx }) => {
+        await actions.source.fetch(`/common/footer/`)
+      },
       toggleMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = !state.theme.isMobileMenuOpen;
       },
@@ -51,6 +54,12 @@ const marsTheme = {
       },
       unsetSticky: ({ state }) => {
         state.theme.isHeaderSticky = false
+      },
+      setLandscapeOrientation: ({ state }) => {
+        state.theme.isLandscape = true
+      },
+      setPortraitOrientation: ({ state }) => {
+        state.theme.isLandscape = false
       }
     },
   },

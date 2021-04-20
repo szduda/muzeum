@@ -7,7 +7,8 @@ const Nav = ({ state }) => {
   return (
     <NavContainer>
       {state.theme.menu.map(([name, link, icon]) => {
-        const isCurrentPage = state.router.link === link
+        // TODO: handle hash anchors in beforeSSR
+        const isCurrentPage = state.router.link.split('#').shift() === link
         const ItemIcon = Icon?.[icon]
         return (
           <NavItem key={name} sticky={sticky} aria-current={isCurrentPage ? "page" : undefined}>

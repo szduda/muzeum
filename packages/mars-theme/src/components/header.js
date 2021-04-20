@@ -3,16 +3,20 @@ import { connect, styled, css } from "frontity";
 import Link from "./link";
 import Nav from "./nav";
 import MobileMenu from "./menu";
-import Logo from './logo'
+import { Icon } from './theme'
 
 const Header = ({ state }) => {
-  const sticky = state.theme.isHeaderSticky
+  const {
+    isHeaderSticky: sticky,
+    isMobileMenuOpen
+  } = state.theme
+
   return (
     <Container sticky={sticky}>
       <Row>
-        <StyledLink href="/" sticky={sticky}>
-          <Logo />
-        </StyledLink>
+        <LogoLink link="/" $hidden={sticky && !isMobileMenuOpen}>
+          <Icon.Logo lighten={isMobileMenuOpen} />
+        </LogoLink>
         <Nav />
       </Row>
       <MobileMenu />
@@ -46,17 +50,19 @@ const Container = styled.div`
   }
 `
 
-const StyledLink = styled.a`
+const LogoLink = styled(Link)`
   text-decoration: none;
-  margin-left: 6px;
+  margin: 0.5rem 0.25rem;
   transition: opacity 300ms ease-out;
-
+  z-index: 3;
+  
   @media (min-width: 960px) {
-    margin-left: 16px;
+    margin-left: 1rem;
   }
-
+  
   @media (max-width: 767px) {
-    ${props => props.sticky && `
+    margin: 1.25rem 0.75rem 0;
+    ${props => props.$hidden && `
     pointer-events: none;
     opacity: 0;
     `}

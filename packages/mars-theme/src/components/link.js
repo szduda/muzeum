@@ -18,6 +18,14 @@ import Link from "@frontity/components/link";
  */
 const MarsLink = ({ children, ...props }) => {
   const { state, actions } = useConnect();
+  const isCSR = state.frontity.rendering === 'csr'
+
+  const htmlProps = Object.keys(props)
+    .filter(key => !key.startsWith('$'))
+    .reduce((obj, key) => {
+      obj[key] = props[key]
+      return obj
+    }, {})
 
   /**
    * A handler that closes the mobile menu when a link is clicked.
@@ -26,10 +34,14 @@ const MarsLink = ({ children, ...props }) => {
     if (state.theme.isMobileMenuOpen) {
       actions.theme.closeMobileMenu();
     }
+
+    if (isCSR && props.link !== state.router.previous) {
+      document.querySelector('#root').scrollTo(0, 0)
+    }
   };
 
   return (
-    <Link {...props} onClick={onClick}>
+    <Link {...htmlProps} onClick={onClick}>
       {children}
     </Link>
   );

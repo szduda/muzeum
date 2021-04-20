@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { Global, css, connect, styled, Head } from "frontity";
 import Switch from "@frontity/components/switch";
 import Header from "./header";
+import Footer from "./footer";
 import Home from "./home";
 import List from "./list";
 import Post from "./post";
@@ -9,7 +10,7 @@ import Loading from "./loading";
 import Title from "./title";
 import PageError from "./page-error";
 import bgUrl from '../assets/gate.jpg'
-import { scrollToAnchor, useMousedown } from '../helpers'
+import { scrollToAnchor, useMousedown, useMediaQuery } from '../helpers'
 import { useDebouncedCallback } from "use-debounce";
 
 /**
@@ -21,11 +22,6 @@ const Theme = ({ state, actions }) => {
   const data = state.source.get(state.router.link)
   const isSticky = state.theme.isHeaderSticky
   const ref = useRef(null)
-  const route = state.router.link
-
-  useEffect(() => {
-    document && document.querySelector('#root').scrollTo(0, 0)
-  }, [route])
 
   const handleScroll = () => {
     if (ref.current) {
@@ -45,6 +41,14 @@ const Theme = ({ state, actions }) => {
   }, [debouncedHandleScroll])
 
   const mousedown = useMousedown()
+  const isLandscape = useMediaQuery('(max-height: 475px)');
+
+  useEffect(() => {
+    if (isLandscape)
+      actions.theme.setLandscapeOrientation()
+    else
+      actions.theme.setPortraitOrientation()
+  }, [isLandscape])
 
   return (
     <>
@@ -64,7 +68,7 @@ const Theme = ({ state, actions }) => {
 
       <Global styles={globalStyles} />
 
-      <Wrapper className={mousedown ? 'mousedown' : ''}>
+      <Wrapper className={[mousedown ? 'mousedown' : '', isLandscape ? 'landscape' : ''].join(' ')}>
         <Header sticky={isSticky} />
         <Hero fullHeight={data.isHome}>
           <Switch>
@@ -84,37 +88,7 @@ const Theme = ({ state, actions }) => {
           </Main>
         )}
 
-        <FooterWrapper>
-          <Footer>
-            <div>
-              <ul>
-                <li><a href="#">News</a></li>
-                <li><a href="#">Useful maps</a></li>
-                <li><a href="#">Useful docs</a></li>
-                <li>&nbsp;</li>
-                <li><a href="#">Learn history</a></li>
-                <li>&nbsp;</li>
-                <li><a href="#">Wiki</a></li>
-                <li><a href="#">Books</a></li>
-                <li><a href="#">Amazing stories</a></li>
-              </ul>
-            </div>
-            <div>
-              <ul>
-                <li><a href="#">Search</a></li>
-                <li>&nbsp;</li>
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Know more</a></li>
-                <li><a href="#">Get help</a></li>
-              </ul>
-            </div>
-            <div id="contact">
-              <h4>Contact</h4>
-              <span>+48 123 456 789</span>
-              <span>info@visit-auschwitz.info</span>
-            </div>
-          </Footer>
-        </FooterWrapper>
+        <Footer />
       </Wrapper>
     </>
   );
@@ -209,78 +183,6 @@ const Main = styled.div`
     #fffff0
   );
 `;
-
-const FooterWrapper = styled.div`
-  width: 100%;
-  background: #444a;
-  border-top: 2px solid #888;
-`
-
-const Footer = styled.div`
-  min-height: 400px;
-  width: 100%;
-  max-width: 960px;
-  display: flex;
-  color: #d4d4d4;
-  padding: 4rem 1rem;
-  margin: 0 auto;
-  flex-wrap: wrap;
-
-  > div {
-    flex-basis: 128px;
-    margin: 0 1rem 2rem 0;
-    box-sizing: border-box;
-  }
-
-  div#contact {
-    background: #888a;
-    margin-right: 0;
-    flex-grow: 1;
-    border-radius: 16px;
-    padding: 2rem 1rem;
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
-
-    span {
-      font-size: 1.4rem;
-      line-height: 3rem;
-    }
-
-    h4 {
-      margin-top: 0;
-      color: #afafaf;
-
-    }
-  }
-
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-
-    li {
-      padding: 0;
-      margin: 0 0 0.5rem;
-    }
-  }
-
-  @media(min-width: 768px) {
-    padding: 8rem 1rem;
-    
-    > div {
-      flex-basis: 200px;
-    }
-
-    div#contact {
-      padding: 2rem;
-
-      span {
-        font-size: 2rem;
-      }
-    }
-  }
-`
 
 const Hero = styled.div`
   padding: 0 1rem;

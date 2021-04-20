@@ -4,7 +4,7 @@ import Link from "./link";
 import { Icon } from './theme'
 
 const MenuModal = ({ state }) => {
-  const { menu } = state.theme;
+  const { menu, isLandscape } = state.theme;
   const isThereLinks = menu != null && menu.length > 0;
 
   const textItems = menu.filter(([, , icon]) => !!!icon)
@@ -27,10 +27,13 @@ const MenuModal = ({ state }) => {
               {name}
             </MenuLink>
           ))}
-        <IconRow icons={iconItems} />
+        <IconRow icons={iconItems} landscape={isLandscape} />
         <span ref={bottomRef} />
       </MenuContent>
-      <ScrollDownButton onClick={() => bottomRef.current.scrollIntoView({ behavior: 'smooth' })}>
+      <ScrollDownButton
+        onClick={() => bottomRef.current.scrollIntoView({ behavior: 'smooth' })}
+        landscape={isLandscape}
+      >
         <Icon.Arrow angle={180} />
       </ScrollDownButton>
     </>
@@ -38,12 +41,14 @@ const MenuModal = ({ state }) => {
 };
 
 const ScrollDownButton = styled.button`
+  ${props => !props.landscape && `display: none;`}
   border: 0;
   background: 0;
   position: fixed;
   z-index: 300;
-  right: 0.75rem;
-  bottom: 6rem;
+  right: 0;
+  bottom: 0;
+  padding: 1rem;
 
   svg {
     height: 32px;
@@ -51,8 +56,8 @@ const ScrollDownButton = styled.button`
   }
 `
 
-const IconRow = ({ icons }) => (
-  <IconRowWrapper>
+const IconRow = ({ icons, landscape }) => (
+  <IconRowWrapper {...{ landscape }}>
     {icons.map(([name, link, icon]) => {
       const CurrentIcon = Icon[icon]
       return <CurrentIcon key={name} />
@@ -63,12 +68,18 @@ const IconRow = ({ icons }) => (
 const IconRowWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
-  padding: 1rem 0;
   position: fixed;
+  background: #444;
+  padding: 1rem 0;
+
+  ${props => props.landscape ? `
+  top: 0;
+  right: 3rem;
+  left: 120px;
+  ` : `
   bottom: 0;
   width: 100%;
-  background: #444;
-
+  `}
   > * {
     height: 40px;
     width: 40px;
@@ -94,8 +105,8 @@ const MenuContent = styled.div`
   z-index: 3;
   position: fixed;
   top: 0;
-  padding: 72px 0;
-  overflow-y: scroll;
+  margin: 4rem 0 0;
+  overflow-y: auto;
   height: calc(100vh - 52px);
   box-sizing: border-box;
 `;
@@ -105,7 +116,7 @@ const MenuLink = styled(Link)`
   display: inline-block;
   outline: 0;
   text-align: center;
-  padding: 1rem;
+  padding: 0.75rem;
   color: #fffff0 !important;
   box-sizing: border-box;
 
