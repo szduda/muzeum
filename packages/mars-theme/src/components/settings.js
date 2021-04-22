@@ -81,13 +81,14 @@ const SettingsDropdown = styled.div`
   top: 0;
   right: 0;
   transform: translateX(${props => props.open ? 0 : 220}px);
-  transition: transform 150ms ease-out;
+  transition: transform 150ms ease-out, visibility 150ms ease-out;
   padding: 0.5rem 0;
   background: #fffff0;
   border-bottom-left-radius: 8px;
   color: #444;
   width: 220px;
   box-shadow: 0 0 4px #4444;
+  ${props => !props.open && 'visibility: hidden;'}
 `
 
 const SettingsLink = styled(Link)`
