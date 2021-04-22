@@ -1,10 +1,9 @@
 import { styled, connect, Global } from "frontity";
 import { Icon } from "./theme";
 import MapModal from "./map-modal";
-import { CloseIcon } from './menu-icon'
 import { useMediaQuery } from '../helpers'
 
-function Map({ state, actions }) {
+const Map = ({ state, actions }) => {
   const { isMapOpen, isMobileMenuOpen } = state.theme;
   const isWideScreen = useMediaQuery('(min-width: 768px)');
   return (
@@ -14,7 +13,7 @@ function Map({ state, actions }) {
           ? (
             <>
               <Global styles={getBodyLockStyle({ padRight: isWideScreen })} />
-              <CloseIcon size="24px" color="#444" />
+              <Icon.Close />
             </>
           ) : <Icon.Map />}
       </MapToggle>}

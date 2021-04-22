@@ -4,19 +4,16 @@ import { Icon } from "../components/theme"
 
 const Nav = ({ state }) => {
   const sticky = state.theme.isHeaderSticky
+  const { menu } = state.theme
   return (
     <NavContainer>
-      {state.theme.menu.map(([name, link, icon]) => {
+      {menu.map(([name, link]) => {
         // TODO: handle hash anchors in beforeSSR
         const isCurrentPage = state.router.link.split('#').shift() === link
-        const ItemIcon = Icon?.[icon]
         return (
           <NavItem key={name} sticky={sticky} aria-current={isCurrentPage ? "page" : undefined}>
-            <Link className={icon ? 'icon' : ''} aria-label={icon ?? undefined} link={link}>
-              {icon
-                ? <ItemIcon />
-                : name
-              }
+            <Link link={link}>
+              {name}
             </Link>
           </NavItem>
         )
@@ -32,7 +29,7 @@ const NavContainer = styled.nav`
   display: flex;
   max-width: 100%;
   box-sizing: border-box;
-  padding: 0 0 0 24px;
+  padding: 0 1.5rem;
   margin: 0;
 
   @media screen and (max-width: 959px) {
@@ -61,21 +58,24 @@ const NavItem = styled.div`
     
     svg {
       height: 24px;
-    }
-    
-    svg {
-      fill: ${({ sticky }) => sticky ? `#afafaf` : `#d4d4d4`};
+      fill: #444;
     }
 
     &[aria-label="Help"]:not(:hover) svg {
-      fill: ${({ sticky }) => sticky ? `#afafaf` : `#d4d4d4`};
+      fill: #444;
     }
 
-    &[aria-label="Lang"]:not(:hover) div {
-      background: ${({ sticky }) => sticky ? `#afafaf` : `#d4d4d4`};
+    &[aria-label="Lang"] {
+       div {
+      background: #444;
       span {
-        color: ${({ sticky }) => sticky ? `#fffff0` : `#888`};        
+        color: #d4d4d4;        
       }
+    }
+
+    :hover div {
+      background: #f9c959;
+    }
     }
   }
   
@@ -102,27 +102,5 @@ const NavItem = styled.div`
 
   &:first-of-type {
     margin-left: 0;
-  }
-
-  &:last-of-type {
-    margin-right: 16px;
-
-    a {
-      border-radius: 8px;
-      border: 2px solid #f9c959;
-      color: #f9c959;
-      ${({ sticky }) => sticky && `
-        border-color: #d4d4d4;
-        color: #444;
-        background: #d4d4d4;
-      `}
-
-      :hover {
-        border-color: #f9c959;
-        color: #444;
-        background: #f9c959
-      }
-      
-    }
   }
 `

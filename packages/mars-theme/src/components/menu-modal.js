@@ -7,9 +7,6 @@ const MenuModal = ({ state }) => {
   const { menu, isLandscape } = state.theme;
   const isThereLinks = menu != null && menu.length > 0;
 
-  const textItems = menu.filter(([, , icon]) => !!!icon)
-  const iconItems = menu.filter(([, , icon]) => !!icon)
-
   const bottomRef = useRef()
 
   return (
@@ -18,7 +15,7 @@ const MenuModal = ({ state }) => {
       <MenuContent as="nav">
         <MenuLink link="/">Home</MenuLink>
         {isThereLinks &&
-          textItems.map(([name, link]) => (
+          menu.map(([name, link]) => (
             <MenuLink
               key={name}
               link={link}
@@ -27,9 +24,17 @@ const MenuModal = ({ state }) => {
               {name}
             </MenuLink>
           ))}
-        <IconRow icons={iconItems} landscape={isLandscape} />
         <span ref={bottomRef} />
       </MenuContent>
+      <IconRowWrapper>
+        <Icon.Search />
+        {isLandscape && <Icon.Gear />}
+      </IconRowWrapper>
+      {!isLandscape && (
+        <SettingsWrapper>
+          <Icon.Gear />
+        </SettingsWrapper>
+      )}
       <ScrollDownButton
         onClick={() => bottomRef.current.scrollIntoView({ behavior: 'smooth' })}
         landscape={isLandscape}
@@ -56,36 +61,35 @@ const ScrollDownButton = styled.button`
   }
 `
 
-const IconRow = ({ icons, landscape }) => (
-  <IconRowWrapper {...{ landscape }}>
-    {icons.map(([name, link, icon]) => {
-      const CurrentIcon = Icon[icon]
-      return <CurrentIcon key={name} />
-    })}
-  </IconRowWrapper>
-)
-
 const IconRowWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   position: fixed;
   background: #444;
-  padding: 1rem 0;
-
-  ${props => props.landscape ? `
-  top: 0;
+  z-index: 2;
+  top: 1rem;
   right: 3rem;
   left: 120px;
-  ` : `
+  
+  svg {
+    height: 24px;
+    fill: #d4d4d4;
+    padding: 0.5rem;
+  }
+`
+
+const SettingsWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  background: #444;
+  padding: 1rem 0;
+  z-index: 2;
   bottom: 0;
   width: 100%;
-  `}
-  > * {
-    height: 40px;
-    width: 40px;
-  }
 
   svg {
+    height: 64px;
     fill: #d4d4d4;
   }
 `

@@ -14,8 +14,8 @@ const settings = {
         "theme": {
           "menu": [
             [
-              "Tickets & Guide",
-              "/tickets-and-guide/",
+              "Tickets",
+              "/tickets/",
             ],
             [
               "Arrival",
@@ -33,11 +33,8 @@ const settings = {
               "See more",
               "/see-more/"
             ],
-            [
-              "Search",
-              "#",
-              "Search"
-            ],
+          ],
+          settings: [
             [
               "Change language",
               "#",

@@ -1,9 +1,10 @@
-import React from 'react'
-import { connect, styled, css } from "frontity";
-import Link from "./link";
-import Nav from "./nav";
-import MobileMenu from "./menu";
+import { connect, styled } from "frontity"
+import Link from "./link"
+import Nav from "./nav"
+import MobileMenu from "./menu"
 import { Icon } from './theme'
+import Settings from './settings'
+import Search from './search'
 
 const Header = ({ state }) => {
   const {
@@ -18,6 +19,10 @@ const Header = ({ state }) => {
           <Icon.Logo lighten={isMobileMenuOpen} />
         </LogoLink>
         <Nav />
+        <IconsRow>
+          <Search />
+          <Settings />
+        </IconsRow>
       </Row>
       <MobileMenu />
     </Container>
@@ -45,7 +50,7 @@ const Container = styled.div`
     ${props => props.sticky && `
     backdrop-filter: blur(2px) saturate(0.3) contrast(0.4) brightness(1.4);
     background-color: #fffff088;
-    box-shadow: 0 2px 4px #444a;
+    box-shadow: 0 2px 4px #4444;
     `}
   }
 `
@@ -72,4 +77,11 @@ const LogoLink = styled(Link)`
 const Row = styled.div`
   display: flex;
   justify-content: space-between;
+`
+
+const IconsRow = styled(Row)`
+  display: none;
+  @media (min-width: 960px) {
+    display: flex;
+  }
 `

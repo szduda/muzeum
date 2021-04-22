@@ -31,9 +31,12 @@ const MarsLink = ({ children, ...props }) => {
    * A handler that closes the mobile menu when a link is clicked.
    */
   const onClick = () => {
-    if (state.theme.isMobileMenuOpen) {
-      actions.theme.closeMobileMenu();
-    }
+    if (state.theme.isMobileMenuOpen)
+      actions.theme.closeMobileMenu()
+    if (state.theme.isMapOpen)
+      actions.theme.toggleMap()
+    if (state.theme.isSettingsOpen)
+      actions.theme.toggleSettings()
 
     if (isCSR && props.link !== state.router.previous) {
       document.querySelector('#root').scrollTo(0, 0)

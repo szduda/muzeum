@@ -1,6 +1,6 @@
-import Theme from "./components";
-import image from "@frontity/html2react/processors/image";
-import iframe from "@frontity/html2react/processors/iframe";
+import Theme from "./components"
+import image from "@frontity/html2react/processors/image"
+import iframe from "@frontity/html2react/processors/iframe"
 import { init } from './components/html2react'
 
 const marsTheme = {
@@ -20,9 +20,11 @@ const marsTheme = {
     theme: {
       autoPrefetch: "in-view",
       menu: [],
+      settings: [],
       isMobileMenuOpen: false,
       isMapOpen: false,
       isHeaderSticky: false,
+      isSettingsOpen: false,
       featured: {
         showOnList: false,
         showOnPost: false,
@@ -41,13 +43,13 @@ const marsTheme = {
         await actions.source.fetch(`/common/footer/`)
       },
       toggleMobileMenu: ({ state }) => {
-        state.theme.isMobileMenuOpen = !state.theme.isMobileMenuOpen;
+        state.theme.isMobileMenuOpen = !state.theme.isMobileMenuOpen
       },
       closeMobileMenu: ({ state }) => {
-        state.theme.isMobileMenuOpen = false;
+        state.theme.isMobileMenuOpen = false
       },
       toggleMap: ({ state }) => {
-        state.theme.isMapOpen = !state.theme.isMapOpen;
+        state.theme.isMapOpen = !state.theme.isMapOpen
       },
       setSticky: ({ state }) => {
         state.theme.isHeaderSticky = true
@@ -60,7 +62,10 @@ const marsTheme = {
       },
       setPortraitOrientation: ({ state }) => {
         state.theme.isLandscape = false
-      }
+      },
+      toggleSettings: ({ state }) => {
+        state.theme.isSettingsOpen = !state.theme.isSettingsOpen
+      },
     },
   },
   libraries: {
@@ -75,4 +80,4 @@ const marsTheme = {
   },
 };
 
-export default marsTheme;
+export default marsTheme
