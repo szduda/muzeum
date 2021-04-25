@@ -28,6 +28,7 @@ const SearchModal = ({ state, actions }) => {
           <Input innerRef={inputRef} name="searchTerm" placeholder="I am searching for..."
             value={term}
             onChange={e => setTerm(e.target.value)}
+            onFocus={() => inputRef.current.select()}
           />
         </Form>
         {results.length ? <ResultsWrapper>
