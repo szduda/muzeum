@@ -104,6 +104,7 @@ const Wrapper = styled.div`
   top: 52px;
   left: 0;
   color: #444;
+  box-shadow: 0 2px 4px #4444;
 `
 
 const ResultItem = styled.div`
@@ -141,7 +142,6 @@ const Content = styled.div`
   flex-direction: column;
   max-width: 1088px;
   align-items: center;
-  box-shadow: 0 2px 4px #4444;
 
   @media (min-width: 768px) {
     padding: 4rem 4rem 2rem;
