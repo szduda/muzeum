@@ -42,3 +42,10 @@ export const useMousedown = () => {
 
   return mousedown
 }
+
+export const getBodyLockStyle = ({ padRight = 0 }) => ({
+  body: {
+    overflowY: "hidden",
+    paddingRight: padRight ? '15px' : 0
+  }
+})

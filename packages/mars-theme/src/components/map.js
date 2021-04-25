@@ -1,7 +1,7 @@
 import { styled, connect, Global } from "frontity";
 import { Icon } from "./theme";
 import MapModal from "./map-modal";
-import { useMediaQuery } from '../helpers'
+import { useMediaQuery, getBodyLockStyle } from '../helpers'
 
 const Map = ({ state, actions }) => {
   const { isMapOpen, isMobileMenuOpen } = state.theme;
@@ -21,13 +21,6 @@ const Map = ({ state, actions }) => {
     </>
   );
 }
-
-const getBodyLockStyle = ({ padRight }) => ({
-  body: {
-    overflowY: "hidden",
-    paddingRight: padRight ? '15px' : 0
-  }
-})
 
 const MapToggle = styled.button`
   position: fixed;

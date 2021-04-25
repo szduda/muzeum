@@ -1,13 +1,18 @@
-import { connect, styled } from "frontity"
+import { connect, styled, Global } from "frontity"
 import { Icon } from "../components/theme"
+import SearchModal from './search-modal'
+import { useMediaQuery, getBodyLockStyle } from '../helpers'
 
-const Search = () => {
-
+const Search = ({ state, actions }) => {
+  const { open } = state.theme.search
+  const isWideScreen = useMediaQuery('(min-width: 768px)');
   return (
     <SearchWrapper>
-      <SearchToggle>
+      {open && <Global styles={getBodyLockStyle({ padRight: isWideScreen })} />}
+      <SearchToggle onClick={actions.theme.search.toggle}>
         <Icon.Search />
       </SearchToggle>
+      {open && <SearchModal />}
     </SearchWrapper>
   )
 }
@@ -34,5 +39,4 @@ const SearchToggle = styled.button`
 
 const SearchWrapper = styled.div`
   display: flex;
-  align-items: center;
 `

@@ -25,6 +25,11 @@ const marsTheme = {
       isMapOpen: false,
       isHeaderSticky: false,
       isSettingsOpen: false,
+      search: {
+        open: false,
+        term: '',
+        results: []
+      },
       featured: {
         showOnList: false,
         showOnPost: false,
@@ -39,7 +44,7 @@ const marsTheme = {
   actions: {
     theme: {
       init,
-      beforeSSR: ({ state, actions }) => async ({ ctx }) => {
+      beforeSSR: ({ actions }) => async ({ ctx }) => {
         await actions.source.fetch(`/common/footer/`)
       },
       toggleMobileMenu: ({ state }) => {
@@ -66,6 +71,17 @@ const marsTheme = {
       toggleSettings: ({ state }) => {
         state.theme.isSettingsOpen = !state.theme.isSettingsOpen
       },
+      search: {
+        toggle: ({ state }) => {
+          state.theme.search.open = !state.theme.search.open
+        },
+        setTerm: ({ state }) => term => {
+          state.theme.search.term = term
+        },
+        setResults: ({ state }) => {
+          state.theme.search.results = ['x', 'y', 'z', 'a', 'b', 'c']
+        }
+      }
     },
   },
   libraries: {

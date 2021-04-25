@@ -37,6 +37,8 @@ const MarsLink = ({ children, ...props }) => {
       actions.theme.toggleMap()
     if (state.theme.isSettingsOpen)
       actions.theme.toggleSettings()
+    if (state.theme.search.open)
+      actions.theme.search.toggle()
 
     if (isCSR && props.link !== state.router.previous) {
       document.querySelector('#root').scrollTo(0, 0)

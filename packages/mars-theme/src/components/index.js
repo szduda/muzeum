@@ -160,6 +160,18 @@ const globalStyles = css`
   p {
     line-height: 1.5;
   }
+
+  input {
+    font-size: 2rem;
+    padding: 1rem;
+    border: none;
+    background: #fffff0;
+    border-bottom: 4px solid #f9c959;
+
+    :focus {
+      outline: 2px solid #f9c959;
+    }
+  }
 `;
 
 const Wrapper = styled.div`
