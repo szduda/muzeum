@@ -8,20 +8,23 @@ const Settings = ({ state, actions }) => {
   return (
     <SettingsWrapper open={isSettingsOpen}>
       {isSettingsOpen && <Overlay onClick={actions.theme.toggleSettings} />}
-      <SettingsDropdown open={isSettingsOpen}>
-        <Title>Settings</Title>
-        {settings.map(([name, link, icon]) => {
-          const ItemIcon = icon ? Icon[icon] : Icon.Help
-          return (
-            <SettingsLink key={name} link={link}>
-              <ItemIcon />
-              <span>{name}</span>
-            </SettingsLink>
-          )
-        })}
-      </SettingsDropdown>
+      <SlideDown open={isSettingsOpen} >
+        <SettingsDropdown sticky={state.theme.isHeaderSticky}>
+          <Title>Settings</Title>
+          {settings.map(([name, link, icon]) => {
+            const ItemIcon = icon ? Icon[icon] : Icon.Help
+            return (
+              <SettingsLink key={name} link={link}>
+                <ItemIcon />
+                <span>{name}</span>
+              </SettingsLink>
+            )
+          })}
+        </SettingsDropdown>
+        {isSettingsOpen && <ArrowDecor />}
+      </SlideDown>
       <SettingsToggle onClick={actions.theme.toggleSettings}>
-        {isSettingsOpen ? <Icon.Close size="16px" /> : <Icon.Gear />}
+        <Icon.Gear />
       </SettingsToggle>
     </SettingsWrapper>
   )
@@ -30,8 +33,6 @@ const Settings = ({ state, actions }) => {
 export default connect(Settings)
 
 const Overlay = styled.div`
-  background-color: #444a;
-  backdrop-filter: blur(1px);
   width: 100vw;
   height: 100vh;
   overflow: hidden auto;
@@ -74,21 +75,52 @@ const SettingsToggle = styled.button`
   }
 `
 
+const SlideDown = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  transition: transform 150ms ease-out, opacity 150ms ease-out, visibility 150ms ease-out;
+
+  ${props => !props.open && `
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-2rem);
+  `}
+`
+
 const SettingsDropdown = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  top: 0;
-  right: 0;
-  transform: translateX(${props => props.open ? 0 : 220}px);
-  transition: transform 150ms ease-out, visibility 150ms ease-out;
+  top: 100%;
+  right: -1rem;
   padding: 0.5rem 0;
   background: #fffff0;
-  border-bottom-left-radius: 8px;
+  border: 1px solid #888;
+  border-radius: 8px;
   color: #444;
   width: 220px;
-  box-shadow: 0 0 4px #4444;
-  ${props => !props.open && 'visibility: hidden;'}
+  margin-top: 1rem;
+`
+
+const ArrowDecor = styled.div`
+  position: absolute;
+  top: 100%;
+  right: 14px;
+  margin-top: 10px;
+  border: 1px solid #888;
+  background: #fffff0;
+  transform: rotate(45deg);
+  width: 12px;
+  height: 12px;
+
+  :after {
+    content: ' ';
+    position: absolute;
+    background: #fffff0;
+    width: 12px;
+    height: 12px;
+  }
 `
 
 const SettingsLink = styled(Link)`
