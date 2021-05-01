@@ -43,11 +43,12 @@ const NavItem = styled.div`
   align-items: center;
   display: flex;
   
-  &[aria-current="page"] {
-    ${({ sticky }) => sticky && `
-    background: #444;
-    color: #fffff0;
-  `};
+  &[aria-current="page"] a {
+    border-bottom-color: #F9C959;
+
+    svg {
+      fill: #f9c959;
+    }
   }
 
   .icon {
