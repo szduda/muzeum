@@ -12,6 +12,7 @@ import PageError from "./page-error";
 import bgUrl from '../assets/gate.jpg'
 import { scrollToAnchor, useMousedown, useMediaQuery } from '../helpers'
 import { useDebouncedCallback } from "use-debounce";
+import faviconUrl from '../assets/favicon.png'
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -54,9 +55,10 @@ const Theme = ({ state, actions }) => {
     <>
       <Title />
       <Head>
+        <html lang="en" />
         <meta name="description" content={state.frontity.description} />
         <meta name="mobile-web-app-capable" content="yes" />
-        <html lang="en" />
+        <link rel="icon" type="image/png" href={faviconUrl} />
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
           crossorigin="" />
