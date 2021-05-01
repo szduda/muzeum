@@ -29,7 +29,6 @@ const NavContainer = styled.nav`
   display: flex;
   max-width: 100%;
   box-sizing: border-box;
-  padding: 0 1.5rem;
   margin: 0;
 
   @media screen and (max-width: 959px) {

@@ -56,17 +56,19 @@ const Container = styled.div`
 `
 
 const LogoLink = styled(Link)`
-  text-decoration: none;
-  margin: 0.5rem 0.25rem;
-  transition: opacity 300ms ease-out;
+  width: 128px;
+  height: 48px;
+  display: block;
+  box-sizing: border-box;
+  padding: 0.5rem 1rem;
+  margin: 0 0 0 1rem;
   z-index: 3;
+  transition: opacity 300ms ease-out;
+  text-decoration: none;
   
-  @media (min-width: 960px) {
-    margin-left: 1rem;
-  }
-  
-  @media (max-width: 767px) {
-    margin: 1.25rem 0.75rem 0;
+  @media (max-width: 959px) {
+    margin: 0;
+    transform: translateY(12px);
     ${props => props.$hidden && `
     pointer-events: none;
     opacity: 0;
@@ -81,6 +83,10 @@ const Row = styled.div`
 
 const IconsRow = styled(Row)`
   display: none;
+  width: 120px;
+  justify-content: flex-end;
+  margin: 0 1.5rem 0 0;
+
   @media (min-width: 960px) {
     display: flex;
   }
