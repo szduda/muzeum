@@ -2,7 +2,7 @@ import { connect, styled, Global } from "frontity"
 import { Icon } from "../components/theme"
 import SearchModal from './search-modal'
 import { useMediaQuery, getBodyLockStyle } from '../helpers'
-import { SlideDown } from './theme'
+import { Slide } from './theme'
 
 const Search = ({ state, actions }) => {
   const { open } = state.theme.search
@@ -10,11 +10,11 @@ const Search = ({ state, actions }) => {
   return (
     <SearchWrapper>
       {open && <Global styles={getBodyLockStyle({ padRight: isWideScreen })} />}
-      <SlideDown open={open}>
+      <Slide down open={open}>
         <SearchModal />
-      </SlideDown>
+      </Slide>
       <SearchToggle onClick={actions.theme.search.toggle}>
-        <Icon.Search />
+        <Icon.Search color={open ? '#f9c959' : '#444'} />
       </SearchToggle>
     </SearchWrapper>
   )
@@ -29,11 +29,6 @@ const SearchToggle = styled.button`
   padding: 4px;
   margin: 0 2px;
   border-color: transparent !important;
-
-  svg {
-    height: 24px;
-    fill: #444;
-  }
 
   :hover svg {
     fill: #f9c959;

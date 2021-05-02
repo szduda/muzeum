@@ -53,8 +53,16 @@ const Map = () => (
   </svg>
 )
 
-const Search = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 288.136 288.136" fill="#d4d4d4">
+const Search = ({ color = "#d4d4d4", size = "24px" }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    viewBox="0 0 288.136 288.136"
+    css={css`
+      fill: ${color};
+      width: ${size};
+      height: ${size};
+    `}>
     <path d="M253.094,35.437c-22.634-22.634-52.727-35.099-84.735-35.099s-62.102,12.465-84.735,35.099  
             c-38.632,38.632-45.319,97.294-20.067,142.865L9.496,232.364c-12.661,12.661-12.661,33.262,0,45.923  
             c6.133,6.134,14.287,9.511,22.961,9.511s16.828-3.377,22.961-9.511l53.821-53.821c17.824,10.141,38.057,15.539,59.12,15.539  
@@ -211,21 +219,6 @@ export const Icon = {
   Close,
   Gear,
 }
-
-export const SlideDown = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  pointer-event: none;
-  transition: transform 300ms ease-out, opacity 150ms ease-out, visibility 150ms ease-out;
-  ${props => !props.open && `
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(-2rem);
-  `}
-`
 
 export const Slide = styled.div`
   position: absolute;

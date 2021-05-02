@@ -1,6 +1,6 @@
 import { connect, styled } from "frontity"
 import Link from "./link"
-import { Icon } from "../components/theme"
+import { Icon, Slide } from "../components/theme"
 
 const Settings = ({ state, actions }) => {
   const { settings, isSettingsOpen } = state.theme
@@ -8,7 +8,7 @@ const Settings = ({ state, actions }) => {
   return (
     <SettingsWrapper open={isSettingsOpen}>
       {isSettingsOpen && <Overlay onClick={actions.theme.toggleSettings} />}
-      <SlideDown open={isSettingsOpen} >
+      <Slide down open={isSettingsOpen} >
         <SettingsDropdown sticky={state.theme.isHeaderSticky}>
           <Title>Settings</Title>
           {settings.map(([name, link, icon]) => {
@@ -22,7 +22,7 @@ const Settings = ({ state, actions }) => {
           })}
         </SettingsDropdown>
         {isSettingsOpen && <ArrowDecor />}
-      </SlideDown>
+      </Slide>
       <SettingsToggle open={isSettingsOpen} onClick={actions.theme.toggleSettings}>
         <Icon.Gear />
       </SettingsToggle>
@@ -73,19 +73,6 @@ const SettingsToggle = styled.button`
   :hover svg {
     fill: #f9c959;
   }
-`
-
-const SlideDown = styled.div`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  transition: transform 150ms ease-out, opacity 150ms ease-out, visibility 150ms ease-out;
-
-  ${props => !props.open && `
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(-2rem);
-  `}
 `
 
 const SettingsDropdown = styled.div`

@@ -4,25 +4,23 @@ import { Input, Form } from 'reactstrap'
 import Link from './link'
 import { Icon } from './theme'
 
-const SearchModal = ({ state, actions, libraries }) => {
-  const { results, term } = state.theme.search
+const SearchModal = ({ state, actions }) => {
+  const { results, term, open } = state.theme.search
   const { setResults, setTerm, toggle } = actions.theme.search
   const inputRef = useRef()
 
+  // TODO: Focus Trap
   useEffect(() => {
-    inputRef.current.focus()
-  })
+    if (!open) return
+    const timeoutId = setTimeout(() => { inputRef.current?.focus() }, 150)
+    return clearTimeout(timeoutId)
+  }, [open])
 
   useEffect(() => {
     if (!!!term || term.trim().length < 3)
       return
 
     const fetchResults = async () => {
-      // actions.source.fetch(`search?search=${encodeURIComponent(term)}`)
-      // console.log(state.source.get('posts'))
-      // const p = await libraries.source.api.get({ endpoint: 'posts' })
-      // const j = await p.json()
-      // console.log(j)
       const response = await fetch(`https://www.lucanus.ayz.pl/wp-json/wp/v2/search?search=${encodeURIComponent(term)}`)
       const results = await response.json()
       setResults(results)
@@ -32,15 +30,16 @@ const SearchModal = ({ state, actions, libraries }) => {
 
   return (
     <Wrapper>
-      <Overlay />
+      <Overlay onClick={toggle} />
       <Content>
         <Form>
           <Input innerRef={inputRef}
+            autoFocus
             name="searchTerm"
             placeholder="I am searching for..."
             value={term}
             onChange={e => setTerm(e.target.value)}
-            onFocus={() => inputRef.current.select()}
+            onFocus={() => { inputRef.current.select() }}
             css={css`margin-bottom: 4rem;`}
           />
         </Form>
@@ -165,6 +164,7 @@ const ResultsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  justify-content: center;
 `
 
 const Content = styled.div`
