@@ -1,40 +1,73 @@
 import { useRef } from 'react'
-import { styled, connect } from "frontity";
+import { styled, css, connect } from "frontity";
 import Link from "./link";
 import { Icon } from './theme'
 
-const MenuModal = ({ state }) => {
-  const { menu, isLandscape } = state.theme;
-  const isThereLinks = menu != null && menu.length > 0;
-
+const MenuModal = ({ state, actions }) => {
+  const { menu, isLandscape, isSettingsOpen } = state.theme;
   const bottomRef = useRef()
+
+  const SettingsToggle = props => (
+    <button
+      onClick={actions.theme.toggleSettings}
+      css={css`
+        display: flex; 
+        align-items: center;
+        border: 0;
+        background: 0;
+        color: #fffff0;
+        font-size: 1rem;
+
+        svg {
+          ${isSettingsOpen && `fill: #f9c959;`}
+        }
+      `} {...props} />
+  )
 
   return (
     <>
       <MenuOverlay />
+
       <MenuContent as="nav">
         <MenuLink link="/">Home</MenuLink>
-        {isThereLinks &&
-          menu.map(([name, link]) => (
-            <MenuLink
-              key={name}
-              link={link}
-              aria-current={state.router.link === link ? "page" : undefined}
-            >
-              {name}
-            </MenuLink>
-          ))}
+        {menu?.map(([name, link]) => (
+          <MenuLink
+            key={name}
+            link={link}
+            aria-current={state.router.link === link ? "page" : undefined}
+          >
+            {name}
+          </MenuLink>
+        ))}
         <span ref={bottomRef} />
       </MenuContent>
+
+      {isSettingsOpen && (
+        <SettingsContent landscape={isLandscape}>
+          <SettingsToggle css={css`padding: 1rem 1rem; width: 100%; background: #888;`}>
+            <Icon.Arrow angle={270} />
+            <span css={css`margin-left: 0.5rem;`}>back to menu</span>
+          </SettingsToggle>
+        </SettingsContent>
+
+      )}
       <IconRowWrapper>
         <Icon.Search />
-        {isLandscape && <Icon.Gear />}
+        {isLandscape && (
+          <SettingsToggle>
+            <Icon.Gear />
+          </SettingsToggle>
+        )}
       </IconRowWrapper>
+
       {!isLandscape && (
         <SettingsWrapper>
-          <Icon.Gear />
+          <SettingsToggle>
+            <Icon.Gear size={64} color="#d4d4d4" />
+          </SettingsToggle>
         </SettingsWrapper>
       )}
+
       <ScrollDownButton
         onClick={() => bottomRef.current.scrollIntoView({ behavior: 'smooth' })}
         landscape={isLandscape}
@@ -45,12 +78,26 @@ const MenuModal = ({ state }) => {
   );
 };
 
+const SettingsContent = ({ landscape, children }) => (
+  <MenuContent css={css`
+      height: calc(100vh - ${landscape ? 72 : 170}px); 
+      width: 100%; 
+      background: #666;
+      margin-top: 72px;
+    `}>
+    {children}
+    <MenuLink link={"#"}>Settings</MenuLink>
+    <MenuLink link={"#"}>Settings</MenuLink>
+    <MenuLink link={"#"}>Settings</MenuLink>
+  </MenuContent>
+)
+
 const ScrollDownButton = styled.button`
   ${props => !props.landscape && `display: none;`}
   border: 0;
   background: 0;
   position: fixed;
-  z-index: 300;
+  z-index: 3;
   right: 0;
   bottom: 0;
   padding: 1rem;
@@ -63,7 +110,7 @@ const ScrollDownButton = styled.button`
 
 const IconRowWrapper = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   position: fixed;
   background: #444;
   z-index: 2;
@@ -76,6 +123,10 @@ const IconRowWrapper = styled.div`
     fill: #d4d4d4;
     padding: 0.5rem;
   }
+
+  > * {
+    margin-right: 1rem;
+  }
 `
 
 const SettingsWrapper = styled.div`
@@ -84,14 +135,9 @@ const SettingsWrapper = styled.div`
   position: fixed;
   background: #444;
   padding: 1rem 0;
-  z-index: 2;
+  z-index: 4;
   bottom: 0;
   width: 100%;
-
-  svg {
-    height: 64px;
-    fill: #d4d4d4;
-  }
 `
 
 const MenuOverlay = styled.div`
@@ -113,6 +159,7 @@ const MenuContent = styled.div`
   overflow-y: auto;
   height: calc(100vh - 52px);
   box-sizing: border-box;
+  background: #444;
 `;
 
 const MenuLink = styled(Link)`

@@ -64,8 +64,16 @@ const Search = () => (
   </svg>
 )
 
-const Arrow = ({ angle = 90 }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 512 512" css={css`transform: rotateZ(${angle - 90}deg)`}>
+const Arrow = ({ angle = 90, size = 32, color = '#fffff0' }) => (
+  <svg xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    viewBox="0 0 512 512"
+    css={css`
+      transform: rotateZ(${angle - 90}deg);
+      width: ${size}px;
+      height: ${size}px;
+      fill: ${color};
+    `}>
     <g>
       <g>
         <path d="M506.134,241.843c-0.006-0.006-0.011-0.013-0.018-0.019l-104.504-104c-7.829-7.791-20.492-7.762-28.285,0.068
@@ -166,8 +174,15 @@ const UkFlag = () => (
   </svg>
 )
 
-const Gear = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" height="24px" fill="#444" version="1.1" viewBox="0 0 512 512">
+const Gear = ({color = '#444', size = 24}) => (
+  <svg xmlns="http://www.w3.org/2000/svg"  
+  version="1.1" 
+  viewBox="0 0 512 512"
+  css={css`
+    fill: ${color};
+    width: ${size}px;
+    height: ${size}px;
+  `}>
     <g>
       <g>
         <path d="M496.659,312.107l-47.061-36.8c0.597-5.675,1.109-12.309,1.109-19.328c0-7.019-0.491-13.653-1.109-19.328l47.104-36.821    
