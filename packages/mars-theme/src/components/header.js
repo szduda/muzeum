@@ -86,6 +86,13 @@ const IconsRow = styled(Row)`
   width: 120px;
   justify-content: flex-end;
   margin: 0 1.5rem 0 0;
+  
+  svg {
+    box-shadow: 0 0 16px #fffff077;
+    border-radius: 50%;
+    background: #fffff033;
+    overflow: visible;
+  }
 
   @media (min-width: 960px) {
     display: flex;
