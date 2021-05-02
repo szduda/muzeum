@@ -69,7 +69,8 @@ export default connect(Post);
 
 const Container = styled.div`
   margin: 0;
-  padding: 24px;
+  padding: 8rem 1rem 1rem;
+  max-width: 960px;
 `;
 
 const Title = styled.h1`
@@ -107,8 +108,18 @@ const Content = styled.div`
     max-width: 100%;
   }
 
+  p, h1, h2, h3 {
+    max-width: 640px;
+    text-align: left;
+  }
+
+  h2 {
+    margin-bottom: 2rem;
+  }
+
   p {
-    line-height: 1.6em;
+    line-height: 1.7rem;
+    margin: 2rem 0;
   }
 
   img {
@@ -118,9 +129,10 @@ const Content = styled.div`
   }
 
   figure {
-    margin: 24px auto;
+    margin: 4rem 0;
     /* next line overrides an inline style of the figure element. */
-    width: 100% !important;
+    // width: 100% !important;
+    // max-height: 50vh;
 
     figcaption {
       font-size: 0.7em;
@@ -133,15 +145,21 @@ const Content = styled.div`
   }
 
   blockquote {
-    margin: 16px 0;
-    background-color: rgba(0, 0, 0, 0.1);
-    border-left: 4px solid rgba(12, 17, 43);
-    padding: 4px 16px;
-  }
+    margin: 2rem 0;
+    box-sizing: border-box;
+    background-color: #f2eedd;
+    border-right: 4px solid #888;
+    padding: 1rem;
+    font-size: 1.25rem;
 
-  a {
-    color: rgb(31, 56, 197);
-    text-decoration: underline;
+    cite {
+      font-style: normal;
+      color: #888;
+    }
+    
+    @media (min-width: 960px) {
+      transform: translateX(4rem);
+    }
   }
 
   /* Input fields styles */

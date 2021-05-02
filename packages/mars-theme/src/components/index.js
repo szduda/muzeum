@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useRef, useLayoutEffect } from 'react'
 import { Global, css, connect, styled, Head } from "frontity";
 import Switch from "@frontity/components/switch";
 import Header from "./header";
@@ -34,17 +34,17 @@ const Theme = ({ state, actions }) => {
   }
   const debouncedHandleScroll = useDebouncedCallback(handleScroll, 100)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     handleScroll()
     const root = document.querySelector('#root')
     root.addEventListener('scroll', debouncedHandleScroll)
     return () => root.removeEventListener('scroll', () => debouncedHandleScroll)
-  }, [debouncedHandleScroll])
+  }, [debouncedHandleScroll, state.router.link])
 
   const mousedown = useMousedown()
   const isLandscape = useMediaQuery('(max-height: 475px)');
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isLandscape)
       actions.theme.setLandscapeOrientation()
     else
