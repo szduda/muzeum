@@ -146,14 +146,14 @@ const ResultItem = styled(Link)`
   flex-basis: 288px;
   flex-shrink: 0;
   height: 240px;
-  background: #d4d4d4;
+  background: #f2eedd;
   border-radius: 6px;
   margin: 0 2rem 2rem 0;
   padding: 1rem;
   animation: pop 200ms ease-out ${props => props.delay ? props.delay * 100 : 0}ms backwards;
 
   :hover {
-    background: #efefef;
+    background: #e2e2d2;
   }
 `
 
