@@ -76,13 +76,17 @@ const Theme = ({ state, actions }) => {
 
       <Wrapper className={[mousedown ? 'mousedown' : '', isLandscape ? 'landscape' : ''].join(' ')}>
         <Header sticky={isSticky} />
-        {!data.isPost && <Hero fullHeight={data.isHome}>
-          <Switch>
-            <HomepageHero when={data.isHome} />
-            <GenericHero when={data.route === '/arrival/'} title="Arrival" cta="match my ride" ctaId="Find the best transport" />
-            <PageError when={data.isError} />
-          </Switch>
-        </Hero>}
+        {data.isPost ? (
+          <NoHero/>
+        ) : (
+          <Hero fullHeight={data.isHome}>
+            <Switch>
+              <HomepageHero when={data.isHome} />
+              <GenericHero when={data.route === '/arrival/'} title="Arrival" cta="match my ride" ctaId="Find the best transport" />
+              <PageError when={data.isError} />
+            </Switch>
+          </Hero>
+        )}
         {!data.isError && (
           <Main ref={ref}>
             <Switch>
@@ -275,6 +279,14 @@ const HomepageHero = () => (
     </CTA>
   </>
 )
+
+const NoHero = styled.div`
+  height: 48px;
+  background: #fffff0;
+  width: 100%;
+  margin-top: -48px;
+  z-index: 1;
+`
 
 export const CTA = styled.button`
   align-self: flex-end;
