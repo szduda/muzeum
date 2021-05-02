@@ -23,7 +23,7 @@ const Settings = ({ state, actions }) => {
         </SettingsDropdown>
         {isSettingsOpen && <ArrowDecor />}
       </SlideDown>
-      <SettingsToggle onClick={actions.theme.toggleSettings}>
+      <SettingsToggle open={isSettingsOpen} onClick={actions.theme.toggleSettings}>
         <Icon.Gear />
       </SettingsToggle>
     </SettingsWrapper>
@@ -67,7 +67,7 @@ const SettingsToggle = styled.button`
 
   svg {
     height: 24px;
-    fill: #444;
+    fill: ${props => props.open ? '#f9c959' : '#444'};
   }
 
   :hover svg {
