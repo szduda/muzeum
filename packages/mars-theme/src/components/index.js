@@ -76,14 +76,14 @@ const Theme = ({ state, actions }) => {
 
       <Wrapper className={[mousedown ? 'mousedown' : '', isLandscape ? 'landscape' : ''].join(' ')}>
         <Header sticky={isSticky} />
-        <Hero fullHeight={data.isHome}>
+        {!data.isPost && <Hero fullHeight={data.isHome}>
           <Switch>
             <HomepageHero when={data.isHome} />
             <GenericHero when={data.route === '/arrival/'} title="Arrival" cta="match my ride" ctaId="Find the best transport" />
             <PageError when={data.isError} />
           </Switch>
-        </Hero>
-        {!!!data.isError && (
+        </Hero>}
+        {!data.isError && (
           <Main ref={ref}>
             <Switch>
               <Loading when={data.isFetching} />
@@ -238,7 +238,7 @@ const Hero = styled.div`
   }
 
   @media(min-width: 768px) {
-    min-height: 55vh;
+    min-height: 50vh;
     justify-content: center;
     ${props => props.fullHeight && 'height: 100vh;'}
 
