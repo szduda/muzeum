@@ -4,7 +4,7 @@ import { Input, Form } from 'reactstrap'
 import Link from './link'
 import { Icon } from './theme'
 
-const SearchModal = ({ state, actions }) => {
+const SearchModal = ({ state, actions, libraries }) => {
   const { results, term } = state.theme.search
   const { setResults, setTerm, toggle } = actions.theme.search
   const inputRef = useRef()
@@ -14,10 +14,21 @@ const SearchModal = ({ state, actions }) => {
   })
 
   useEffect(() => {
-    if (!!!term || term.length < 3)
+    if (!!!term || term.trim().length < 3)
       return
 
-    setResults(term)
+    const fetchResults = async () => {
+      // actions.source.fetch(`search?search=${encodeURIComponent(term)}`)
+      // console.log(state.source.get('posts'))
+      // const p = await libraries.source.api.get({ endpoint: 'posts' })
+      // const j = await p.json()
+      // console.log(j)
+      const response = await fetch(`https://www.lucanus.ayz.pl/wp-json/wp/v2/search?search=${encodeURIComponent(term)}`)
+      const results = await response.json()
+      setResults(results)
+      console.log(results)
+    }
+    fetchResults()
   }, [term])
 
   return (
@@ -33,7 +44,10 @@ const SearchModal = ({ state, actions }) => {
         </Form>
         {results.length ? <ResultsWrapper>
           {results.map((item, index) =>
-            <ResultItem key={index} delay={index}>{item}</ResultItem>)}
+            <ResultItem key={index} delay={index} link={getUrl(item.url)}>
+              {item.title}
+            </ResultItem>
+          )}
         </ResultsWrapper>
           : null}
         {results.length ? (
@@ -50,6 +64,12 @@ const SearchModal = ({ state, actions }) => {
 }
 
 export default connect(SearchModal)
+
+const getUrl = url => {
+  const i1 = url.indexOf('://')
+  const i2 = url.indexOf('/', i1 + 3)
+  return url.substr(i2)
+}
 
 const Overlay = styled.div`
   background-color: #fffff0aa;
@@ -108,7 +128,8 @@ const Wrapper = styled.div`
   box-shadow: 0 2px 4px #4444;
 `
 
-const ResultItem = styled.div`
+
+const ResultItem = styled(Link)`
   @keyframes pop{
     from {
       transform: scale(0);
@@ -118,6 +139,7 @@ const ResultItem = styled.div`
     }
   }
 
+  box-sizing: border-box;
   flex-basis: 288px;
   flex-shrink: 0;
   height: 240px;

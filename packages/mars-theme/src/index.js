@@ -78,8 +78,8 @@ const marsTheme = {
         setTerm: ({ state }) => term => {
           state.theme.search.term = term
         },
-        setResults: ({ state }) => {
-          state.theme.search.results = ['x', 'y', 'z', 'a', 'b', 'c']
+        setResults: ({ state }) => results => {
+          state.theme.search.results = results
         }
       }
     },
