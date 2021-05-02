@@ -26,7 +26,6 @@ const SearchModal = ({ state, actions, libraries }) => {
       const response = await fetch(`https://www.lucanus.ayz.pl/wp-json/wp/v2/search?search=${encodeURIComponent(term)}`)
       const results = await response.json()
       setResults(results)
-      console.log(results)
     }
     fetchResults()
   }, [term])
@@ -139,6 +138,10 @@ const ResultItem = styled(Link)`
     }
   }
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   box-sizing: border-box;
   flex-basis: 288px;
   flex-shrink: 0;
@@ -148,6 +151,10 @@ const ResultItem = styled(Link)`
   margin: 0 2rem 2rem 0;
   padding: 1rem;
   animation: pop 200ms ease-out ${props => props.delay ? props.delay * 100 : 0}ms backwards;
+
+  :hover {
+    background: #efefef;
+  }
 `
 
 const ResultsWrapper = styled.div`
