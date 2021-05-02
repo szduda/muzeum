@@ -4,12 +4,12 @@ import Map from './map'
 
 const Home = ({ state, libraries }) => {
   const { type, id } = state.source.get(state.router.link)
-  const content = state.source[type][id].content.rendered
+  const page = state.source[type][id]
   const Html2React = libraries.html2react.Component;
 
   return (
     <Container>
-      <Html2React html={content} />
+      <Html2React html={page.content.rendered} />
       {state.theme.isHeaderSticky && <Map />}
     </Container>
   )

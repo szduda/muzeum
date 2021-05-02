@@ -9,7 +9,7 @@ import Post from "./post";
 import Loading from "./loading";
 import Title from "./title";
 import PageError from "./page-error";
-import bgUrl from '../assets/gate.jpg'
+import heroBackgroundUrl from '../assets/gate.jpg'
 import { scrollToAnchor, useMousedown, useMediaQuery } from '../helpers'
 import { useDebouncedCallback } from "use-debounce";
 import faviconUrl from '../assets/favicon.png'
@@ -51,6 +51,10 @@ const Theme = ({ state, actions }) => {
       actions.theme.setPortraitOrientation()
   }, [isLandscape])
 
+
+  const heroImageId = state.source?.[data.type]?.[data.id]?.featured_media || -1
+  const bgUrl = state.source.attachment?.[heroImageId]?.source_url ?? heroBackgroundUrl
+
   return (
     <>
       <Title />
@@ -68,7 +72,7 @@ const Theme = ({ state, actions }) => {
           crossorigin="" />
       </Head>
 
-      <Global styles={globalStyles} />
+      <Global styles={getGlobalStyles(bgUrl)} />
 
       <Wrapper className={[mousedown ? 'mousedown' : '', isLandscape ? 'landscape' : ''].join(' ')}>
         <Header sticky={isSticky} />
@@ -98,7 +102,7 @@ const Theme = ({ state, actions }) => {
 
 export default connect(Theme);
 
-const globalStyles = css`
+const getGlobalStyles = bgUrl => css`
   html {
     scroll-behavior: smooth;
     height: 100vh;
