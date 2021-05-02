@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { styled, css, connect } from "frontity";
 import Link from "./link";
-import { Icon } from './theme'
+import { Icon, Slide } from './theme'
 
 const MenuModal = ({ state, actions }) => {
   const { menu, isLandscape, isSettingsOpen } = state.theme;
@@ -35,22 +35,19 @@ const MenuModal = ({ state, actions }) => {
             key={name}
             link={link}
             aria-current={state.router.link === link ? "page" : undefined}
+            aria-label={link.includes('mission') ? 'highlight' : undefined}
           >
             {name}
           </MenuLink>
         ))}
+        <MenuLink link="/mission" $highlight={true}>
+          Mission
+        </MenuLink>
         <span ref={bottomRef} />
       </MenuContent>
 
-      {isSettingsOpen && (
-        <SettingsContent landscape={isLandscape}>
-          <SettingsToggle css={css`padding: 1rem 1rem; width: 100%; background: #888;`}>
-            <Icon.Arrow angle={270} />
-            <span css={css`margin-left: 0.5rem;`}>back to menu</span>
-          </SettingsToggle>
-        </SettingsContent>
+      <SettingsContent landscape={isLandscape} open={isSettingsOpen} />
 
-      )}
       <IconRowWrapper>
         <Icon.Search />
         {isLandscape && (
@@ -78,18 +75,18 @@ const MenuModal = ({ state, actions }) => {
   );
 };
 
-const SettingsContent = ({ landscape, children }) => (
-  <MenuContent css={css`
-      height: calc(100vh - ${landscape ? 72 : 170}px); 
+const SettingsContent = ({ landscape, open }) => (
+  <Slide left opaque={true} open={open}>
+    <MenuContent css={css`
+      height: calc(100vh - ${landscape ? 64 : 162}px); 
       width: 100%; 
-      background: #666;
-      margin-top: 72px;
+      background: #555;
     `}>
-    {children}
-    <MenuLink link={"#"}>Settings</MenuLink>
-    <MenuLink link={"#"}>Settings</MenuLink>
-    <MenuLink link={"#"}>Settings</MenuLink>
-  </MenuContent>
+      <MenuLink link={"#"}>Toggle dark mode</MenuLink>
+      <MenuLink link={"#"}>Font size</MenuLink>
+      <MenuLink link={"#"}>Change language</MenuLink>
+    </MenuContent>
+  </Slide>
 )
 
 const ScrollDownButton = styled.button`
@@ -121,7 +118,7 @@ const IconRowWrapper = styled.div`
   svg {
     height: 24px;
     fill: #d4d4d4;
-    padding: 0.5rem;
+    padding: 0.25rem;
   }
 
   > * {
@@ -166,22 +163,21 @@ const MenuLink = styled(Link)`
   width: 100%;
   display: inline-block;
   outline: 0;
-  text-align: center;
   padding: 0.75rem;
-  color: #fffff0 !important;
   box-sizing: border-box;
-
+  border: 2px solid transparent;
+  
+  color: ${props => props.$highlight ? '#f9c959' : '#fffff0' } !important;
+  text-align: center;
   font-size: 1.5rem;
   font-weight: 600;
   display: inline-flex;
   align-items:center;
   line-height: 1;
   text-align: center;
-  border: 2px solid transparent;
   font-variant: all-small-caps;
 
-  &:last-of-type {
-    color: #f9c959 !important;
+  :last-of-type {
     margin-bottom: 2rem;
   }
 

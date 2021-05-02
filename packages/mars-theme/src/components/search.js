@@ -2,6 +2,7 @@ import { connect, styled, Global } from "frontity"
 import { Icon } from "../components/theme"
 import SearchModal from './search-modal'
 import { useMediaQuery, getBodyLockStyle } from '../helpers'
+import { SlideDown } from './theme'
 
 const Search = ({ state, actions }) => {
   const { open } = state.theme.search
@@ -9,10 +10,12 @@ const Search = ({ state, actions }) => {
   return (
     <SearchWrapper>
       {open && <Global styles={getBodyLockStyle({ padRight: isWideScreen })} />}
+      <SlideDown open={open}>
+        <SearchModal />
+      </SlideDown>
       <SearchToggle onClick={actions.theme.search.toggle}>
         <Icon.Search />
       </SearchToggle>
-      {open && <SearchModal />}
     </SearchWrapper>
   )
 }

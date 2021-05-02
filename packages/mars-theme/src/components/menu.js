@@ -23,18 +23,18 @@ function MobileMenu({ state, actions }) {
 
 const MenuToggle = styled.button`
   position: absolute;
-  right: 0.5rem;
+  right: 0;
+  top: 0;
   transition: top 300ms ease-out;
-  top: 1rem;
-  padding: 0.5rem;
+  // padding: 1.25rem 1rem;
+  padding: 0.75rem;
+  margin: 0.5rem;
   border-radius: 8px;
   ${props => !props.isOpen && `transition: background-color 300ms ease-out 150ms;`}
   background-color: ${props => props.sticky && !props.isOpen ? '#fffff0' : 'transparent'};
   border: 0;
   color: white;
   z-index: 5;
-  height: 40px;
-  width: 40px;
   display: none;
 
   @media (max-width: 959px) {

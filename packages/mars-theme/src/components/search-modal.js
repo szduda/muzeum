@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { styled, css, connect } from "frontity"
 import { Input, Form } from 'reactstrap'
 import Link from './link'
@@ -9,7 +9,7 @@ const SearchModal = ({ state, actions, libraries }) => {
   const { setResults, setTerm, toggle } = actions.theme.search
   const inputRef = useRef()
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     inputRef.current.focus()
   })
 
@@ -34,11 +34,14 @@ const SearchModal = ({ state, actions, libraries }) => {
     <Wrapper>
       <Overlay />
       <Content>
-        <Form css={css`margin-bottom: 4rem;`}>
-          <Input innerRef={inputRef} name="searchTerm" placeholder="I am searching for..."
+        <Form>
+          <Input innerRef={inputRef}
+            name="searchTerm"
+            placeholder="I am searching for..."
             value={term}
             onChange={e => setTerm(e.target.value)}
             onFocus={() => inputRef.current.select()}
+            css={css`margin-bottom: 4rem;`}
           />
         </Form>
         {results.length ? <ResultsWrapper>
@@ -71,12 +74,12 @@ const getUrl = url => {
 }
 
 const Overlay = styled.div`
-  background-color: #fffff0aa;
+  background-color: #444e;
   width: 100vw;
   height: 100vh;
   overflow: hidden auto;
   position: fixed;
-  top: 0;
+  top: 100%;
   left: 0;
   z-index: -1;
 `;
@@ -86,7 +89,7 @@ const CloseButton = styled.button`
   border: none;
   border-radius: 12px;
   position: fixed;
-  top: 5rem;
+  top: 4.5rem;
   right: 4rem;
   cursor: pointer;
   
@@ -101,7 +104,7 @@ const CloseButton = styled.button`
 `
 
 const AllResultsButton = styled(Link)`
-  margin: 1.75rem auto 2rem; 
+  margin: 1.75rem auto 3.5rem; 
   font-weight: 600; 
   font-size: 1.5rem; 
   padding: 0.25rem; 
@@ -121,10 +124,11 @@ const Wrapper = styled.div`
   width: 100vw;
   // height: 100vh;
   position: fixed;
-  top: 52px;
+  top: 48px;
   left: 0;
   color: #444;
   box-shadow: 0 2px 4px #4444;
+  border-top: 4px solid #4448;
 `
 
 
@@ -174,7 +178,7 @@ const Content = styled.div`
   align-items: center;
 
   @media (min-width: 768px) {
-    padding: 4rem 4rem 2rem;
+    padding: 4rem 4rem 1rem;
   }
 `;
 

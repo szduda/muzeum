@@ -1,22 +1,37 @@
-import { connect, styled } from "frontity"
+import { connect, styled, css } from "frontity"
 import Link from "./link"
 import Nav from "./nav"
 import MobileMenu from "./menu"
-import { Icon } from './theme'
+import { Icon, Slide } from './theme'
 import Settings from './settings'
 import Search from './search'
 
-const Header = ({ state }) => {
+const Header = ({ state, actions }) => {
   const {
     isHeaderSticky: sticky,
-    isMobileMenuOpen
+    isMobileMenuOpen,
+    isSettingsOpen
   } = state.theme
 
+  const Logo = props => (
+    <LogoLink link="/" $hidden={sticky && !isMobileMenuOpen} {...props}>
+      <Icon.Logo lighten={isMobileMenuOpen} />
+    </LogoLink>
+  )
+
   return (
-    <Container sticky={sticky}>
+    <Container sticky={sticky} blur={state.theme.search.open}>
       <Row>
-        <LogoLink link="/" $hidden={sticky && !isMobileMenuOpen}>
-          <Icon.Logo lighten={isMobileMenuOpen} />
+        <Slide left $offset="-64px" opaque open={isMobileMenuOpen && isSettingsOpen} className="mobile-only">
+          <div css={css`display: flex`}>
+            <BackButton onClick={actions.theme.toggleSettings}>
+              <Icon.Arrow angle={270} color="#f9c959" />
+            </BackButton>
+            <Logo />
+          </div>
+        </Slide>
+        <LogoLink link="/" className="widescreen-only">
+          <Icon.Logo />
         </LogoLink>
         <Nav />
         <IconsRow>
@@ -41,18 +56,39 @@ const Container = styled.div`
   top: 0;
   z-index: 5;
   background: transparent;
-  transition: background-color 600ms ease-out, color 600ms ease-out;
+  transition: background-color 600ms ease-out, color 600ms ease-out, backdrop-filter 150ms ease-out;
   color: ${props => props.sticky ? '#444' : '#fffff0'};
 
   @media (min-width: 960px) {
     background-color: #fffff011;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(${props => props.blur ? 10 : 2}px) saturate(1) contrast(1) brightness(1);
     ${props => props.sticky && `
-    backdrop-filter: blur(2px) saturate(0.3) contrast(0.4) brightness(1.4);
+    backdrop-filter: blur(2px) saturate(0.3) contrast(0.3) brightness(1.4);
     background-color: #fffff088;
     box-shadow: 0 2px 4px #4444;
     `}
   }
+
+  .widescreen-only {
+    display: none !important;
+  }
+  @media (min-width: 960px) {
+    .widescreen-only {
+      display: initial !important;
+    }
+    .mobile-only {
+      display: none !important;
+    }
+  }
+`
+
+const BackButton = styled.button`
+  display: flex; 
+  align-items: center;
+  border: 0;
+  background: 0;
+  padding: 0.75rem;
+  margin: 0.25rem;
 `
 
 const LogoLink = styled(Link)`
@@ -68,7 +104,7 @@ const LogoLink = styled(Link)`
   
   @media (max-width: 959px) {
     margin: 0;
-    transform: translateY(12px);
+    transform: translateY(6px);
     ${props => props.$hidden && `
     pointer-events: none;
     opacity: 0;
@@ -88,9 +124,9 @@ const IconsRow = styled(Row)`
   margin: 0 1.5rem 0 0;
   
   svg {
-    box-shadow: 0 0 16px #fffff077;
+    box-shadow: 0 0 24px #fffff066;
     border-radius: 50%;
-    background: #fffff033;
+    background: #fffff022;
     overflow: visible;
   }
 

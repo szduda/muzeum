@@ -116,7 +116,7 @@ const getGlobalStyles = bgUrl => css`
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background: linear-gradient(to bottom, #444a, #654), url('${bgUrl}') center 0px;
+    background: linear-gradient(to bottom, #654a, #444), url('${bgUrl}') center 0px;
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;

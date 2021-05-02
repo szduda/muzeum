@@ -174,11 +174,11 @@ const UkFlag = () => (
   </svg>
 )
 
-const Gear = ({color = '#444', size = 24}) => (
-  <svg xmlns="http://www.w3.org/2000/svg"  
-  version="1.1" 
-  viewBox="0 0 512 512"
-  css={css`
+const Gear = ({ color = '#444', size = 24 }) => (
+  <svg xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    viewBox="0 0 512 512"
+    css={css`
     fill: ${color};
     width: ${size}px;
     height: ${size}px;
@@ -211,3 +211,42 @@ export const Icon = {
   Close,
   Gear,
 }
+
+export const SlideDown = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  pointer-event: none;
+  transition: transform 300ms ease-out, opacity 150ms ease-out, visibility 150ms ease-out;
+  ${props => !props.open && `
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-2rem);
+  `}
+`
+
+export const Slide = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  transition: transform 150ms ease-out, opacity 150ms ease-out, visibility 150ms ease-out;
+  z-index: 5;
+
+  > * {
+    pointer-events: initial;
+  }
+
+  ${props => !props.open && `
+    ${props.opaque === undefined ? `
+      visibility: hidden;
+      opacity: 0;
+    ` : ''}
+    ${props.down !== undefined ? `transform: translateY(-2rem);` : ''}
+    ${props.left !== undefined ? `transform: translateX(${props.$offset || '-100%'});` : ''}
+  `}
+`
