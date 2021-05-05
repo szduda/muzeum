@@ -46,7 +46,7 @@ const MapToggle = styled.button`
   :hover {
     background: #444;
     svg {
-      fill: #f9c959;
+      fill: #fffff0;
     }
   }
 
