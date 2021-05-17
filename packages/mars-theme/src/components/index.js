@@ -1,14 +1,14 @@
 import React, { useRef, useEffect } from 'react'
 import { Global, css, connect, styled, Head } from "frontity";
 import Switch from "@frontity/components/switch";
-import Header from "./header";
+import Header from "./header/header";
 import Footer from "./footer";
-import Home from "./home";
-import List from "./list";
-import Post from "./post";
-import Loading from "./loading";
-import Title from "./title";
-import PageError from "./page-error";
+import Home from "./pages/home";
+import List from "./pages/list/list";
+import Post from "./pages/post";
+import Loading from "./pages/loading";
+import Title from "./header/title";
+import PageError from "./pages/page-error";
 import heroBackgroundUrl from '../assets/gate.jpg'
 import { scrollToAnchor, useMousedown, useMediaQuery } from '../helpers'
 import { useDebouncedCallback } from "use-debounce";
@@ -78,7 +78,7 @@ const Theme = ({ state, actions }) => {
       <Wrapper className={[mousedown ? 'mousedown' : '', isLandscape ? 'landscape' : ''].join(' ')}>
         <Header sticky={isSticky} />
         {data.isPost ? (
-          <NoHero/>
+          <NoHero />
         ) : (
           <Hero fullHeight={data.isHome}>
             <Switch>
@@ -172,15 +172,27 @@ const getGlobalStyles = bgUrl => css`
     line-height: 1.5;
   }
 
+  form {
+    display: flex;
+  }
+
   input {
     font-size: 2rem;
-    padding: 1rem;
+    padding: 0.25rem;
+    margin: 1rem;
     border: none;
     background: #fffff0;
     border-bottom: 4px solid #f9c959;
+    color: #fffff0;
 
     :focus {
       outline: 2px solid #f9c959;
+    }
+
+    @media (min-width: 768px) {
+      padding: 1rem;
+      margin: 0;
+      color: #444;
     }
   }
 `;

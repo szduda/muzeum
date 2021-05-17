@@ -1,28 +1,13 @@
 import { useRef } from 'react'
-import { styled, css, connect } from "frontity";
-import Link from "./link";
-import { Icon, Slide } from './theme'
+import { styled, connect } from "frontity";
+import Link from "../../link";
+import { Icon } from '../../theme'
+import { SearchContent, SearchToggle } from './search'
+import { SettingsContent, SettingsToggle } from './settings'
 
 const MenuModal = ({ state, actions }) => {
-  const { menu, isLandscape, isSettingsOpen } = state.theme;
+  const { menu, isLandscape, isSettingsOpen, search } = state.theme;
   const bottomRef = useRef()
-
-  const SettingsToggle = props => (
-    <button
-      onClick={actions.theme.toggleSettings}
-      css={css`
-        display: flex; 
-        align-items: center;
-        border: 0;
-        background: 0;
-        color: #fffff0;
-        font-size: 1rem;
-
-        svg {
-          ${isSettingsOpen && `fill: #f9c959;`}
-        }
-      `} {...props} />
-  )
 
   return (
     <>
@@ -47,19 +32,16 @@ const MenuModal = ({ state, actions }) => {
       </MenuContent>
 
       <SettingsContent landscape={isLandscape} open={isSettingsOpen} />
+      <SearchContent landscape={isLandscape} open={search.open} />
 
       <IconRowWrapper>
-        <Icon.Search />
-        {isLandscape && (
-          <SettingsToggle>
-            <Icon.Gear />
-          </SettingsToggle>
-        )}
+        <SearchToggle onClick={actions.theme.search.toggle} open={search.open} />
+        {isLandscape && <SettingsToggle onClick={actions.theme.toggleSettings} />}
       </IconRowWrapper>
 
       {!isLandscape && (
         <SettingsWrapper>
-          <SettingsToggle>
+          <SettingsToggle onClick={actions.theme.toggleSettings}>
             <Icon.Gear size={64} color="#d4d4d4" />
           </SettingsToggle>
         </SettingsWrapper>
@@ -75,19 +57,52 @@ const MenuModal = ({ state, actions }) => {
   );
 };
 
-const SettingsContent = ({ landscape, open }) => (
-  <Slide left opaque={true} open={open}>
-    <MenuContent css={css`
-      height: calc(100vh - ${landscape ? 64 : 162}px); 
-      width: 100%; 
-      background: #555;
-    `}>
-      <MenuLink link={"#"}>Toggle dark mode</MenuLink>
-      <MenuLink link={"#"}>Font size</MenuLink>
-      <MenuLink link={"#"}>Change language</MenuLink>
-    </MenuContent>
-  </Slide>
-)
+export const MenuContent = styled.div`
+  z-index: 3;
+  position: fixed;
+  top: 0;
+  margin: 4rem 0 0;
+  overflow-y: auto;
+  height: calc(100vh - 52px);
+  box-sizing: border-box;
+  background: #444;
+`;
+
+export const MenuLink = styled(Link)`
+  width: 100%;
+  display: inline-block;
+  outline: 0;
+  padding: 0.75rem;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+  
+  color: ${props => props.$highlight ? '#f9c959' : '#fffff0'} !important;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items:center;
+  line-height: 1;
+  text-align: center;
+  font-variant: all-small-caps;
+
+  :last-of-type {
+    margin-bottom: 2rem;
+  }
+
+  &:hover {
+    background-color: #f9c959;
+    text-decoration: none;
+  }
+
+  :focus {
+    background-color: #f9c95922;
+  }
+
+  &[aria-current="page"] {
+    background-color: #888;
+  }
+`;
 
 const ScrollDownButton = styled.button`
   ${props => !props.landscape && `display: none;`}
@@ -114,7 +129,7 @@ const IconRowWrapper = styled.div`
   top: 1rem;
   right: 3rem;
   left: 120px;
-  
+
   svg {
     height: 24px;
     fill: #d4d4d4;
@@ -146,53 +161,6 @@ const MenuOverlay = styled.div`
   z-index: 2;
   top: 0;
   left: 0;
-`;
-
-const MenuContent = styled.div`
-  z-index: 3;
-  position: fixed;
-  top: 0;
-  margin: 4rem 0 0;
-  overflow-y: auto;
-  height: calc(100vh - 52px);
-  box-sizing: border-box;
-  background: #444;
-`;
-
-const MenuLink = styled(Link)`
-  width: 100%;
-  display: inline-block;
-  outline: 0;
-  padding: 0.75rem;
-  box-sizing: border-box;
-  border: 2px solid transparent;
-  
-  color: ${props => props.$highlight ? '#f9c959' : '#fffff0' } !important;
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: 600;
-  display: inline-flex;
-  align-items:center;
-  line-height: 1;
-  text-align: center;
-  font-variant: all-small-caps;
-
-  :last-of-type {
-    margin-bottom: 2rem;
-  }
-
-  &:hover {
-    background-color: #f9c959;
-    text-decoration: none;
-  }
-
-  :focus {
-    background-color: #f9c95922;
-  }
-
-  &[aria-current="page"] {
-    background-color: #888;
-  }
-`;
+`
 
 export default connect(MenuModal);

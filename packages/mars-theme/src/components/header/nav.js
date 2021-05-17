@@ -1,6 +1,5 @@
 import { connect, styled } from "frontity"
-import Link from "./link"
-import { Icon } from "../components/theme"
+import Link from "../link"
 
 const Nav = ({ state }) => {
   const sticky = state.theme.isHeaderSticky

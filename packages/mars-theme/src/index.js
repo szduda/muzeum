@@ -73,6 +73,7 @@ const marsTheme = {
       },
       search: {
         toggle: ({ state }) => {
+          state.theme.isSettingsOpen = false;
           state.theme.search.open = !state.theme.search.open
         },
         setTerm: ({ state }) => term => {

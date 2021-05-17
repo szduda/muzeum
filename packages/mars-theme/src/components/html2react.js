@@ -1,5 +1,4 @@
 import { styled, css } from "frontity"
-import Link from '../components/link'
 
 export const init = ({ libraries }) => {
   elements.map(([tag, component]) => {

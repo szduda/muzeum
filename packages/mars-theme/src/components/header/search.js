@@ -1,8 +1,7 @@
 import { connect, styled, Global } from "frontity"
-import { Icon } from "../components/theme"
+import { Icon, Slide } from "../theme"
 import SearchModal from './search-modal'
-import { useMediaQuery, getBodyLockStyle } from '../helpers'
-import { Slide } from './theme'
+import { useMediaQuery, getBodyLockStyle } from '../../helpers'
 
 const Search = ({ state, actions }) => {
   const { open } = state.theme.search

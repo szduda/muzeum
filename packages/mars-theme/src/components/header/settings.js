@@ -1,6 +1,6 @@
 import { connect, styled } from "frontity"
-import Link from "./link"
-import { Icon, Slide } from "../components/theme"
+import Link from "../link"
+import { Icon, Slide } from "../theme"
 
 const Settings = ({ state, actions }) => {
   const { settings, isSettingsOpen } = state.theme

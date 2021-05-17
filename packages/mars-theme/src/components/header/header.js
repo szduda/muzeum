@@ -1,8 +1,8 @@
 import { connect, styled, css } from "frontity"
-import Link from "./link"
+import Link from "../link"
 import Nav from "./nav"
-import MobileMenu from "./menu"
-import { Icon, Slide } from './theme'
+import MobileMenu from "./mobile/menu"
+import { Icon, Slide } from '../theme'
 import Settings from './settings'
 import Search from './search'
 
@@ -10,7 +10,8 @@ const Header = ({ state, actions }) => {
   const {
     isHeaderSticky: sticky,
     isMobileMenuOpen,
-    isSettingsOpen
+    isSettingsOpen,
+    search
   } = state.theme
 
   const Logo = props => (
@@ -22,10 +23,10 @@ const Header = ({ state, actions }) => {
   return (
     <Container sticky={sticky} blur={state.theme.search.open}>
       <Row>
-        <Slide left $offset="-64px" opaque open={isMobileMenuOpen && isSettingsOpen} className="mobile-only">
-          <div css={css`display: flex`}>
-            <BackButton onClick={actions.theme.toggleSettings}>
-              <Icon.Arrow angle={270} color="#f9c959" />
+        <Slide left $offset="-64px" opaque open={isMobileMenuOpen && (search.open || isSettingsOpen)} className="mobile-only">
+          <div css={css`display: inline-flex`}>
+            <BackButton onClick={isSettingsOpen ? actions.theme.toggleSettings : actions.theme.search.toggle}>
+              <Icon.Arrow angle={270} />
             </BackButton>
             <Logo />
           </div>
@@ -101,6 +102,10 @@ const LogoLink = styled(Link)`
   z-index: 3;
   transition: opacity 300ms ease-out;
   text-decoration: none;
+
+  :focus {
+    outline-offset: 10px;
+  }
   
   @media (max-width: 959px) {
     margin: 0;

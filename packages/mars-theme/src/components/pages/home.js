@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect, styled } from "frontity"
-import Map from './map'
+import Map from '../map/map'
 
 const Home = ({ state, libraries }) => {
   const { type, id } = state.source.get(state.router.link)

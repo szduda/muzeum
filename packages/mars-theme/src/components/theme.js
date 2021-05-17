@@ -240,6 +240,7 @@ export const Slide = styled.div`
       opacity: 0;
     ` : ''}
     ${props.down !== undefined ? `transform: translateY(-2rem);` : ''}
-    ${props.left !== undefined ? `transform: translateX(${props.$offset || '-100%'});` : ''}
+    ${props.left !== undefined ? `transform: translateX(${props.$offset || '-100vw'});` : ''}
+    ${props.right !== undefined ? `transform: translateX(${props.$offset || '100vw'});` : ''}
   `}
 `
