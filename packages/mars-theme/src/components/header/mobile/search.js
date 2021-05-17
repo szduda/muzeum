@@ -35,9 +35,6 @@ export const SearchContent = connect(({ landscape, open }) => {
                 {item.title}
               </ResultItem>
             )}
-            <AllResultsButton link={`/search/${term}`}>
-              See all results
-            </AllResultsButton>
           </ResultsWrapper>
         ) : null}
       </MenuContent>
@@ -68,34 +65,22 @@ export const SearchToggle = ({ open, children, ...props }) => (
   </button>
 )
 
-const AllResultsButton = styled(Link)`
-  margin: 1rem 0; 
-  font-weight: 600; 
-  font-size: 1.5rem; 
-  padding: 0.25rem; 
-  border-bottom: 2px solid #f9c959;
-
-  :hover {
-    text-decoration: none;
-    color: #888;
-  }
-`
-
 const ResultsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   justify-content: center;
   margin-top: 2rem;
+  overflow-x: hidden;
 `
 
 const ResultItem = styled(Link)`
-  @keyframes pop{
+  @keyframes from-right{
     from {
-      transform: scale(0);
+      transform: translateX(100%);
     }
     to {
-      transform: scale(1);
+      transform: translateX(0);
     }
   }
 
@@ -111,9 +96,5 @@ const ResultItem = styled(Link)`
   border-radius: 6px;
   margin: 0 0 2rem;
   padding: 1rem;
-  animation: pop 200ms ease-out ${props => props.delay ? props.delay * 100 : 0}ms backwards;
-
-  :hover {
-    background: #e2e2d2;
-  }
+  animation: from-right 200ms ease-out ${props => props.delay ? props.delay * 100 : 0}ms backwards;
 `
