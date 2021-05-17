@@ -213,11 +213,7 @@ const Main = styled.div`
   min-height: 80vh;
   background: #fffff0;
   box-shadow: 0 0 24px 16px #444;
-  background-image: linear-gradient(
-    180deg,
-    #F9C95911,
-    #fffff0
-  );
+  background: #fffff0;
 `;
 
 const Hero = styled.div`

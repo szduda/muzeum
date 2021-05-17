@@ -28,8 +28,8 @@ const MapToggle = styled.button`
   right: 0.5rem;
   bottom: 1rem;
   padding: 0.5rem;
-  border: 2px solid #f9c959;
-  background: #f9c959;
+  border: 2px solid #fffff0;
+  background: #fffff0;
   border-radius: 8px;
   z-index: 8;
   height: 48px;
