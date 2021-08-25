@@ -13,6 +13,7 @@ import heroBackgroundUrl from '../assets/gate.jpg'
 import { scrollToAnchor, useMousedown, useMediaQuery } from '../helpers'
 import { useDebouncedCallback } from "use-debounce";
 import faviconUrl from '../assets/favicon.png'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 /**
  * Theme is the root React component of our theme. The one we will export

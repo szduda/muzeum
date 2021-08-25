@@ -8,14 +8,14 @@ const Settings = ({ state, actions }) => {
   return (
     <SettingsWrapper open={isSettingsOpen}>
       {isSettingsOpen && <Overlay onClick={actions.theme.toggleSettings} />}
-      <Slide down open={isSettingsOpen} >
+      <Slide down open={isSettingsOpen}>
         <SettingsDropdown sticky={state.theme.isHeaderSticky}>
           <Title>Settings</Title>
           {settings.map(([name, link, icon]) => {
             const ItemIcon = icon ? Icon[icon] : Icon.Help
             return (
               <SettingsLink key={name} link={link}>
-                <ItemIcon />
+                {icon && <ItemIcon />}
                 <span>{name}</span>
               </SettingsLink>
             )

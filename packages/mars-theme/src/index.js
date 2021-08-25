@@ -47,7 +47,15 @@ const marsTheme = {
       beforeSSR: ({ actions }) => async ({ ctx }) => {
         await actions.source.fetch(`/common/footer/`)
       },
-      toggleMobileMenu: ({ state }) => {
+      toggleMobileMenu: ({ state, actions }) => {
+        if (state.theme.search.open) {
+          actions.theme.search.toggle()
+        }
+
+        if (state.theme.isSettingsOpen) {
+          actions.theme.toggleSettings()
+        }
+
         state.theme.isMobileMenuOpen = !state.theme.isMobileMenuOpen
       },
       closeMobileMenu: ({ state }) => {
@@ -72,14 +80,18 @@ const marsTheme = {
         state.theme.isSettingsOpen = !state.theme.isSettingsOpen
       },
       search: {
-        toggle: ({ state }) => {
+        toggle: ({ state, actions }) => {
           state.theme.isSettingsOpen = false;
           state.theme.search.open = !state.theme.search.open
+          if (state.theme.search.open) {
+            actions.theme.search.setTerm('')
+            actions.theme.search.setResults([])
+          }
         },
-        setTerm: ({ state }) => term => {
+        setTerm: ({ state }) => (term = '') => {
           state.theme.search.term = term
         },
-        setResults: ({ state }) => results => {
+        setResults: ({ state }) => (results = []) => {
           state.theme.search.results = results
         }
       }

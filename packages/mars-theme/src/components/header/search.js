@@ -1,21 +1,23 @@
 import { connect, styled, Global } from "frontity"
-import { Icon, Slide } from "../theme"
+import { Icon } from "../theme"
 import SearchModal from './search-modal'
 import { useMediaQuery, getBodyLockStyle } from '../../helpers'
+import FocusTrap from 'focus-trap-react'
 
 const Search = ({ state, actions }) => {
-  const { open } = state.theme.search
+  const { search: { open }, isMobileMenuOpen } = state.theme
   const isWideScreen = useMediaQuery('(min-width: 768px)');
+
   return (
-    <SearchWrapper>
-      {open && <Global styles={getBodyLockStyle({ padRight: isWideScreen })} />}
-      <Slide down open={open}>
-        <SearchModal />
-      </Slide>
-      <SearchToggle onClick={actions.theme.search.toggle}>
-        <Icon.Search color={open ? '#f9c959' : '#444'} />
-      </SearchToggle>
-    </SearchWrapper>
+    <FocusTrap active={open && !isMobileMenuOpen} initialFocus={'#search-toggle'}>
+      <SearchWrapper>
+        {open && <Global styles={getBodyLockStyle({ padRight: isWideScreen })} />}
+        {open && <SearchModal />}
+        <SearchToggle onClick={actions.theme.search.toggle} id={'search-toggle'}>
+          <Icon.Search color={open ? '#f9c959' : '#444'} />
+        </SearchToggle>
+      </SearchWrapper>
+    </FocusTrap>
   )
 }
 

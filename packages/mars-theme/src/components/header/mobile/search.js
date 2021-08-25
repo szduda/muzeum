@@ -9,8 +9,11 @@ import Link from '../../link'
 export const SearchContent = connect(({ landscape, open }) => {
   const inputRef = useRef()
   const [results, term, setTerm] = useSearch()
+
+  if (!open) return null
+
   return (
-    <Slide left opaque={true} open={open}>
+    <Slide opaque open={open}>
       <MenuContent css={css`
       height: calc(100vh - 4rem); 
       width: 100%; 
@@ -38,7 +41,7 @@ export const SearchContent = connect(({ landscape, open }) => {
           </ResultsWrapper>
         ) : null}
       </MenuContent>
-    </Slide>
+    // </Slide>
   )
 })
 

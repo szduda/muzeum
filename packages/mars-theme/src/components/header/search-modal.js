@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { styled, css, connect } from "frontity"
 import { Input, Form } from 'reactstrap'
 import Link from '../link'
@@ -7,15 +7,7 @@ import useSearch from './useSearch'
 
 const SearchModal = () => {
   const inputRef = useRef()
-  const [results, term, setTerm, open, toggle] = useSearch()
-
-  // TODO: Focus Trap
-  useEffect(() => {
-    if (!open) return
-    const timeoutId = setTimeout(() => { inputRef.current?.focus() }, 150)
-    return clearTimeout(timeoutId)
-  }, [open])
-
+  const [results, term, setTerm, , toggle] = useSearch()
 
   return (
     <Wrapper>
@@ -28,7 +20,7 @@ const SearchModal = () => {
             placeholder="I am searching for..."
             value={term}
             onChange={e => setTerm(e.target.value)}
-            onFocus={() => { inputRef.current.select() }}
+            onFocus={() => { inputRef.current?.select() }}
             css={css`margin-bottom: 4rem;`}
           />
         </Form>

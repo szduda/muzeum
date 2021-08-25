@@ -7,6 +7,7 @@ import { SettingsContent, SettingsToggle } from './settings'
 
 const MenuModal = ({ state, actions }) => {
   const { menu, isLandscape, isSettingsOpen, search } = state.theme;
+  const { search: { toggle }, toggleSettings } = actions.theme
   const bottomRef = useRef()
 
   return (
@@ -35,13 +36,13 @@ const MenuModal = ({ state, actions }) => {
       <SearchContent landscape={isLandscape} open={search.open} />
 
       <IconRowWrapper>
-        <SearchToggle onClick={actions.theme.search.toggle} open={search.open} />
-        {isLandscape && <SettingsToggle onClick={actions.theme.toggleSettings} />}
+        <SearchToggle onClick={toggle} open={search.open} />
+        {isLandscape && <SettingsToggle onClick={toggleSettings} />}
       </IconRowWrapper>
 
       {!isLandscape && (
         <SettingsWrapper>
-          <SettingsToggle onClick={actions.theme.toggleSettings}>
+          <SettingsToggle onClick={toggleSettings}>
             <Icon.Gear size={64} color="#d4d4d4" />
           </SettingsToggle>
         </SettingsWrapper>
