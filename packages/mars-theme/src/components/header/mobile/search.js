@@ -41,7 +41,7 @@ export const SearchContent = connect(({ landscape, open }) => {
           </ResultsWrapper>
         ) : null}
       </MenuContent>
-    // </Slide>
+    </Slide>
   )
 })
 
