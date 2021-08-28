@@ -31,8 +31,8 @@ const marsTheme = {
         results: []
       },
       featured: {
-        showOnList: false,
-        showOnPost: false,
+        showOnList: true,
+        showOnPost: true,
       },
     },
   },
