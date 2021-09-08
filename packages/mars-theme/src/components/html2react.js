@@ -1,10 +1,27 @@
 import { styled, css } from "frontity"
+import Slider from "react-slick";
 
 export const init = ({ libraries }) => {
   elements.map(([tag, component]) => {
     const entry = createEntry(tag, component)
     libraries.html2react.processors.push(entry)
   })
+
+  const carouselEntry = createEntry(
+    ({ node }) =>
+      node.component === 'div' && node.props.className.includes('carousel'),
+    null,
+    ({ node }) => {
+      node.component = Carousel
+      node.children = node.children[0].children
+      // for (child in node.children) {
+      //   child.parent = node
+      // }
+      return node
+    }
+  )
+
+  libraries.html2react.processors.push(carouselEntry)
 }
 
 export default init
@@ -61,19 +78,64 @@ const H4 = styled.h4`
   }
 `
 
+const Carousel = ({ children }) => (
+  <Slider
+    dots={false}
+    infinite
+    autoplay
+    speed={500}
+    slidesToShow={1}
+    slidesToScroll={1}
+    centerMode
+    centerPadding="24px"
+    css={css`
+    .wp-block-media-text {
+      position: relative;
+    }
+
+    .wp-block-media-text__content {
+      position: absolute;
+      bottom: 0;
+      background: #444d;
+      width: 100%;
+      color: #fffffe;
+      padding: 0 1rem;
+      text-align: right;
+    }
+
+    .wp-block-media-text__media {
+      margin: 0;
+      padding: 0;
+    }
+
+    .slick-slide {
+      margin: 0 0.5rem;
+      height: inherit !important;
+    }
+
+    .slick-track {
+      display: flex !important;
+    } 
+    `}
+  >
+    {children}
+  </Slider>
+)
+
 const elements = [
   ['a', Anchor],
   ['h2', H2],
   ['h3', H3],
-  ['h4', H4]
+  ['h4', H4],
 ]
 
-const createEntry = (test, component) => ({
+const createEntry = (test, component, _processor) => ({
   test: typeof test === 'function'
     ? test
     : ({ node }) => node.component === test,
-  processor: ({ node }) => {
-    node.component = component;
-    return node;
-  }
+  processor: _processor ||
+    (({ node }) => {
+      node.component = component;
+      return node;
+    })
 })
