@@ -177,6 +177,22 @@ const Container = styled.div`
     }
   }
 
+  .wp-block-button {
+    display: flex;
+
+    a {
+      margin: 1rem auto 0;
+      font-size: 24px;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 32px;
+      a {
+        margin: 0 auto 2rem;
+      }
+    }
+  }
+
   #mission {
     position: relative;
     padding: 4rem max(calc(50vw - 50%), 1rem) 2rem;
