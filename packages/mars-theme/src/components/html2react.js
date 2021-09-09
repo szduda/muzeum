@@ -83,12 +83,41 @@ const Carousel = ({ children }) => (
     dots={false}
     infinite
     autoplay
+    arrows={false}
+    dots
     speed={500}
-    slidesToShow={1}
+    autoplaySpeed={6000}
     slidesToScroll={1}
     centerMode
-    centerPadding="24px"
+    slidesToShow={3}
+    centerPadding={'128px'}
+    mobileFirst={true}
+    responsive={[{
+      breakpoint: 640,
+      settings: {
+        slidesToShow: 1,
+        centerPadding: '16px'
+      }
+    }, {
+      breakpoint: 960,
+      settings: {
+        slidesToShow: 1,
+        centerPadding: '72px'
+      }
+    }, {
+      breakpoint: 1400,
+      settings: {
+        slidesToShow: 2,
+        centerPadding: '96px'
+      }
+    }]}
     css={css`
+    margin: 2rem 0 4rem;
+
+    @media (min-width: 768px) {
+      margin: 10rem 0 4rem;
+    }
+
     .wp-block-media-text {
       position: relative;
     }
@@ -115,7 +144,13 @@ const Carousel = ({ children }) => (
 
     .slick-track {
       display: flex !important;
-    } 
+    }
+
+    @media (min-width: 960px) {
+      .slick-list {
+        margin: 0 calc(-50vw + 50%);
+      }
+    }
     `}
   >
     {children}

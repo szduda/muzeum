@@ -47,7 +47,7 @@ const settings = {
             ],
             [
               "Mission",
-              "/mission/"
+              "/#mission"
             ]
           ],
           "featured": {
