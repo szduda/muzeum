@@ -179,11 +179,12 @@ const Container = styled.div`
 
   #mission {
     position: relative;
-    padding: 4rem max(calc(50vw - 50%), 1rem) 3rem;
+    padding: 4rem max(calc(50vw - 50%), 1rem) 2rem;
     background: #444;
     color: #fffffe;
     margin: 0 calc(-50vw + 50%);
     overflow: hidden;
+    min-height: 67vh;
 
     .quote {
       max-width: 480px;
