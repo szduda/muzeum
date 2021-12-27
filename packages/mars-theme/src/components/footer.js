@@ -4,7 +4,7 @@ export const Footer = ({ state, libraries }) => {
   const Html2React = libraries.html2react.Component;
   const { type, id } = state.source.get('/common/footer/')
   const data = state.source?.[type]?.[id]
-  const { contactPhone, contactMail } = data
+  const { contactPhone, contactMail } = data || {}
 
   return (
     <FooterWrapper>
