@@ -2,7 +2,7 @@ const settings = {
   "name": "muzeum",
   "state": {
     "frontity": {
-      "url": "https://lucanus.ayz.pl",
+      "url": "http://noderesources.visitauschwitz.info",
       "title": "Visit Auschwitz",
       "description": "Clear and useful information on numerous aspects of the visit - in order to save time and help both the visitors and the Museum staff."
     }
@@ -61,7 +61,7 @@ const settings = {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "url": "https://lucanus.ayz.pl",
+          "url": "http://noderesources.visitauschwitz.info",
           "homepage": "home",
           postTypes: [
             {
