@@ -109,7 +109,7 @@ const FooterContent = styled.div`
     padding: 8rem 1rem 4rem;
 
     .wp-block-columns {
-      flex-basis: 55%;
+      flex-basis: 50%;
     }
     
     .wp-block-column {
