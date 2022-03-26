@@ -45,7 +45,7 @@ const marsTheme = {
     theme: {
       init,
       beforeSSR: ({ actions }) => async ({ ctx }) => {
-        await actions.source.fetch(`/common/footer/`)
+        await actions.source.fetch(`/footer/`)
       },
       toggleMobileMenu: ({ state, actions }) => {
         if (state.theme.search.open) {

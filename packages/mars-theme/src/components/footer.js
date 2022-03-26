@@ -2,10 +2,12 @@ import { connect, styled } from 'frontity'
 
 export const Footer = ({ state, libraries }) => {
   const Html2React = libraries.html2react.Component;
-  const { type, id } = state.source.get('/common/footer/')
+  const { type, id } = state.source.get('/footer/')
   const data = state.source?.[type]?.[id]
   const { contactPhone, contactMail } = data || {}
   const html = data?.content?.rendered
+
+  console.log(data)
 
   return (
     <FooterWrapper>
