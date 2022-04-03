@@ -80,16 +80,15 @@ const H4 = styled.h4`
 
 const Carousel = ({ children }) => (
   <Slider
-    dots={false}
+    dots
+    arrows
     infinite
     autoplay
-    arrows={false}
-    dots
     speed={500}
     autoplaySpeed={6000}
     slidesToScroll={1}
     centerMode
-    slidesToShow={3}
+    slidesToShow={2}
     centerPadding={'128px'}
     mobileFirst={true}
     responsive={[{
@@ -107,7 +106,7 @@ const Carousel = ({ children }) => (
     }, {
       breakpoint: 1400,
       settings: {
-        slidesToShow: 2,
+        slidesToShow: 1,
         centerPadding: '96px'
       }
     }]}
@@ -144,6 +143,40 @@ const Carousel = ({ children }) => (
 
     .slick-track {
       display: flex !important;
+    }
+
+    .slick-next, .slick-prev {
+      z-index: 1;
+      top: calc(100% + 2rem);
+      width: 40px;
+      height: 40px;
+      padding: 4px;
+      &::before {
+        font-size: 32px;
+        color: #777;
+      }
+    }
+
+    .slick-next {
+      right: 0;
+      @media (min-width: 768px) {
+        right: calc(-50vw + 50% + 2rem);
+      }
+    }
+
+    .slick-prev {
+      left: 0;
+      @media (min-width: 768px) {
+        left: calc(-50vw + 50% + 2rem);
+      }
+    }
+
+    .slick-dots {
+      bottom: -42px;
+
+      li button:before {
+        font-size: 12px;
+      }
     }
 
     @media (min-width: 960px) {
