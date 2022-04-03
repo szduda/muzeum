@@ -314,7 +314,7 @@ export const CTA = styled.button`
   text-transform: lowercase;
   margin: 0 0 8rem;
   cursor: pointer;
-  box-shadow: 0 0px 12px #f9c95966;
+  box-shadow: 0 0px 12px #f9c95922;
   font-variant: all-small-caps;
   line-height: 1.5;
   font-weight: 600;

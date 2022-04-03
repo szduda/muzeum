@@ -258,6 +258,29 @@ const Container = styled.div`
     }
   }
 
+  #bigQuote {
+    padding: 0 1rem 2rem;
+    height: 80vh;
+    font-size: 2rem;
+    line-height: 1.5;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+
+    
+    h4 {
+      max-width: 480px;
+    }
+
+    p {
+      max-width: 60%;
+    }
+
+    @media (min-width: 768px) {
+      padding: 0 4rem 8rem;
+    }
+  }
+
   @media (min-width: 768px) {
     padding: 1rem 0 0;
   }

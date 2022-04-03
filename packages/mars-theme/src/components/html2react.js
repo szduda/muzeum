@@ -111,10 +111,10 @@ const Carousel = ({ children }) => (
       }
     }]}
     css={css`
-    margin: 2rem 0 4rem;
+    margin: 2rem 0 8rem;
 
     @media (min-width: 768px) {
-      margin: 10rem 0 4rem;
+      margin: 10rem 0 12rem;
     }
 
     .wp-block-media-text {
