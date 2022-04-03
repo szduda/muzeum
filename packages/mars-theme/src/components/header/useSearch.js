@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useConnect } from "frontity"
 import { useDebouncedCallback } from "use-debounce";
+import settings from '/frontity.settings.js'
 
 export const useSearch = () => {
   const { state, actions } = useConnect()
@@ -10,7 +11,8 @@ export const useSearch = () => {
   const [previousTerm, setPreviousTerm] = useState('')
 
   const fetchResults = async () => {
-    const response = await fetch(`https://www.lucanus.ayz.pl/wp-json/wp/v2/search?search=${encodeURIComponent(term)}`)
+    const wpUrl = settings.packages.find(p => p.name === '@frontity/wp-source').state.source.url
+    const response = await fetch(`${wpUrl}/wp-json/wp/v2/search?search=${encodeURIComponent(term)}`)
     const results = await response.json()
     setResults(results)
   }
