@@ -183,7 +183,9 @@ const getGlobalStyles = bgUrl => css`
   }
 
   p {
+    font-size: 1.25rem;
     line-height: 1.5;
+    margin: 0 0 2rem;
   }
 
   form {
@@ -209,7 +211,26 @@ const getGlobalStyles = bgUrl => css`
       color: #444;
     }
   }
+
+  .has-text-align-center {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
   
+  figure.icon, .icon figure {
+    height: 128px;
+    width: 128px;
+  }
+
+   div.icon {
+    display: flex;
+    justify-content: center;
+  }
+
+  .aligncenter {
+    align-self: center;
+  }
 `;
 
 const Wrapper = styled.div`

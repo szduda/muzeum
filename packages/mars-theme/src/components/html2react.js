@@ -38,7 +38,8 @@ const Anchor = props => (
 
 const H2 = styled.h2`
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 3rem;
+  line-height: 1;
   margin: 0 0 2rem;
   display: flex;
   flex-direction: column;
@@ -59,16 +60,19 @@ const H2 = styled.h2`
 `
 
 const H3 = styled.h3`
-  font-size: 1.75rem;
+  font-size: 2.5rem;
+  line-height: 1;
   font-weight: normal;
-  margin: 0.5rem 0;
+  margin: 0 0 2rem;
+  font-variant: all-small-caps;
 `
 
 const H4 = styled.h4`
   display: inline-flex;
   margin: 0;
-  padding: 1rem 0;
-  font-size: 1.25rem;
+  padding: 1rem 0 2rem;
+  font-size: 1.75rem;
+  line-height: 1.5;
   font-weight: normal;
 
   & img {

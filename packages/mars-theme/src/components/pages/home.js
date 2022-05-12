@@ -32,6 +32,13 @@ const Container = styled.div`
     font-size: 20px;
   }
 
+  #prepare {
+    color: white;
+    background: #444;
+    margin: 8rem calc(-50vw + 480px) 0;
+    padding: 2rem calc(50vw - 480px);
+  }
+
   .means-of-transport {
     .wp-block-image {
       height: 128px;
