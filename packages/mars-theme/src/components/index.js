@@ -89,6 +89,7 @@ const Theme = ({ state, actions }) => {
             <Switch>
               <HomepageHero when={data.isHome} />
               <GenericHero when={data.route === '/arrival/'} title="Arrival" cta="match my ride" ctaId="Find the best transport" />
+              <GenericHero when={data.route === '/get-ready/'} title="Get ready" cta="match my ride" ctaId="Find the best transport" />
               <PageError when={data.isError} />
             </Switch>
           </Hero>
@@ -97,7 +98,7 @@ const Theme = ({ state, actions }) => {
           <Main ref={ref}>
             <Switch>
               <Loading when={data.isFetching} />
-              <Home when={data.isHome || data.route === '/arrival/'} />
+              <Home when={data.isHome || data.route === '/arrival/' || data.route === '/get-ready/'} />
               <List when={data.isArchive} />
               <Post when={data.isPostType} />
             </Switch>
