@@ -144,10 +144,9 @@ const Container = styled.div`
 
   .wp-block-image {
     margin: 0 0 1rem;
-    overflow: hidden;
   }
 
-  .shadow {
+  .shadow img {
     box-shadow: 0 0 8px 0 #0008;
   }
 

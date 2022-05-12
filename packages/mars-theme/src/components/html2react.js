@@ -114,7 +114,7 @@ const Carousel = ({ children }) => (
     margin: 2rem 0 8rem;
 
     @media (min-width: 768px) {
-      margin: 10rem 0 12rem;
+      margin: 4rem 0 12rem;
     }
 
     .wp-block-media-text {
@@ -129,11 +129,17 @@ const Carousel = ({ children }) => (
       color: #fffffe;
       padding: 0 1rem;
       text-align: right;
+      z-index: -1;
     }
 
     .wp-block-media-text__media {
       margin: 0;
       padding: 0;
+
+      img {
+        height: calc(100% - 56px);
+        width: 100%;
+      }
     }
 
     .slick-slide {
@@ -147,13 +153,17 @@ const Carousel = ({ children }) => (
 
     .slick-next, .slick-prev {
       z-index: 1;
-      top: calc(100% + 2rem);
+      top: calc(100% + 2.5rem);
       width: 40px;
       height: 40px;
       padding: 4px;
       &::before {
         font-size: 32px;
         color: #777;
+      }
+
+      @media (min-width: 768px) {
+        top: calc(100% + 4rem);
       }
     }
 
@@ -172,7 +182,11 @@ const Carousel = ({ children }) => (
     }
 
     .slick-dots {
-      bottom: -42px;
+      bottom: -48px;
+
+      @media (min-width: 768px) {
+        bottom: -74px;
+      }
 
       li button:before {
         font-size: 12px;
