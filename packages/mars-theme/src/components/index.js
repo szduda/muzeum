@@ -89,7 +89,9 @@ const Theme = ({ state, actions }) => {
             <Switch>
               <HomepageHero when={data.isHome} />
               <GenericHero when={data.route === '/arrival/'} title="Arrival" cta="match my ride" ctaId="Find the best transport" />
-              <GenericHero when={data.route === '/get-ready/'} title="Get ready" cta="match my ride" ctaId="Find the best transport" />
+              <GenericHero when={data.route === '/get-ready/'} title="Get ready" />
+              <GenericHero when={data.route === '/auschwitz-birkenau/'} title="Auschwitz-Birkenau" />
+              <GenericHero when={data.route === '/find-more/'} title="Find more" />
               <PageError when={data.isError} />
             </Switch>
           </Hero>
@@ -98,7 +100,13 @@ const Theme = ({ state, actions }) => {
           <Main ref={ref}>
             <Switch>
               <Loading when={data.isFetching} />
-              <Home when={data.isHome || data.route === '/arrival/' || data.route === '/get-ready/'} />
+              <Home when={
+                data.isHome ||
+                data.route === '/arrival/' ||
+                data.route === '/get-ready/' ||
+                data.route === '/auschwitz-birkenau/' ||
+                data.route === '/find-more/'
+              } />
               <List when={data.isArchive} />
               <Post when={data.isPostType} />
             </Switch>
@@ -276,9 +284,11 @@ const GenericHero = ({ title, cta, ctaId }) => (
     <h2>
       {title}
     </h2>
-    <CTA onClick={() => scrollToAnchor(`#${ctaId}`)}>
-      <span>{cta}</span>
-    </CTA>
+    {cta && ctaId && (
+      <CTA onClick={() => scrollToAnchor(`#${ctaId}`)}>
+        <span>{cta}</span>
+      </CTA>
+    )}
   </>
 )
 
