@@ -26,17 +26,19 @@ export const init = ({ libraries }) => {
 
 export default init
 
-const Anchor = props => (
+export const Anchor = props => (
   <a css={css`
+  cursor: pointer;
   border-bottom: 2px solid #f9c959;
-
+  
   &:hover {
     text-decoration: none;
-    color: #888;
+    background: #f9c95922;
+    outline: 8px solid #f9c95922;
   }`} {...props} />
 )
 
-const H2 = styled.h2`
+export const H2 = styled.h2`
   text-align: center;
   font-size: 3rem;
   line-height: 1;
@@ -59,7 +61,7 @@ const H2 = styled.h2`
   }
 `
 
-const H3 = styled.h3`
+export const H3 = styled.h3`
   font-size: 2.5rem;
   line-height: 1;
   font-weight: normal;
@@ -67,7 +69,7 @@ const H3 = styled.h3`
   font-variant: all-small-caps;
 `
 
-const H4 = styled.h4`
+export const H4 = styled.h4`
   display: inline-flex;
   margin: 0;
   padding: 1rem 0 2rem;

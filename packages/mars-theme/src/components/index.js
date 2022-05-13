@@ -188,6 +188,10 @@ const getGlobalStyles = bgUrl => css`
     margin: 0 0 2rem;
   }
 
+  img {
+    width: auto;
+  }
+
   form {
     display: flex;
   }

@@ -7,8 +7,6 @@ export const Footer = ({ state, libraries }) => {
   const { contactPhone, contactMail } = data || {}
   const html = data?.content?.rendered
 
-  console.log(data)
-
   return (
     <FooterWrapper>
       <FooterContent>

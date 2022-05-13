@@ -1,6 +1,8 @@
 import React from 'react'
-import { connect, styled } from "frontity"
+import { connect, styled, css } from "frontity"
 import Map from '../map/map'
+import { H2, H4, Anchor } from '../html2react'
+import { CTA } from '../index'
 
 const Home = ({ state, libraries }) => {
   const { type, id } = state.source.get(state.router.link)
@@ -10,12 +12,86 @@ const Home = ({ state, libraries }) => {
   return (
     <Container>
       <Html2React html={page.content.rendered} />
+
+      <H2>Latest news</H2>
+      <RecentPosts posts={page.recentPosts} />
       {state.theme.isHeaderSticky && <Map />}
     </Container>
   )
 }
 
 export default connect(Home);
+
+const RecentPosts = ({ posts = [] }) => (
+  <div css={css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 4rem 0 8rem;
+  `}>
+    <div css={css`
+      display: flex;
+      justify-content: center;
+      margin: 0 0 2rem;
+    `}>
+      {posts.map(({ title, slug, categories, thumbnailUrl }) => (
+        <a
+          key={slug}
+          href={`/${slug}`}
+          css={css`
+            margin: 0 2rem;
+            padding: 0 0 1rem;
+            flex: 0 0 calc(50% - 4rem);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 2rem 2rem;
+            box-sizing: border-box;
+            background: #f0f0e0;
+            box-shadow: 0 0 4px #4448;
+            
+            &:hover {
+              text-decoration: none;
+              opacity: 0.8;
+            }
+        `}>
+          <img src={thumbnailUrl} css={css`
+            width: 100%;
+            height: 360px;
+            object-fit: cover;
+            background: #4444;
+        `} />
+          <div css={css`
+          padding: 2rem 1rem 0;
+          width: 100%;
+        `}>
+            {categories?.map(category => (
+              <span key={category} css={css`
+                margin-right: 1rem;
+                padding: 0.25rem 0.5rem;
+                border-radius: 8px;
+                background: #f9c959aa;
+              `}>
+                {category}
+              </span>
+            ))}
+          </div>
+          <H4 css={css`
+            width: 100%;
+            padding: 1rem 1rem;
+            box-sizing: border-box;
+        `}>{title}</H4>
+        </a>
+      ))}
+    </div>
+    <Anchor css={css`
+      font-size: 1.5rem;
+      padding: 0 0 0.5rem;
+    `}>
+      read more posts
+    </Anchor>
+  </div>
+)
 
 const Container = styled.div`
   margin: 0;
