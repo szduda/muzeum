@@ -92,6 +92,7 @@ const Theme = ({ state, actions }) => {
               <GenericHero when={data.route === '/get-ready/'} title="Get ready" />
               <GenericHero when={data.route === '/auschwitz-birkenau/'} title="Auschwitz-Birkenau" />
               <GenericHero when={data.route === '/find-more/'} title="Find more" />
+              <GenericHero when={data.route === '/tours/'} title="Tours" />
               <PageError when={data.isError} />
             </Switch>
           </Hero>
@@ -105,7 +106,8 @@ const Theme = ({ state, actions }) => {
                 data.route === '/arrival/' ||
                 data.route === '/get-ready/' ||
                 data.route === '/auschwitz-birkenau/' ||
-                data.route === '/find-more/'
+                data.route === '/find-more/' ||
+                data.route === '/tours/'
               } />
               <List when={data.isArchive} />
               <Post when={data.isPostType} />

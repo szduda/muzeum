@@ -132,11 +132,11 @@ const Container = styled.div`
     }
   }
 
-  .means-of-transport {
+  #means-of-transport {
     .wp-block-image {
       height: 128px;
       width: 128px;
-      margin: 0;
+      margin: 0 0 0;
     }
 
     .wp-block-column {

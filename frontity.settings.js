@@ -14,8 +14,8 @@ const settings = {
         "theme": {
           "menu": [
             [
-              "Tickets",
-              "/tickets/",
+              "Tours",
+              "/tours/",
             ],
             [
               "Arrival",
@@ -40,15 +40,6 @@ const settings = {
               "#",
               "Lang"
             ],
-            [
-              "Help",
-              "/help/",
-              "Help"
-            ],
-            [
-              "Mission",
-              "/#mission"
-            ]
           ],
           "featured": {
             "showOnList": true,
