@@ -188,6 +188,10 @@ const getGlobalStyles = bgUrl => css`
     margin: 0 0 2rem;
   }
 
+  img {
+    width: auto;
+  }
+
   form {
     display: flex;
   }
@@ -223,13 +227,29 @@ const getGlobalStyles = bgUrl => css`
     width: 128px;
   }
 
-   div.icon {
+   div.icon, figure.icon {
     display: flex;
     justify-content: center;
+    align-items: center;
+  }
+
+  figure.icon a {
+    width: 100%;
+    height: 100%;
+    border: none! important;
   }
 
   .aligncenter {
     align-self: center;
+  }
+
+  .wp-block-image:not(.icon) img {
+    max-width: 100%;
+  }
+
+  figure.icon-64, .icon-64 figure {
+    height: 64px;
+    width: 64px;
   }
 `;
 

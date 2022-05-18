@@ -88,7 +88,8 @@ const NavItem = styled.div`
     text-align: center;
     border: 2px solid transparent;
     font-variant: all-small-caps;
-    ${props => !props.sticky && `text-shadow: 0 0 4px #444;`}
+    // ${props => !props.sticky && `text-shadow: 0 0 4px #444;`}
+    text-shadow: 0 0 4px #fff4;
 
     &:hover {
       text-decoration: none;

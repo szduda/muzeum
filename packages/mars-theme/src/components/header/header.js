@@ -58,7 +58,8 @@ const Container = styled.div`
   z-index: 5;
   background: transparent;
   transition: background-color 600ms ease-out, color 600ms ease-out, backdrop-filter 150ms ease-out;
-  color: ${props => props.sticky ? '#444' : '#fffff0'};
+  // color: ${props => props.sticky ? '#444' : '#fffff0'};
+  color: #444;
 
   @media (min-width: 960px) {
     background-color: #fffff011;
