@@ -88,11 +88,11 @@ const Theme = ({ state, actions }) => {
           <Hero fullHeight={data.isHome}>
             <Switch>
               <HomepageHero when={data.isHome} />
-              <GenericHero when={data.route === '/arrival/'} title="Arrival" cta="match my ride" ctaId="Find the best transport" />
-              <GenericHero when={data.route === '/get-ready/'} title="Get ready" />
-              <GenericHero when={data.route === '/auschwitz-birkenau/'} title="Auschwitz-Birkenau" />
-              <GenericHero when={data.route === '/find-more/'} title="Find more" />
-              <GenericHero when={data.route === '/tours/'} title="Tours" />
+              <GenericHero when={data.route === '/arrival/'} title="how to get there" cta="entry" ctaId="#" />
+              <GenericHero when={data.route === '/get-ready/'} title="prepare well in advance" cta="on site" ctaId="#" />
+              <GenericHero when={data.route === '/auschwitz-birkenau/'} title="sightseeing walkthrough" cta="extras" ctaId="#" />
+              <GenericHero when={data.route === '/find-more/'} title="environs: discover the vicinity" cta="nature" ctaId="#" />
+              <GenericHero when={data.route === '/tours/'} title="best ways to visit" cta="top pick" ctaId="#" />
               <PageError when={data.isError} />
             </Switch>
           </Hero>
@@ -361,8 +361,8 @@ export const CTA = styled.button`
   align-self: flex-end;
   border: 2px solid #f9c959;
   border-radius: 6px;
-  color: #f9c959;
-  background-color: #444;
+  color: #444;
+  background: #f9c959;
   font-size: 1.5rem;
   padding: 0.25rem 1rem;
   text-transform: lowercase;
@@ -391,9 +391,8 @@ export const CTA = styled.button`
   }
 
   :hover {
-    border-color: #f9c959;
-    background: #f9c959;
-    color: #444;
+    background-color: #444d;
+    color: #f9c959;
   }
 
   @media(min-width: 768px) {

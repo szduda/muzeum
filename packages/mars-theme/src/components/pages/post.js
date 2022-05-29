@@ -131,8 +131,13 @@ const Content = styled.div`
 
   ul {
     margin: 2rem 0;
-    line-height: 1.7;
+    line-height: 1.5;
     padding-left: 1rem;
+    font-size: 1.25rem;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
   }
 
   >.wp-block-image {
