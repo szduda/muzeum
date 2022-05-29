@@ -13,8 +13,12 @@ export const Footer = ({ state, libraries }) => {
         {html && <Html2React html={data?.content?.rendered} />}
         <div id="contact">
           <h4>Contact</h4>
-          <a href={`tel:${contactPhone}`}>{contactPhone}</a>
-          <a href={`mailto:${contactMail}`}>{contactMail}</a>
+          {contactPhone && (
+            <a href={`tel:${contactPhone}`}>{contactPhone}</a>
+          )}
+          {contactMail && (
+            <a href={`mailto:${contactMail}`}>{contactMail}</a>
+          )}
         </div>
       </FooterContent>
     </FooterWrapper>

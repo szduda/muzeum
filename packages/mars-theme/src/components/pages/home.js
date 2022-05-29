@@ -7,7 +7,6 @@ const Home = ({ state, libraries }) => {
   const { type, id, isHome } = state.source.get(state.router.link)
   const page = state.source[type][id]
   const Html2React = libraries.html2react.Component;
-  console.log(state.source.get(state.router.link))
   return (
     <Container>
       <Html2React html={page.content.rendered} />
@@ -64,7 +63,7 @@ const RecentPosts = ({ posts = [] }) => (
               margin: 0 2rem 2rem;
             }
         `}>
-          <img src={thumbnailUrl} css={css`
+          <img src={thumbnailUrl || ''} css={css`
             width: 100%;
             height: 360px;
             object-fit: cover;
@@ -212,6 +211,17 @@ const Container = styled.div`
     .wp-block-image {
       height: 64px;
       width: 64px;
+    }
+
+    p {
+      z-index: 1;
+      
+      a {
+        border-bottom: none;
+        display: block;
+        margin-top: -170px;
+        padding-top: 170px;
+      }
     }
   }
 
