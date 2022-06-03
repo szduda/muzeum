@@ -129,17 +129,6 @@ const Content = styled.div`
     margin: 2rem 0;
   }
 
-  ul {
-    margin: 2rem 0;
-    line-height: 1.5;
-    padding-left: 1rem;
-    font-size: 1.25rem;
-
-    li {
-      margin-bottom: 0.5rem;
-    }
-  }
-
   >.wp-block-image {
     margin: 4rem 0;
   }

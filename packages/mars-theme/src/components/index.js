@@ -218,6 +218,17 @@ const getGlobalStyles = bgUrl => css`
     }
   }
 
+  ul, ol {
+    margin: 2rem 0;
+    line-height: 1.5;
+    padding-left: 1rem;
+    font-size: 1.25rem;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+
   .has-text-align-center {
     display: flex;
     justify-content: center;
@@ -252,6 +263,17 @@ const getGlobalStyles = bgUrl => css`
   figure.icon-64, .icon-64 figure {
     height: 64px;
     width: 64px;
+  }
+
+  .inverted {
+    background: #444;
+    color: #fffffa;
+    padding: 4rem 0;
+
+    @media (min-width: 960px) {
+      margin: 0 calc(-50vw + 480px);
+      padding: 4rem calc(50vw - 480px);
+    }
   }
 `;
 
