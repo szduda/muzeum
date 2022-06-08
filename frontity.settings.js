@@ -54,6 +54,7 @@ const settings = {
         "source": {
           "url": "https://noderesources.visitauschwitz.info",
           "homepage": "home",
+          "postsPage": "articles",
           postTypes: [
             {
               type: "common",

@@ -55,7 +55,7 @@ const Theme = ({ state, actions }) => {
 
   const heroImageId = state.source?.[data.type]?.[data.id]?.featured_media || -1
   const bgUrl = state.source.attachment?.[heroImageId]?.source_url ?? heroBackgroundUrl
-
+  
   return (
     <>
       <Title />
@@ -90,8 +90,8 @@ const Theme = ({ state, actions }) => {
               <HomepageHero when={data.isHome} />
               <GenericHero when={data.route === '/arrival/'} title="how to get there" cta="entry" ctaId="#" />
               <GenericHero when={data.route === '/get-ready/'} title="prepare well in advance" cta="on site" ctaId="#" />
-              <GenericHero when={data.route === '/auschwitz-birkenau/'} title="sightseeing walkthrough" cta="extras" ctaId="#" />
-              <GenericHero when={data.route === '/find-more/'} title="environs: discover the vicinity" cta="nature" ctaId="#" />
+              <GenericHero when={data.route === '/auschwitz-birkenau/'} title="visiting guide" cta="extras" ctaId="#" />
+              <GenericHero when={data.route === '/surroundings/'} title="discover the vicinity" cta="nature" ctaId="#" />
               <GenericHero when={data.route === '/tours/'} title="best ways to visit" cta="top pick" ctaId="#" />
               <PageError when={data.isError} />
             </Switch>
@@ -219,13 +219,14 @@ const getGlobalStyles = bgUrl => css`
   }
 
   ul, ol {
-    margin: 2rem 0;
+    margin: 0 0 2rem;
     line-height: 1.5;
-    padding-left: 1rem;
+    padding-left: 2.5rem;
     font-size: 1.25rem;
 
     li {
       margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
     }
   }
 
@@ -309,7 +310,7 @@ const Hero = styled.div`
     margin: 0 0 2rem 0;
     align-self: flex-end;
     font-size: 3.5rem;
-    line-height: 0.6;
+    line-height: 0.8;
     flex-direction: column;
     color: #fffff0;
     position: relative;

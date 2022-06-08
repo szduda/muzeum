@@ -9,7 +9,7 @@ export const init = ({ libraries }) => {
 
   const carouselEntry = createEntry(
     ({ node }) =>
-      node.component === 'div' && node.props.className.includes('carousel'),
+      node.component === 'div' && node.props.className?.includes('carousel'),
     null,
     ({ node }) => {
       node.component = Carousel
@@ -20,7 +20,7 @@ export const init = ({ libraries }) => {
 
   const stepsEntry = createEntry(
     ({ node }) =>
-      node.component === 'ol' && node.props.className.includes('steps-section'),
+      node.component === 'ol' && node.props.className?.includes('steps-section'),
     null,
     ({ node }) => {
       node.component = Steps
