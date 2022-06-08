@@ -55,7 +55,7 @@ const Theme = ({ state, actions }) => {
 
   const heroImageId = state.source?.[data.type]?.[data.id]?.featured_media || -1
   const bgUrl = state.source.attachment?.[heroImageId]?.source_url ?? heroBackgroundUrl
-  
+
   return (
     <>
       <Title />
@@ -275,6 +275,10 @@ const getGlobalStyles = bgUrl => css`
       margin: 0 calc(-50vw + 480px);
       padding: 4rem calc(50vw - 480px);
     }
+  }
+
+  .no-margin {
+    margin: 0 !important;
   }
 `;
 
