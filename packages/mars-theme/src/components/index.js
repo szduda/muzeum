@@ -280,6 +280,14 @@ const getGlobalStyles = bgUrl => css`
   .no-margin {
     margin: 0 !important;
   }
+
+  .no-margin-top {
+    margin-top: 0 !important;
+  }
+
+  .no-margin-bottom {
+    margin-top: 0 !important;
+  }
 `;
 
 const Wrapper = styled.div`
