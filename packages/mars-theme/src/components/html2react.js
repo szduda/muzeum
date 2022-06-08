@@ -200,12 +200,19 @@ const Carousel = ({ children }) => (
     .wp-block-media-text__content {
       position: absolute;
       bottom: 0;
-      background: #444d;
       width: 100%;
-      color: #fffffe;
-      padding: 0 1rem;
+      padding: 0;
       text-align: right;
       z-index: -1;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      p {
+        margin: 0;
+        text-align: center;
+      }
     }
 
     .wp-block-media-text__media {
@@ -213,7 +220,7 @@ const Carousel = ({ children }) => (
       padding: 0;
 
       img {
-        height: calc(100% - 56px);
+        height: calc(100% - 64px);
         width: 100%;
       }
     }
