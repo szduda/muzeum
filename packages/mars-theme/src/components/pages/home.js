@@ -310,6 +310,8 @@ const Container = styled.div`
     overflow: hidden;
     min-height: 67vh;
     font-size: 1.25rem;
+    display: flex;
+    align-items: center;
 
     .quote {
       max-width: 480px;

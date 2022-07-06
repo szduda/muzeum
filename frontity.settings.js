@@ -30,8 +30,8 @@ const settings = {
               "/auschwitz-birkenau/"
             ],
             [
-              "Find more",
-              "/find-more/"
+              "Surroundings",
+              "/surroundings/"
             ],
           ],
           settings: [

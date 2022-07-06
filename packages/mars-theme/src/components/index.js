@@ -88,11 +88,11 @@ const Theme = ({ state, actions }) => {
           <Hero fullHeight={data.isHome}>
             <Switch>
               <HomepageHero when={data.isHome} />
-              <GenericHero when={data.route === '/arrival/'} title="how to get there" cta="entry" ctaId="#" />
-              <GenericHero when={data.route === '/get-ready/'} title="prepare well in advance" cta="on site" ctaId="#" />
-              <GenericHero when={data.route === '/auschwitz-birkenau/'} title="visiting guide" cta="extras" ctaId="#" />
-              <GenericHero when={data.route === '/surroundings/'} title="discover the vicinity" cta="nature" ctaId="#" />
-              <GenericHero when={data.route === '/tours/'} title="best ways to visit" cta="top pick" ctaId="#" />
+              <GenericHero when={data.route === '/arrival/'} title="how to get there" cta="entry" ctaId="entrances" />
+              <GenericHero when={data.route === '/get-ready/'} title="prepare in advance" cta="on site" ctaId="on-site" />
+              <GenericHero when={data.route === '/auschwitz-birkenau/'} title="visiting guide" cta="extras" ctaId="beyond" />
+              <GenericHero when={data.route === '/surroundings/'} title="discover the vicinity" cta="nature" ctaId="nature" />
+              <GenericHero when={data.route === '/tours/'} title="best ways to visit" cta="top pick" ctaId="organized" />
               <PageError when={data.isError} />
             </Switch>
           </Hero>
@@ -106,7 +106,7 @@ const Theme = ({ state, actions }) => {
                 data.route === '/arrival/' ||
                 data.route === '/get-ready/' ||
                 data.route === '/auschwitz-birkenau/' ||
-                data.route === '/find-more/' ||
+                data.route === '/surroundings/' ||
                 data.route === '/tours/'
               } />
               <List when={data.isArchive} />
@@ -287,6 +287,12 @@ const getGlobalStyles = bgUrl => css`
 
   .no-margin-bottom {
     margin-top: 0 !important;
+  }
+
+  .hide-on-mobile {
+    @media (max-width: 767px) {
+      display: none;
+    }
   }
 `;
 
