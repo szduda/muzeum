@@ -135,7 +135,7 @@ const Container = styled.div`
     .wp-block-image {
       height: 128px;
       width: 128px;
-      margin: 0 0 0;
+      margin: 0;
     }
 
     .wp-block-column {
@@ -146,7 +146,6 @@ const Container = styled.div`
       flex-wrap: wrap;
       flex-direction: row;
       justify-content: space-evenly;
-      margin-bottom: 2rem;
     }
   }
 
@@ -203,7 +202,7 @@ const Container = styled.div`
 
     @media (min-width: 768px) {
       flex-direction: row;
-      margin: 4rem auto;
+      margin: 0 auto;
     }
   }
 
@@ -226,13 +225,13 @@ const Container = styled.div`
   }
 
   .wp-block-column {
-    margin: 2rem 1rem;
+    margin: 0 1rem;
     display: flex;
     flex-direction: column;
 
     @media (min-width: 768px) {
       width: 100%;
-      margin: 1rem;
+      margin: 0 1rem;
       padding: 0 1rem;
     }
   }
@@ -278,10 +277,6 @@ const Container = styled.div`
       .wp-block-column {
         width: 50%;
         max-width: 50%;
-      }
-
-      .wp-block-image img {
-        // width: 416px;
       }
     }
   }
@@ -329,48 +324,9 @@ const Container = styled.div`
       }
 
       .wp-block-column {
-        margin: 1rem;
+        margin: 0 1rem;
       }
     }
-
-    // @media (min-width: 768px) {
-    //   .wp-block-columns {
-    //     margin: 4rem auto 0;
-    //   }
-    //   .wp-block-column:first-of-type {
-    //     position: absolute;
-    //     left: 0;
-    //     top: 0;
-    //     bottom: 0;
-    //     overflow: hidden;
-    //     margin: 0;
-    //     padding: 0;
-
-    //     .wp-block-image {
-    //       margin: 0;
-    //     }
-
-    //     img {
-    //       opacity: 0.2;
-    //       width: 100vw;
-    //       height: 100%;
-    //       margin-top: -10%;
-    //     }
-    //   }
-    //   .wp-block-column:last-of-type {
-    //     font-size: 24px;
-    //     max-width: 480px;
-    //     margin: 0 auto 0 0;
-    //     margin-right: 0;
-    //     padding-right: 0;
-
-    //     h2, p {
-    //       text-align: left;
-    //       text-shadow: 1px 1px 4px black;
-    //       color #fffff0;
-    //     }
-    //   }
-    // }
   }
 
   #bigQuote {
