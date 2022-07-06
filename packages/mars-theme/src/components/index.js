@@ -107,7 +107,8 @@ const Theme = ({ state, actions }) => {
                 data.route === '/get-ready/' ||
                 data.route === '/auschwitz-birkenau/' ||
                 data.route === '/surroundings/' ||
-                data.route === '/tours/'
+                data.route === '/tours/' ||
+                data.route === '/4-copy/'
               } />
               <List when={data.isArchive} />
               <Post when={data.isPostType} />

@@ -15,8 +15,8 @@ const Header = ({ state, actions }) => {
   } = state.theme
 
   const Logo = props => (
-    <LogoLink link="/" $hidden={sticky && !isMobileMenuOpen} {...props}>
-      <Icon.Logo lighten={isMobileMenuOpen} />
+    <LogoLink $small link="/" $hidden={sticky && !isMobileMenuOpen} {...props}>
+      <Icon.Logo lighten={isMobileMenuOpen} small />
     </LogoLink>
   )
 
@@ -94,11 +94,12 @@ const BackButton = styled.button`
 `
 
 const LogoLink = styled(Link)`
-  width: 128px;
+  width: ${props => props.$small ? 127 : 208}px;
+  box-sizing: border-box;
   height: 48px;
   display: block;
   box-sizing: border-box;
-  padding: 0.5rem 1rem;
+  padding: ${props => props.$small ? 0.75 : 0.5}rem;
   margin: 0 0 0 1rem;
   z-index: 3;
   transition: opacity 300ms ease-out;
@@ -110,7 +111,7 @@ const LogoLink = styled(Link)`
   
   @media (max-width: 959px) {
     margin: 0;
-    transform: translateY(6px);
+    transform: translateY(8px);
     ${props => props.$hidden && `
     pointer-events: none;
     opacity: 0;
@@ -125,7 +126,7 @@ const Row = styled.div`
 
 const IconsRow = styled(Row)`
   display: none;
-  width: 120px;
+  width: 190px;
   justify-content: flex-end;
   margin: 0 1.5rem 0 0;
   
