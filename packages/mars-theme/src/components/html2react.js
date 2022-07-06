@@ -28,11 +28,47 @@ export const init = ({ libraries }) => {
     }
   )
 
+  const tocEntry = createEntry(
+    ({ node }) =>
+      node.component === 'div' && node.props.className?.includes('table-of-contents'),
+    null,
+    ({ node }) => {
+      node.component = TableOfContents
+      node.children = node.children[0].children
+      return node
+    }
+  )
+
   libraries.html2react.processors.push(carouselEntry)
   libraries.html2react.processors.push(stepsEntry)
+  // libraries.html2react.processors.push(tocEntry)
 }
 
 export default init
+
+export const TableOfContents = ({ children }) => {
+  const table = children[0]
+  const contents = children[1]
+  return (
+    <div css={css`
+      display: flex
+    `}>
+      <div css={css`
+        position: sticky;
+        display: flex;
+        flex: 30% 0 0;
+    `}>
+        {table}
+      </div>
+      <div css={css`
+        display: flex;
+        flex: 70% 1 0;
+    `}>
+        {contents}
+      </div>
+    </div>
+  )
+}
 
 export const Steps = ({ children }) => (
   <ol css={css`
