@@ -120,8 +120,13 @@ const Content = styled.div`
 
   h2 {
     margin: 4rem 0 2rem;
-    font-size: 2rem;
+    font-size: 2.75rem;
     padding-top: 0;
+    letter-spacing: 1.2px;
+  }
+
+  h3 {
+    font-size: 2rem;
   }
 
   p {
