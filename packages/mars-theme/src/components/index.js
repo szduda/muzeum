@@ -295,6 +295,10 @@ const getGlobalStyles = bgUrl => css`
       display: none;
     }
   }
+
+  .w100 {
+    width: 100%;
+  }
 `;
 
 const Wrapper = styled.div`

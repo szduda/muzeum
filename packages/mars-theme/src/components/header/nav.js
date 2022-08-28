@@ -36,7 +36,6 @@ const NavContainer = styled.nav`
 `
 
 const NavItem = styled.div`
-  font-size: 18px;
   box-sizing: border-box;
   align-items: center;
   display: flex;
@@ -79,9 +78,10 @@ const NavItem = styled.div`
   }
   
   & > a {
+    font-size: 20px;
     padding: 6px 8px;
     margin: 0 8px;
-    font-weight: 600;
+    letter-spacing: 0.2px;
     display: inline-flex;
     align-items:center;
     line-height: 1;

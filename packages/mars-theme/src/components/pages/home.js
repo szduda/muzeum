@@ -5,14 +5,14 @@ import { H2, H4, Anchor } from '../html2react'
 
 const Home = ({ state, libraries }) => {
   const { type, id, isHome } = state.source.get(state.router.link)
-  const page = state.source[type][id]
+  const page = state?.source?.[type]?.[id]
   const Html2React = libraries.html2react.Component;
   return (
     <Container>
-      <Html2React html={page.content.rendered} />
+      <Html2React html={page?.content.rendered} />
       {isHome && (<>
         <H2>Latest news</H2>
-        <RecentPosts posts={page.recentPosts} />
+        <RecentPosts posts={page?.recentPosts} />
       </>
       )}
       {state.theme.isHeaderSticky && <Map />}

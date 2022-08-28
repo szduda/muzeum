@@ -80,7 +80,6 @@ export const MenuLink = styled(Link)`
   color: ${props => props.$highlight ? '#f9c959' : '#fffff0'} !important;
   text-align: center;
   font-size: 1.5rem;
-  font-weight: 600;
   display: inline-flex;
   align-items:center;
   line-height: 1;
