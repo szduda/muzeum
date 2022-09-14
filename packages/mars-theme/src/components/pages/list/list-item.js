@@ -1,83 +1,96 @@
-import { connect, styled } from "frontity";
-import Link from "../../link";
+import { connect, styled, css } from "frontity";
+import { H4 } from "../../html2react";
 import FeaturedMedia from "../../featured-media";
 
-/**
- * Item Component
- *
- * It renders the preview of a blog post. Each blog post contains
- * - Title: clickable title of the post
- * - Author: name of author and published date
- * - FeaturedMedia: the featured image/video of the post
- */
-const Item = ({ state, item }) => {
-  const author = state.source.author[item.author];
-  const date = new Date(item.date);
-
+export const Item = ({ state, post }) => {
+  const excerpt = post.excerpt.rendered.match(/<p>(.+)<a/);
+  const categories = post?.categories.map(
+    (cat) => state.source.category[cat].name
+  );
   return (
-    <article>
-      <Link link={item.link}>
-        <Title dangerouslySetInnerHTML={{ __html: item.title.rendered }} />
-      </Link>
+    <a
+      key={post.slug}
+      href={`/${post.slug}`}
+      css={css`
+        padding: 0 0 0.5rem;
+        flex: 0.4 0 calc(50% - 4rem);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
+        background: #f0f0e0;
+        border: 1px solid #4441;
+        margin: 0 0 3rem;
+        height: auto;
+        height: fit-content;
 
-      <div>
-        {/* If the post has an author, we render a clickable author text. */}
-        {author && (
-          <StyledLink link={author.link}>
-            <AuthorName>
-              By <b>{author.name}</b>
-            </AuthorName>
-          </StyledLink>
-        )}
-        <PublishDate>
-          {" "}
-          on <b>{date.toDateString()}</b>
-        </PublishDate>
+        &:hover {
+          text-decoration: none;
+          opacity: 0.8;
+        }
+
+        @media (min-width: 768px) {
+          margin: 0 2rem 4rem;
+        }
+      `}
+    >
+      <FeaturedMedia
+        id={post.featured_media}
+        css={css`
+          width: 100%;
+          height: 360px;
+          object-fit: cover;
+          background: #4444;
+        `}
+      />
+      <div
+        css={css`
+          padding: 2rem 1rem 0;
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+        `}
+      >
+        {categories?.map((category) => (
+          <span
+            key={category}
+            css={css`
+              margin: 0 0.5rem 0.5rem 0;
+              padding: 0.25rem 0.5rem;
+              border-radius: 4px;
+              background: #f9c959aa;
+            `}
+          >
+            {category}
+          </span>
+        ))}
       </div>
-
-      {/*
-       * If the want to show featured media in the
-       * list of featured posts, we render the media.
-       */}
-      {state.theme.featured.showOnList && (
-        <FeaturedMedia id={item.featured_media} />
-      )}
-
-      {/* If the post has an excerpt (short summary text), we render it */}
-      {item.excerpt && (
-        <Excerpt dangerouslySetInnerHTML={{ __html: item.excerpt.rendered }} />
-      )}
-    </article>
+      <H4
+        css={css`
+          width: 100%;
+          padding: 0.5rem 1rem 1rem;
+          box-sizing: border-box;
+        `}
+        dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+      />
+      <p
+        dangerouslySetInnerHTML={{ __html: excerpt?.[1] }}
+        css={css`
+          padding: 0 1rem;
+          font-size: 1rem;
+        `}
+      />
+      <span
+        css={css`
+          align-self: flex-start;
+          margin: 0 0 1rem 1rem;
+          border-bottom: 2px solid #f9c959;
+        `}
+      >
+        Read more
+      </span>
+    </a>
   );
 };
 
-// Connect the Item to gain access to `state` as a prop
 export default connect(Item);
-
-const Title = styled.h1`
-  font-size: 2rem;
-  color: rgba(12, 17, 43);
-  margin: 0;
-  padding-top: 24px;
-  padding-bottom: 8px;
-  box-sizing: border-box;
-`;
-
-const AuthorName = styled.span`
-  color: rgba(12, 17, 43, 0.9);
-  font-size: 0.9em;
-`;
-
-const StyledLink = styled(Link)`
-  padding: 15px 0;
-`;
-
-const PublishDate = styled.span`
-  color: rgba(12, 17, 43, 0.9);
-  font-size: 0.9em;
-`;
-
-const Excerpt = styled.div`
-  line-height: 1.6em;
-  color: rgba(12, 17, 43, 0.8);
-`;

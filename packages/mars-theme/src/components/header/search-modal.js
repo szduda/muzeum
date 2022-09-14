@@ -27,7 +27,7 @@ const SearchModal = () => {
         {results.length ? <ResultsWrapper>
           {results.map((item, index) =>
             <ResultItem key={index} delay={index} link={getUrl(item.url)}>
-              {item.title}
+              <span dangerouslySetInnerHTML={{__html: item.title}} />
             </ResultItem>
           )}
         </ResultsWrapper>

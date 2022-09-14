@@ -44,7 +44,7 @@ const RecentPosts = ({ posts = [] }) => (
         }
       `}
     >
-      {posts.map(({ title, slug, categories, thumbnailUrl }) => (
+      {posts.map(({ title, slug, categories, thumbnailUrl, excerpt }) => (
         <a
           key={slug}
           href={`/${slug}`}
@@ -56,7 +56,7 @@ const RecentPosts = ({ posts = [] }) => (
             align-items: center;
             box-sizing: border-box;
             background: #f0f0e0;
-            box-shadow: 0 0 4px #4448;
+            border: 1px solid #4441;
             margin: 0 0 3rem;
 
             &:hover {
@@ -107,17 +107,34 @@ const RecentPosts = ({ posts = [] }) => (
           >
             {title}
           </H4>
+          <p
+            dangerouslySetInnerHTML={{ __html: excerpt.match(/(.+)<a/)?.[1] }}
+            css={css`
+              padding: 0 1rem;
+              font-size: 1rem;
+              margin: 0 0 1rem;
+            `}
+          />
+          {/* <span
+            css={css`
+              align-self: flex-start;
+              margin: 0 0 1rem 1rem;
+              border-bottom: 2px solid #f9c959;
+            `}
+          >
+            Read more
+          </span> */}
         </a>
       ))}
     </div>
     <Anchor
-      href='/articles'
+      href="/articles"
       css={css`
         font-size: 1.5rem;
         padding: 0 0 0.5rem;
       `}
     >
-      read more posts
+      Read more posts
     </Anchor>
   </div>
 );

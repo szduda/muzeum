@@ -82,7 +82,7 @@ const Theme = ({ state, actions }) => {
 
       <Wrapper className={[mousedown ? 'mousedown' : '', isLandscape ? 'landscape' : ''].join(' ')}>
         <Header sticky={isSticky} />
-        {data.isPost || data.route === '/resources/' ? (
+        {data.isPost || ['/resources/', '/articles/'].includes(data.route) ? (
           <NoHero />
         ) : (
           <Hero fullHeight={data.isHome}>
