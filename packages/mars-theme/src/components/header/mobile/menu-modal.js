@@ -32,7 +32,7 @@ const MenuModal = ({ state, actions }) => {
         <span ref={bottomRef} />
       </MenuContent>
 
-      <SettingsContent landscape={isLandscape} open={isSettingsOpen} />
+      {/* <SettingsContent landscape={isLandscape} open={isSettingsOpen} /> */}
       <SearchContent landscape={isLandscape} open={search.open} />
 
       <IconRowWrapper>
@@ -40,13 +40,13 @@ const MenuModal = ({ state, actions }) => {
         {isLandscape && <SettingsToggle onClick={toggleSettings} />}
       </IconRowWrapper>
 
-      {!isLandscape && (
+      {/* {!isLandscape && (
         <SettingsWrapper>
           <SettingsToggle onClick={toggleSettings}>
             <Icon.Gear size={64} color="#d4d4d4" />
           </SettingsToggle>
         </SettingsWrapper>
-      )}
+      )} */}
 
       <ScrollDownButton
         onClick={() => bottomRef.current.scrollIntoView({ behavior: 'smooth' })}

@@ -37,7 +37,7 @@ const Header = ({ state, actions }) => {
         <Nav />
         <IconsRow>
           <Search />
-          <Settings />
+          {/* <Settings /> */}
         </IconsRow>
       </Row>
       <MobileMenu />

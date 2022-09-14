@@ -1,15 +1,16 @@
-import { connect, styled } from "frontity"
-import Link from "../link"
-import { Icon, Slide } from "../theme"
+import { connect, styled } from "frontity";
+import Link from "../link";
+import { Icon, Slide } from "../theme";
 
 const Settings = ({ state, actions }) => {
-  const { settings, isSettingsOpen } = state.theme
+  const { settings, isSettingsOpen } = state.theme;
 
   return (
     <SettingsWrapper open={isSettingsOpen}>
       {isSettingsOpen && <Overlay onClick={actions.theme.toggleSettings} />}
       <Slide down open={isSettingsOpen}>
         <SettingsDropdown sticky={state.theme.isHeaderSticky}>
+          <Title>Website language</Title>
           <Title>Settings</Title>
           {settings.map(([name, link, icon]) => {
             const ItemIcon = icon ? Icon[icon] : Icon.Help
@@ -23,14 +24,17 @@ const Settings = ({ state, actions }) => {
         </SettingsDropdown>
         {isSettingsOpen && <ArrowDecor />}
       </Slide>
-      <SettingsToggle open={isSettingsOpen} onClick={actions.theme.toggleSettings}>
+      <SettingsToggle
+        open={isSettingsOpen}
+        onClick={actions.theme.toggleSettings}
+      >
         <Icon.Gear />
       </SettingsToggle>
     </SettingsWrapper>
-  )
-}
+  );
+};
 
-export default connect(Settings)
+export default connect(Settings);
 
 const Overlay = styled.div`
   width: 100vw;
@@ -47,13 +51,13 @@ const Title = styled.span`
   font-variant: all-small-caps;
   font-weight: 600;
   letter-spacing: 1px;
-`
+`;
 
 const SettingsWrapper = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-`
+`;
 
 const SettingsToggle = styled.button`
   background: none;
@@ -67,13 +71,13 @@ const SettingsToggle = styled.button`
 
   svg {
     height: 24px;
-    fill: ${props => props.open ? '#f9c959' : '#444'};
+    fill: ${(props) => (props.open ? "#f9c959" : "#444")};
   }
 
   :hover svg {
     fill: #f9c959;
   }
-`
+`;
 
 const SettingsDropdown = styled.div`
   position: absolute;
@@ -88,7 +92,7 @@ const SettingsDropdown = styled.div`
   color: #444;
   width: 220px;
   margin-top: 1rem;
-`
+`;
 
 const ArrowDecor = styled.div`
   position: absolute;
@@ -102,13 +106,13 @@ const ArrowDecor = styled.div`
   height: 12px;
 
   :after {
-    content: ' ';
+    content: " ";
     position: absolute;
     background: #fffff0;
     width: 12px;
     height: 12px;
   }
-`
+`;
 
 const SettingsLink = styled(Link)`
   box-sizing: border-box;
@@ -135,4 +139,4 @@ const SettingsLink = styled(Link)`
     background: #f9c959;
     text-decoration: none;
   }
-`
+`;
