@@ -147,6 +147,7 @@ export const Anchor = (props) => (
   <a
     css={css`
       cursor: pointer;
+      display: inline;
       border-bottom: 2px solid #f9c959;
 
       &:hover {

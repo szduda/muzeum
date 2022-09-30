@@ -5,7 +5,8 @@ export const scrollToAnchor = id => {
   const element = document.querySelector(id);
 
   if (element) {
-    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    const pageY = document.querySelector('#root').scrollTop;
+    const y = element.getBoundingClientRect().top + pageY + yOffset;
     document.querySelector('#root').scrollTo({ top: y, behavior: 'smooth' });
   }
 }

@@ -3,7 +3,7 @@ import { connect, styled, Global, css } from "frontity";
 import Link from "../link";
 import List from "./list";
 import FeaturedMedia from "../featured-media";
-import postStyle from './post.css';
+import postStyle from "./post.css";
 
 const Post = ({ state, actions, libraries }) => {
   const data = state.source.get(state.router.link);
@@ -24,54 +24,51 @@ const Post = ({ state, actions, libraries }) => {
   }, []);
 
   return data.isReady ? (
-    <Col>
+    <Wrapper>
       {state.theme.featured.showOnPost && (
         <FeaturedMedia id={post.featured_media} />
       )}
       <Container hasFeaturedImage={!!post.featured_media}>
         <Global styles={css(postStyle)} />
-        <div>
+        <PostMeta>
           <Title dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
 
           {data.isPost && (
-            <div>
-              {author && (
-                <StyledLink link={author.link}>
-                  <Author>
-                    By <b>{author.name}</b>
-                  </Author>
-                </StyledLink>
-              )}
-              <DateWrapper>
-                {" "}
-                on <b>{date.toDateString()}</b>
-              </DateWrapper>
-            </div>
+            <DateWrapper>
+              <b>{date.toDateString()}</b>
+            </DateWrapper>
           )}
-        </div>
+        </PostMeta>
 
         <Content>
           <Html2React html={post.content.rendered} />
         </Content>
       </Container>
-    </Col>
+    </Wrapper>
   ) : null;
 };
 
 export default connect(Post);
 
-const Col = styled.div`
+const PostMeta = styled.div`
+  margin: 0 0 2rem;
+`;
+
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+  width: 100%;
+  max-width: 1080px;
+`;
 
 const Container = styled.div`
   margin: 0;
-  padding: 1rem;
+  padding: 1rem 1rem 4rem;
+  width: 100%;
   max-width: 960px;
 
-  ${props => !props.hasFeaturedImage && `padding-top: 8rem;`}
+  ${(props) => !props.hasFeaturedImage && `padding-top: 8rem;`}
 `;
 
 const Title = styled.h1`
@@ -80,7 +77,7 @@ const Title = styled.h1`
   margin-bottom: 8px;
   color: rgba(12, 17, 43);
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     font-size: 3rem;
   }
 `;
@@ -96,9 +93,12 @@ const Author = styled.p`
 `;
 
 const DateWrapper = styled.p`
-  color: rgba(12, 17, 43, 0.9);
   font-size: 0.9em;
-  display: inline;
+  display: inline-flex;
+  padding: 0.125rem 0.5rem;
+  background: #f0f0e0;
+  color: #444;
+  align-items: center;
 `;
 
 /**
@@ -113,8 +113,10 @@ const Content = styled.div`
     max-width: 100%;
   }
 
-  p, h1, h2, h3 {
-    max-width: 800px;
+  p,
+  h1,
+  h2,
+  h3 {
     text-align: left;
   }
 
@@ -131,14 +133,14 @@ const Content = styled.div`
 
   p {
     line-height: 1.7rem;
-    margin: 2rem 0;
+    margin: 0 0 1.5rem;
   }
 
-  >.wp-block-image {
+  > .wp-block-image {
     margin: 4rem 0;
   }
 
-  >.wp-block-embed.is-type-video {
+  > .wp-block-embed.is-type-video {
     margin: 4rem 0;
   }
 
@@ -165,11 +167,11 @@ const Content = styled.div`
   }
 
   blockquote {
-    margin: 2rem 0;
+    margin: 0 0 1.5rem;
     box-sizing: border-box;
     background-color: #f2eedd;
     border-left: 4px solid #888;
-    padding: 1rem;
+    padding: 3rem max(calc(50% - 320px), 3rem) 1.6rem;
     font-size: 1.25rem;
 
     cite {
@@ -255,5 +257,11 @@ const Content = styled.div`
 
   .wp-block-columns {
     margin-bottom: 0;
+  }
+
+  .wp-block-column:not(:first-of-type) {
+    @media (min-width: 768px) {
+      margin-left: 4rem;
+    }
   }
 `;

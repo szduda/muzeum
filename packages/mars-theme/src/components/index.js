@@ -322,11 +322,12 @@ const Main = styled.div`
 
 const Hero = styled.div`
   padding: 0 1rem;
-  min-height: calc(100vh - 52px);
+  min-height: 72vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  ${props => props.fullHeight && 'height: 100vh;'}
   
   h2 {
     display: flex;
@@ -357,7 +358,6 @@ const Hero = styled.div`
   @media(min-width: 768px) {
     min-height: 50vh;
     justify-content: center;
-    ${props => props.fullHeight && 'height: 100vh;'}
 
     h2 {
       text-align: center;
