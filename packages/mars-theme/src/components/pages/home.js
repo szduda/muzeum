@@ -341,7 +341,7 @@ const Container = styled.div`
 
   #mission {
     position: relative;
-    padding: 4rem max(calc(50vw - 50%), 1rem) 2rem;
+    padding: 0 max(calc(50vw - 50%), 1rem);
     background: #423628;
     color: #fffffe;
     margin: 0 calc(-50vw + 50%);
@@ -370,8 +370,8 @@ const Container = styled.div`
   }
 
   #bigQuote {
+    min-height: 80vh;
     padding: 0 1rem 2rem;
-    height: 80vh;
     font-size: 2rem;
     line-height: 1.5;
     letter-spacing: 2px;
@@ -380,11 +380,7 @@ const Container = styled.div`
 
     
     h4 {
-      max-width: 480px;
-    }
-
-    p {
-      max-width: 60%;
+      max-width: 520px;
     }
 
     @media (min-width: 768px) {

@@ -14,6 +14,7 @@ import { scrollToAnchor, useMousedown, useMediaQuery } from '../helpers'
 import { useDebouncedCallback } from "use-debounce";
 import faviconUrl from '../assets/favicon.png'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Icon } from './theme';
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -86,6 +87,9 @@ const Theme = ({ state, actions }) => {
           <NoHero />
         ) : (
           <Hero fullHeight={data.isHome}>
+            <MobileLogo href='/'>
+              <Icon.Logo small />
+            </MobileLogo>
             <Switch>
               <HomepageHero when={data.isHome} />
               <GenericHero when={data.route === '/arrival/'} title="how to get there" cta="entry" ctaId="entrances" />
@@ -270,11 +274,21 @@ const getGlobalStyles = bgUrl => css`
   .inverted {
     background: #444;
     color: #fffffa;
-    padding: 4rem 0;
+    padding: 0;
 
     @media (min-width: 960px) {
-      margin: 0 calc(-50vw + 480px);
-      padding: 4rem calc(50vw - 480px);
+      margin: 0 calc(-50vw + 480px) !important;
+      padding: 0 calc(50vw - 480px);
+    }
+  }
+
+  .salmonize {
+    background: #f9c95933;
+    padding: 0;
+
+    @media (min-width: 960px) {
+      margin: 0 calc(-50vw + 480px) !important;
+      padding: 0 calc(50vw - 480px);
     }
   }
 
@@ -326,8 +340,13 @@ const Hero = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   ${props => props.fullHeight && 'height: 100vh;'}
+
+  > div {
+    display: flex;
+    flex-direction: column;
+  }
   
   h2 {
     display: flex;
@@ -369,7 +388,7 @@ const Hero = styled.div`
 `;
 
 const GenericHero = ({ title, cta, ctaId }) => (
-  <>
+  <div>
     <h2>
       {title}
     </h2>
@@ -378,11 +397,11 @@ const GenericHero = ({ title, cta, ctaId }) => (
         <span>{cta}</span>
       </CTA>
     )}
-  </>
+  </div>
 )
 
 const HomepageHero = () => (
-  <>
+  <div>
     <h2>
       <small>How to visit</small>
       <span css={css`@media(min-width: 768px) { display: none }`}>Auschwitz Birkenau</span>
@@ -392,8 +411,19 @@ const HomepageHero = () => (
     <CTA onClick={() => scrollToAnchor('#key-info')}>
       <span>key info</span>
     </CTA>
-  </>
+  </div>
 )
+
+const MobileLogo = styled.a`
+  position: sticky;
+  top: 0;
+  width: 127px;
+  padding: 1.125rem 0;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+`
 
 const NoHero = styled.div`
   height: 48px;

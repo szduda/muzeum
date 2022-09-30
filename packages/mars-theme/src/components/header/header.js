@@ -3,7 +3,7 @@ import Link from "../link"
 import Nav from "./nav"
 import MobileMenu from "./mobile/menu"
 import { Icon, Slide } from '../theme'
-import Settings from './settings'
+// import Settings from './settings'
 import Search from './search'
 
 const Header = ({ state, actions }) => {
@@ -28,7 +28,7 @@ const Header = ({ state, actions }) => {
             <BackButton onClick={isSettingsOpen ? actions.theme.toggleSettings : actions.theme.search.toggle}>
               <Icon.Arrow angle={270} />
             </BackButton>
-            <Logo />
+            {isMobileMenuOpen && <Logo />}
           </div>
         </Slide>
         <LogoLink link="/" className="widescreen-only">

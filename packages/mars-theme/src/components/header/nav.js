@@ -78,6 +78,7 @@ const NavItem = styled.div`
   }
   
   & > a {
+    transform: translateY(-2px);
     font-size: 20px;
     padding: 6px 8px;
     margin: 0 8px;
