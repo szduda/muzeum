@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect } from "react";
 import { Global, css, connect, styled, Head } from "frontity";
 import Switch from "@frontity/components/switch";
 import Header from "./header/header";
@@ -9,12 +9,12 @@ import Post from "./pages/post";
 import Loading from "./pages/loading";
 import Title from "./header/title";
 import PageError from "./pages/page-error";
-import heroBackgroundUrl from '../assets/gate.jpg'
-import { scrollToAnchor, useMousedown, useMediaQuery } from '../helpers'
+import heroBackgroundUrl from "../assets/gate.jpg";
+import { scrollToAnchor, useMousedown, useMediaQuery } from "../helpers";
 import { useDebouncedCallback } from "use-debounce";
-import faviconUrl from '../assets/favicon.png'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Icon } from './theme';
+import faviconUrl from "../assets/favicon.png";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Icon } from "./theme";
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -22,40 +22,39 @@ import { Icon } from './theme';
  */
 const Theme = ({ state, actions }) => {
   // Get information about the current URL.
-  const data = state.source.get(state.router.link)
-  const isSticky = state.theme.isHeaderSticky
-  const ref = useRef(null)
+  const data = state.source.get(state.router.link);
+  const isSticky = state.theme.isHeaderSticky;
+  const ref = useRef(null);
 
   const handleScroll = () => {
     if (ref.current) {
       if (ref.current.getBoundingClientRect().top <= 100)
-        actions.theme.setSticky()
-      else
-        actions.theme.unsetSticky()
+        actions.theme.setSticky();
+      else actions.theme.unsetSticky();
     }
-  }
-  const debouncedHandleScroll = useDebouncedCallback(handleScroll, 100)
+  };
+  const debouncedHandleScroll = useDebouncedCallback(handleScroll, 100);
 
   useEffect(() => {
-    handleScroll()
-    const root = document.querySelector('#root')
-    root.addEventListener('scroll', debouncedHandleScroll)
-    return () => root.removeEventListener('scroll', () => debouncedHandleScroll)
-  }, [debouncedHandleScroll, state.router.link])
+    handleScroll();
+    const root = document.querySelector("#root");
+    root.addEventListener("scroll", debouncedHandleScroll);
+    return () =>
+      root.removeEventListener("scroll", () => debouncedHandleScroll);
+  }, [debouncedHandleScroll, state.router.link]);
 
-  const mousedown = useMousedown()
-  const isLandscape = useMediaQuery('(max-height: 475px)');
+  const mousedown = useMousedown();
+  const isLandscape = useMediaQuery("(max-height: 475px)");
 
   useEffect(() => {
-    if (isLandscape)
-      actions.theme.setLandscapeOrientation()
-    else
-      actions.theme.setPortraitOrientation()
-  }, [isLandscape])
+    if (isLandscape) actions.theme.setLandscapeOrientation();
+    else actions.theme.setPortraitOrientation();
+  }, [isLandscape]);
 
-
-  const heroImageId = state.source?.[data.type]?.[data.id]?.featured_media || -1
-  const bgUrl = state.source.attachment?.[heroImageId]?.source_url ?? heroBackgroundUrl
+  const heroImageId =
+    state.source?.[data.type]?.[data.id]?.featured_media || -1;
+  const bgUrl =
+    state.source.attachment?.[heroImageId]?.source_url ?? heroBackgroundUrl;
 
   return (
     <>
@@ -67,36 +66,87 @@ const Theme = ({ state, actions }) => {
         <meta name="mobile-web-app-capable" content="yes" />
         <link rel="icon" type="image/png" href={faviconUrl} />
 
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
           integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-          crossorigin="" />
+          crossorigin=""
+        />
         {/* <!-- Make sure you put this AFTER Leaflet's CSS --> */}
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" type="text/javascript" async
+        <script
+          src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+          type="text/javascript"
+          async
           integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-          crossorigin="" />
+          crossorigin=""
+        />
 
-        <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          charset="UTF-8"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+        />
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+        />
       </Head>
 
       <Global styles={getGlobalStyles(bgUrl)} />
 
-      <Wrapper className={[mousedown ? 'mousedown' : '', isLandscape ? 'landscape' : ''].join(' ')}>
+      <Wrapper
+        className={[
+          mousedown ? "mousedown" : "",
+          isLandscape ? "landscape" : "",
+        ].join(" ")}
+      >
         <Header sticky={isSticky} />
-        {data.isPost || ['/resources/', '/articles/'].includes(data.route) ? (
+        {data.isPost || ["/resources/", "/articles/"].includes(data.route) ? (
           <NoHero />
         ) : (
           <Hero fullHeight={data.isHome}>
-            <MobileLogo href='/'>
+            <MobileLogo href="/">
               <Icon.Logo small />
             </MobileLogo>
             <Switch>
               <HomepageHero when={data.isHome} />
-              <GenericHero when={data.route === '/arrival/'} title="how to get there" cta="entry" ctaId="entrances" />
-              <GenericHero when={data.route === '/get-ready/'} title="prepare in advance" cta="on site" ctaId="on-site" />
-              <GenericHero when={data.route === '/auschwitz-birkenau/'} title="visiting guide" cta="extras" ctaId="beyond" />
-              <GenericHero when={data.route === '/surroundings/'} title="discover the vicinity" cta="nature" ctaId="nature" />
-              <GenericHero when={data.route === '/tours/'} title="best ways to visit" cta="top pick" ctaId="organized" />
+              <GenericHero
+                when={data.route === "/arrival/"}
+                title="how to get there"
+                cta="entry"
+                ctaId="entrances"
+                ctaHint="where it starts"
+              />
+              <GenericHero
+                when={data.route === "/get-ready/"}
+                title="prepare in advance"
+                cta="on site"
+                ctaId="on-site"
+                ctaHint="before entering"
+              />
+              <GenericHero
+                when={data.route === "/auschwitz-birkenau/"}
+                title="visiting guide"
+                cta="extras"
+                ctaId="beyond"
+                ctaHint="more on site"
+              />
+              <GenericHero
+                when={data.route === "/surroundings/"}
+                title="discover the vicinity"
+                cta="nature"
+                ctaId="nature"
+                ctaHint="rest nearby"
+              />
+              <GenericHero
+                when={data.route === "/tours/"}
+                title="best ways to visit"
+                cta="top pick"
+                ctaId="organized"
+                ctaHint="popular tours"
+              />
               <PageError when={data.isError} />
             </Switch>
           </Hero>
@@ -105,15 +155,17 @@ const Theme = ({ state, actions }) => {
           <Main ref={ref}>
             <Switch>
               <Loading when={data.isFetching} />
-              <Home when={
-                data.isHome ||
-                data.route === '/arrival/' ||
-                data.route === '/get-ready/' ||
-                data.route === '/auschwitz-birkenau/' ||
-                data.route === '/surroundings/' ||
-                data.route === '/tours/' ||
-                data.route === '/4-copy/'
-              } />
+              <Home
+                when={
+                  data.isHome ||
+                  data.route === "/arrival/" ||
+                  data.route === "/get-ready/" ||
+                  data.route === "/auschwitz-birkenau/" ||
+                  data.route === "/surroundings/" ||
+                  data.route === "/tours/" ||
+                  data.route === "/4-copy/"
+                }
+              />
               <List when={data.isArchive} />
               <Post />
             </Switch>
@@ -128,7 +180,7 @@ const Theme = ({ state, actions }) => {
 
 export default connect(Theme);
 
-const getGlobalStyles = bgUrl => css`
+const getGlobalStyles = (bgUrl) => css`
   html {
     scroll-behavior: smooth;
     height: 100vh;
@@ -138,7 +190,8 @@ const getGlobalStyles = bgUrl => css`
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background: linear-gradient(to bottom, #654a, #444), url('${bgUrl}') center 0px;
+    background: linear-gradient(to bottom, #654a, #444),
+      url("${bgUrl}") center 0px;
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
@@ -148,13 +201,14 @@ const getGlobalStyles = bgUrl => css`
     width: 100%;
     position: fixed;
     top: 0;
-    
+
     // @media (min-width: 960px) {
     //   background-attachment: fixed;
     // }
   }
 
-  a, a:visited {
+  a,
+  a:visited {
     color: inherit;
     text-decoration: none;
   }
@@ -163,16 +217,18 @@ const getGlobalStyles = bgUrl => css`
     text-decoration: underline;
   }
 
-  a, button {
+  a,
+  button {
     -webkit-tap-highlight-color: #f9c95944;
   }
 
-
-  button:focus, a:focus {
+  button:focus,
+  a:focus {
     outline: 2px solid #f9c959;
   }
   .mousedown {
-    a:focus, button:focus {
+    a:focus,
+    button:focus {
       outline: none;
     }
   }
@@ -223,7 +279,8 @@ const getGlobalStyles = bgUrl => css`
     }
   }
 
-  ul, ol {
+  ul,
+  ol {
     margin: 0 0 2rem;
     line-height: 1.5;
     padding-left: 2.5rem;
@@ -240,13 +297,15 @@ const getGlobalStyles = bgUrl => css`
     justify-content: center;
     text-align: center;
   }
-  
-  figure.icon, .icon figure {
+
+  figure.icon,
+  .icon figure {
     height: 128px;
     width: 128px;
   }
 
-   div.icon, figure.icon {
+  div.icon,
+  figure.icon {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -255,7 +314,7 @@ const getGlobalStyles = bgUrl => css`
   figure.icon a {
     width: 100%;
     height: 100%;
-    border: none! important;
+    border: none !important;
   }
 
   .aligncenter {
@@ -266,7 +325,8 @@ const getGlobalStyles = bgUrl => css`
     max-width: 100%;
   }
 
-  figure.icon-64, .icon-64 figure {
+  figure.icon-64,
+  .icon-64 figure {
     height: 64px;
     width: 64px;
   }
@@ -335,19 +395,19 @@ const Main = styled.div`
 `;
 
 const Hero = styled.div`
-  padding: 0 1rem;
+  padding: 0 1rem 8rem;
   min-height: 72vh;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  ${props => props.fullHeight && 'height: 100vh;'}
+  ${(props) => props.fullHeight && "height: 100vh;"}
 
   > div {
     display: flex;
     flex-direction: column;
   }
-  
+
   h2 {
     display: flex;
     margin: 0 0 2rem 0;
@@ -371,10 +431,9 @@ const Hero = styled.div`
       font-variant: normal;
       text-transform: lowercase;
     }
-
   }
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     min-height: 50vh;
     justify-content: center;
 
@@ -387,32 +446,69 @@ const Hero = styled.div`
   }
 `;
 
-const GenericHero = ({ title, cta, ctaId }) => (
+const GenericHero = ({ title, cta, ctaId, ctaHint }) => (
   <div>
-    <h2>
-      {title}
-    </h2>
+    <h2>{title}</h2>
     {cta && ctaId && (
-      <CTA onClick={() => scrollToAnchor(`#${ctaId}`)}>
-        <span>{cta}</span>
-      </CTA>
+      <div css={css`
+        display: flex;
+        flex-direction: column;
+        align-self: flex-end;
+        @media (min-width: 768px) {
+          align-self: center;
+        }
+
+      `}>
+        <CTA onClick={() => scrollToAnchor(`#${ctaId}`)}>
+          <span>{cta}</span>
+        </CTA>
+        <div css={css`
+          margin: 0.5rem auto 0;
+          font-size: 1rem;
+          line-height: 1;
+          color: #f0f0e0;
+          text-align: center;
+
+          @media (min-width: 768px) {
+            margin: 1rem auto 0;
+          }
+        `}>
+          {ctaHint}
+        </div>
+      </div>
     )}
   </div>
-)
+);
 
 const HomepageHero = () => (
   <div>
     <h2>
       <small>How to visit</small>
-      <span css={css`@media(min-width: 768px) { display: none }`}>Auschwitz Birkenau</span>
-      <span css={css`@media(max-width: 767px) { display: none }`}>Auschwitz-Birkenau</span>
+      <span
+        css={css`
+          @media (min-width: 768px) {
+            display: none;
+          }
+        `}
+      >
+        Auschwitz Birkenau
+      </span>
+      <span
+        css={css`
+          @media (max-width: 767px) {
+            display: none;
+          }
+        `}
+      >
+        Auschwitz-Birkenau
+      </span>
       <small>memorial &amp; museum</small>
     </h2>
-    <CTA onClick={() => scrollToAnchor('#key-info')}>
+    <CTA onClick={() => scrollToAnchor("#key-info")}>
       <span>key info</span>
     </CTA>
   </div>
-)
+);
 
 const MobileLogo = styled.a`
   position: sticky;
@@ -423,7 +519,7 @@ const MobileLogo = styled.a`
   @media (min-width: 768px) {
     display: none;
   }
-`
+`;
 
 const NoHero = styled.div`
   height: 48px;
@@ -431,7 +527,7 @@ const NoHero = styled.div`
   width: 100%;
   margin-top: -48px;
   z-index: 1;
-`
+`;
 
 export const CTA = styled.button`
   align-self: flex-end;
@@ -442,26 +538,26 @@ export const CTA = styled.button`
   font-size: 1.5rem;
   padding: 0.25rem 1rem;
   text-transform: lowercase;
-  margin: 0 0 8rem;
+  margin: 0;
   cursor: pointer;
   box-shadow: 0 0px 12px #f9c95922;
   font-variant: all-small-caps;
   line-height: 1.5;
   font-weight: 600;
-	min-width: 150px;
-	display: block;
-	vertical-align: middle;
-	position: relative;
-	z-index: 1;
+  min-width: 150px;
+  display: block;
+  vertical-align: middle;
+  position: relative;
+  z-index: 1;
   transition: color 300ms, background-color 300ms;
   transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
 
   :focus {
-	  outline-offset: 12px;
+    outline-offset: 12px;
   }
 
   > span {
-	  vertical-align: middle;
+    vertical-align: middle;
     transform: translateY(-2px);
     display: inline-block;
   }
@@ -471,7 +567,7 @@ export const CTA = styled.button`
     color: #f9c959;
   }
 
-  @media(min-width: 768px) {
+  @media (min-width: 768px) {
     align-self: center;
   }
-`
+`;
