@@ -302,6 +302,7 @@ const getGlobalStyles = (bgUrl) => css`
   .icon figure {
     height: 128px;
     width: 128px;
+    margin: 0;
   }
 
   div.icon,

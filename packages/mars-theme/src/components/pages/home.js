@@ -290,7 +290,7 @@ const Container = styled.div`
   }
 
   .wp-block-image {
-    margin: 0 0 1rem;
+    margin: 0;
   }
 
   .shadow img {
