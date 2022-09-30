@@ -82,7 +82,8 @@ export const MenuLink = styled(Link)`
   font-size: 1.5rem;
   display: inline-flex;
   align-items:center;
-  line-height: 1;
+  font-size: 1.5rem;
+  line-height: 1.2;
   text-align: center;
   font-variant: all-small-caps;
 
