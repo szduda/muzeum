@@ -211,7 +211,6 @@ const getGlobalStyles = (bgUrl) => css`
   a,
   a:visited {
     color: inherit;
-    text-decoration: none;
   }
 
   a:hover {

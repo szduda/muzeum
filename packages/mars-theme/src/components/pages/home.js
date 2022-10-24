@@ -58,6 +58,7 @@ const RecentPosts = ({ posts = [] }) => (
             background: #f0f0e0;
             border: 1px solid #4441;
             margin: 0 0 3rem;
+            text-decoration: none;
 
             &:hover {
               text-decoration: none;
@@ -254,10 +255,14 @@ const Container = styled.div`
       z-index: 1;
       
       a {
-        border-bottom: none;
+        text-decoration: none;
         display: block;
         margin-top: -170px;
         padding-top: 170px;
+      }
+
+      a:visited, a:hover {
+        text-decoration: none;
       }
     }
   }

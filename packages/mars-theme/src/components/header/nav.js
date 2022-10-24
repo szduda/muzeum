@@ -91,6 +91,7 @@ const NavItem = styled.div`
     font-variant: all-small-caps;
     // ${props => !props.sticky && `text-shadow: 0 0 4px #444;`}
     text-shadow: 0 0 4px #fff4;
+    text-decoration: none;
 
     &:hover {
       text-decoration: none;

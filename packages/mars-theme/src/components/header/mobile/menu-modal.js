@@ -76,6 +76,7 @@ export const MenuLink = styled(Link)`
   padding: 0.75rem;
   box-sizing: border-box;
   border: 2px solid transparent;
+  text-decoration: none;
   
   color: ${props => props.$highlight ? '#f9c959' : '#fffff0'} !important;
   text-align: center;
@@ -92,7 +93,6 @@ export const MenuLink = styled(Link)`
   }
 
   &:hover {
-    background-color: #f9c959;
     text-decoration: none;
   }
 

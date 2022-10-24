@@ -52,13 +52,8 @@ const FooterContent = styled.div`
     transform: translateX(-0.5rem);
   }
 
-  a {
-    border: none;
-  }
-
   a:hover {
     color: #f9c959;
-    text-decoration: underline;
   }
 
   .wp-block-columns {
@@ -91,7 +86,6 @@ const FooterContent = styled.div`
     h4 {
       margin-top: 0;
       color: #afafaf;
-
     }
   }
 

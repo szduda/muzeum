@@ -23,6 +23,7 @@ export const Item = ({ state, post }) => {
         margin: 0 0 3rem;
         height: auto;
         height: fit-content;
+        text-decoration: none;
 
         &:hover {
           text-decoration: none;

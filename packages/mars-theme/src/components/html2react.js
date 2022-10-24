@@ -1,5 +1,6 @@
 import { styled, css } from "frontity";
 import Slider from "react-slick";
+import { Link } from "./theme";
 
 export const init = ({ libraries }) => {
   elements.map(([tag, component]) => {
@@ -143,22 +144,7 @@ export const Steps = ({ children }) => (
   </ol>
 );
 
-export const Anchor = (props) => (
-  <a
-    css={css`
-      cursor: pointer;
-      display: inline;
-      border-bottom: 2px solid #f9c959;
-
-      &:hover {
-        text-decoration: none;
-        background: #f9c95922;
-        outline: 8px solid #f9c95922;
-      }
-    `}
-    {...props}
-  />
-);
+export const Anchor = Link
 
 export const H2 = styled.h2`
   text-align: center;
