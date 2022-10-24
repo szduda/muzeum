@@ -186,6 +186,10 @@ const Container = styled.div`
       flex-direction: row;
       justify-content: space-evenly;
     }
+
+    h4 {
+      padding-top: 0;
+    }
   }
 
   #opening-hours {
