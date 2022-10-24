@@ -14,7 +14,7 @@ import { scrollToAnchor, useMousedown, useMediaQuery } from "../helpers";
 import { useDebouncedCallback } from "use-debounce";
 import faviconUrl from "../assets/favicon.png";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Icon } from "./theme";
+import { CookiePopup, Icon } from "./theme";
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -173,6 +173,7 @@ const Theme = ({ state, actions }) => {
         )}
 
         <Footer />
+        <CookiePopup />
       </Wrapper>
     </>
   );
@@ -451,29 +452,32 @@ const GenericHero = ({ title, cta, ctaId, ctaHint }) => (
   <div>
     <h2>{title}</h2>
     {cta && ctaId && (
-      <div css={css`
-        display: flex;
-        flex-direction: column;
-        align-self: flex-end;
-        @media (min-width: 768px) {
-          align-self: center;
-        }
-
-      `}>
+      <div
+        css={css`
+          display: flex;
+          flex-direction: column;
+          align-self: flex-end;
+          @media (min-width: 768px) {
+            align-self: center;
+          }
+        `}
+      >
         <CTA onClick={() => scrollToAnchor(`#${ctaId}`)}>
           <span>{cta}</span>
         </CTA>
-        <div css={css`
-          margin: 0.5rem auto 0;
-          font-size: 1rem;
-          line-height: 1;
-          color: #f0f0e0;
-          text-align: center;
+        <div
+          css={css`
+            margin: 0.5rem auto 0;
+            font-size: 1rem;
+            line-height: 1;
+            color: #f0f0e0;
+            text-align: center;
 
-          @media (min-width: 768px) {
-            margin: 1rem auto 0;
-          }
-        `}>
+            @media (min-width: 768px) {
+              margin: 1rem auto 0;
+            }
+          `}
+        >
           {ctaHint}
         </div>
       </div>
