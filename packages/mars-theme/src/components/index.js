@@ -367,7 +367,13 @@ const getGlobalStyles = (bgUrl) => css`
 
   .hide-on-mobile {
     @media (max-width: 767px) {
-      display: none;
+      display: none !important;
+    }
+  }
+
+  .hide-on-desktop {
+    @media (min-width: 768px) {
+      display: none !important;
     }
   }
 

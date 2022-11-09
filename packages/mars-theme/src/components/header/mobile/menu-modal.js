@@ -26,8 +26,8 @@ const MenuModal = ({ state, actions }) => {
             {name}
           </MenuLink>
         ))}
-        <MenuLink link="/#mission" $highlight={true}>
-          Mission
+        <MenuLink link="/about-us" $highlight={true}>
+          About us
         </MenuLink>
         <span ref={bottomRef} />
       </MenuContent>
