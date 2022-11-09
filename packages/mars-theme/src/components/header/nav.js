@@ -1,27 +1,29 @@
-import { connect, styled } from "frontity"
-import Link from "../link"
+import { connect, styled } from "frontity";
+import Link from "../link";
 
 const Nav = ({ state }) => {
-  const sticky = state.theme.isHeaderSticky
-  const { menu } = state.theme
+  const sticky = state.theme.isHeaderSticky;
+  const { menu } = state.theme;
   return (
     <NavContainer>
       {menu.map(([name, link]) => {
         // TODO: handle hash anchors in beforeSSR
-        const isCurrentPage = state.router.link.split('#').shift() === link
+        const isCurrentPage = state.router.link.split("#").shift() === link;
         return (
-          <NavItem key={name} sticky={sticky} aria-current={isCurrentPage ? "page" : undefined}>
-            <Link link={link}>
-              {name}
-            </Link>
+          <NavItem
+            key={name}
+            sticky={sticky}
+            aria-current={isCurrentPage ? "page" : undefined}
+          >
+            <Link link={link}>{name}</Link>
           </NavItem>
-        )
+        );
       })}
     </NavContainer>
-  )
-}
+  );
+};
 
-export default connect(Nav)
+export default connect(Nav);
 
 const NavContainer = styled.nav`
   list-style: none;
@@ -33,15 +35,15 @@ const NavContainer = styled.nav`
   @media screen and (max-width: 959px) {
     display: none;
   }
-`
+`;
 
 const NavItem = styled.div`
   box-sizing: border-box;
   align-items: center;
   display: flex;
-  
+
   &[aria-current="page"] a {
-    border-bottom-color: #F9C959;
+    border-bottom-color: #f9c959;
 
     svg {
       fill: #f9c959;
@@ -53,7 +55,7 @@ const NavItem = styled.div`
     padding: 4px;
     margin: 0 2px;
     border-color: transparent !important;
-    
+
     svg {
       height: 24px;
       fill: #444;
@@ -64,19 +66,19 @@ const NavItem = styled.div`
     }
 
     &[aria-label="Lang"] {
-       div {
-      background: #444;
-      span {
-        color: #d4d4d4;        
+      div {
+        background: #444;
+        span {
+          color: #d4d4d4;
+        }
+      }
+
+      :hover div {
+        background: #f9c959;
       }
     }
-
-    :hover div {
-      background: #f9c959;
-    }
-    }
   }
-  
+
   & > a {
     transform: translateY(-2px);
     font-size: 20px;
@@ -84,18 +86,18 @@ const NavItem = styled.div`
     margin: 0 8px;
     letter-spacing: 0.2px;
     display: inline-flex;
-    align-items:center;
+    align-items: center;
     line-height: 1;
     text-align: center;
     border: 2px solid transparent;
     font-variant: all-small-caps;
-    // ${props => !props.sticky && `text-shadow: 0 0 4px #444;`}
+    // ${(props) => !props.sticky && `text-shadow: 0 0 4px #444;`}
     text-shadow: 0 0 4px #fff4;
     text-decoration: none;
 
     &:hover {
       text-decoration: none;
-      border-bottom-color: #F9C959;
+      border-bottom-color: #f9c959;
 
       svg {
         fill: #f9c959;
@@ -106,4 +108,4 @@ const NavItem = styled.div`
   &:first-of-type {
     margin-left: 0;
   }
-`
+`;
