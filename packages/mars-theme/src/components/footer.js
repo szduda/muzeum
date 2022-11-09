@@ -81,6 +81,7 @@ const FooterContent = styled.div`
     a {
       font-size: 1.4rem;
       line-height: 3rem;
+      align-self: flex-start;
     }
 
     h4 {
