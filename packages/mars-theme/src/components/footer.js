@@ -1,37 +1,59 @@
-import { connect, styled } from 'frontity'
+import { connect, styled } from "frontity";
 
 export const Footer = ({ state, libraries }) => {
   const Html2React = libraries.html2react.Component;
-  const { type, id } = state.source.get('/footer/')
-  const data = state.source?.[type]?.[id]
-  const { contactPhone, contactMail } = data || {}
-  const html = data?.content?.rendered
+  const { type, id } = state.source.get("/footer/");
+  const data = state.source?.[type]?.[id];
+  const { contactPhone, contactMail } = data || {};
+  const html = data?.content?.rendered;
 
   return (
     <FooterWrapper>
       <FooterContent>
-        {html && <Html2React html={data?.content?.rendered} />}
-        <div id="contact">
-          <h4>Contact</h4>
-          {contactPhone && (
-            <a href={`tel:${contactPhone}`}>{contactPhone}</a>
-          )}
-          {contactMail && (
-            <a href={`mailto:${contactMail}`}>{contactMail}</a>
-          )}
-        </div>
+        <Row>
+          {html && <Html2React html={data?.content?.rendered} />}
+          <div id="contact">
+            <h4>Contact</h4>
+            {contactPhone && <a href={`tel:${contactPhone}`}>{contactPhone}</a>}
+            {contactMail && <a href={`mailto:${contactMail}`}>{contactMail}</a>}
+          </div>
+        </Row>
+        <Copyright>© 2022 visitauschwitz.info</Copyright>
       </FooterContent>
     </FooterWrapper>
-  )
-}
+  );
+};
 
-export default connect(Footer)
+export default connect(Footer);
+
+const Row = styled.div`
+  width: 100%;
+  display: contents;
+
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+
+const Copyright = styled.div`
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: 2px;
+  padding: 2rem 0 0;
+
+  @media (min-width: 768px) {
+    padding: 4rem 0 0;
+  }
+`;
 
 const FooterWrapper = styled.div`
   width: 100%;
   background: #444a;
   border-top: 2px solid #888;
-`
+`;
 
 const FooterContent = styled.div`
   min-height: 400px;
@@ -39,7 +61,7 @@ const FooterContent = styled.div`
   max-width: 960px;
   display: flex;
   color: #d4d4d4;
-  padding: 5rem 1rem;
+  padding: 5rem 1rem 2rem;
   margin: 0 auto;
   flex-wrap: wrap;
 
@@ -50,6 +72,10 @@ const FooterContent = styled.div`
     font-size: 1.25rem;
     margin: 0 0 0.5rem;
     transform: translateX(-0.5rem);
+  }
+
+  a {
+    text-decoration: none !important;
   }
 
   a:hover {
@@ -102,13 +128,13 @@ const FooterContent = styled.div`
     }
   }
 
-  @media(min-width: 768px) {
-    padding: 8rem 1rem 4rem;
+  @media (min-width: 768px) {
+    padding: 8rem 2rem 2rem;
 
     .wp-block-columns {
       flex-basis: 50%;
     }
-    
+
     .wp-block-column {
       flex-basis: 200px;
     }
@@ -121,4 +147,4 @@ const FooterContent = styled.div`
       }
     }
   }
-`
+`;

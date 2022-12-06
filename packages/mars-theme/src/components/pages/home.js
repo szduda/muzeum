@@ -29,7 +29,11 @@ const RecentPosts = ({ posts = [] }) => (
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 6rem 0 8rem;
+      margin: 4rem 0 1rem;
+      
+      @media (min-width: 768px) {
+        margin: 6rem 0 8rem;
+      }
     `}
   >
     <div
