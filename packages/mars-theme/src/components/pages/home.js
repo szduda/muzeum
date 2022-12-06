@@ -1,15 +1,38 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
 import { connect, styled, css } from "frontity";
 import Map from "../map/map";
 import { H2, H4, Anchor } from "../html2react";
+
+export const OpeningHoursContext = createContext(null);
+export const useOpeningHours = () => useContext(OpeningHoursContext);
 
 const Home = ({ state, libraries }) => {
   const { type, id, isHome } = state.source.get(state.router.link);
   const page = state?.source?.[type]?.[id];
   const Html2React = libraries.html2react.Component;
+
+  let openingHoursData = null;
+  if (page?.openingHours) {
+    try {
+      openingHoursData = JSON.parse(page?.openingHours);
+    } catch (error) {
+      console.log("JSON ERRROR\n", error);
+    }
+  }
+
+  const _HTML = <Html2React html={page?.content.rendered} />;
+
+  const HTML = openingHoursData ? (
+    <OpeningHoursContext.Provider value={openingHoursData}>
+      {_HTML}
+    </OpeningHoursContext.Provider>
+  ) : (
+    _HTML
+  );
+
   return (
     <Container>
-      <Html2React html={page?.content.rendered} />
+      {HTML}
       {isHome && (
         <>
           <H2>Latest news</H2>
@@ -30,7 +53,7 @@ const RecentPosts = ({ posts = [] }) => (
       flex-direction: column;
       align-items: center;
       margin: 4rem 0 1rem;
-      
+
       @media (min-width: 768px) {
         margin: 6rem 0 8rem;
       }

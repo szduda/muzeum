@@ -103,7 +103,7 @@ const Theme = ({ state, actions }) => {
         ].join(" ")}
       >
         <Header sticky={isSticky} />
-        {data.isPost || ["/resources/", "/articles/"].includes(data.route) ? (
+        {data.isPost || ["/resources/", "/articles/", "/about-us/"].includes(data.route) ? (
           <NoHero />
         ) : (
           <Hero fullHeight={data.isHome}>
