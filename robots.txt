@@ -1,2 +1,3 @@
+Sitemap: https://noderesources.visitauschwitz.info/sitemap.xml
 User-agent: *
 Noindex: /

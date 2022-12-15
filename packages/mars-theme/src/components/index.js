@@ -68,21 +68,6 @@ const Theme = ({ state, actions }) => {
 
         <link
           rel="stylesheet"
-          href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-          integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-          crossorigin=""
-        />
-        {/* <!-- Make sure you put this AFTER Leaflet's CSS --> */}
-        <script
-          src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-          type="text/javascript"
-          async
-          integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-          crossorigin=""
-        />
-
-        <link
-          rel="stylesheet"
           type="text/css"
           charset="UTF-8"
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
@@ -415,7 +400,7 @@ const Hero = styled.div`
     flex-direction: column;
   }
 
-  h2 {
+  h1 {
     display: flex;
     margin: 0 0 2rem 0;
     align-self: flex-end;
@@ -444,7 +429,7 @@ const Hero = styled.div`
     min-height: 50vh;
     justify-content: center;
 
-    h2 {
+    h1 {
       text-align: center;
       font-size: 4rem;
       align-self: center;
@@ -455,7 +440,7 @@ const Hero = styled.div`
 
 const GenericHero = ({ title, cta, ctaId, ctaHint }) => (
   <div>
-    <h2>{title}</h2>
+    <h1>{title}</h1>
     {cta && ctaId && (
       <div
         css={css`
@@ -492,7 +477,7 @@ const GenericHero = ({ title, cta, ctaId, ctaHint }) => (
 
 const HomepageHero = () => (
   <div>
-    <h2>
+    <h1>
       <small>How to visit</small>
       <span
         css={css`
@@ -513,7 +498,7 @@ const HomepageHero = () => (
         Auschwitz-Birkenau
       </span>
       <small>memorial &amp; museum</small>
-    </h2>
+    </h1>
     <CTA onClick={() => scrollToAnchor("#key-info")}>
       <span>key info</span>
     </CTA>

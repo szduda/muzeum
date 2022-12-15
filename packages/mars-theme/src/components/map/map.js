@@ -1,26 +1,49 @@
-import { styled, connect, Global } from "frontity";
+import { styled, connect, Global, Head } from "frontity";
 import { Icon } from "../theme";
 import MapModal from "./map-modal";
-import { useMediaQuery, getBodyLockStyle } from '../../helpers'
+import { useMediaQuery, getBodyLockStyle } from "../../helpers";
 
 const Map = ({ state, actions }) => {
   const { isMapOpen, isMobileMenuOpen } = state.theme;
-  const isWideScreen = useMediaQuery('(min-width: 768px)');
+  const isWideScreen = useMediaQuery("(min-width: 768px)");
   return (
     <>
-      {!isMobileMenuOpen && <MapToggle isOpen={isMapOpen} onClick={actions.theme.toggleMap} isWideScreen={isWideScreen}>
-        {isMapOpen
-          ? (
+      {!isMobileMenuOpen && (
+        <MapToggle
+          isOpen={isMapOpen}
+          onClick={actions.theme.toggleMap}
+          isWideScreen={isWideScreen}
+        >
+          {isMapOpen ? (
             <>
+              <Head>
+                <link
+                  rel="stylesheet"
+                  href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+                  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+                  crossorigin=""
+                />
+                {/* <!-- Make sure you put this AFTER Leaflet's CSS --> */}
+                <script
+                  src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+                  type="text/javascript"
+                  async
+                  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+                  crossorigin=""
+                />
+              </Head>
               <Global styles={getBodyLockStyle({ padRight: isWideScreen })} />
               <Icon.Close />
             </>
-          ) : <Icon.Map />}
-      </MapToggle>}
+          ) : (
+            <Icon.Map />
+          )}
+        </MapToggle>
+      )}
       {isMapOpen && <MapModal />}
     </>
   );
-}
+};
 
 const MapToggle = styled.button`
   position: fixed;
@@ -37,7 +60,8 @@ const MapToggle = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  ${({ isOpen, isWideScreen }) => isOpen && `right: calc(0.5rem + ${isWideScreen ? '15px' : 0});`}
+  ${({ isOpen, isWideScreen }) =>
+    isOpen && `right: calc(0.5rem + ${isWideScreen ? "15px" : 0});`}
 
   svg {
     fill: #444;
