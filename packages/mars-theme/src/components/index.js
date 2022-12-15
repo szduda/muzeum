@@ -3,7 +3,6 @@ import { Global, css, connect, styled, Head, loadable } from "frontity";
 import Switch from "@frontity/components/switch";
 import Header from "./header/header";
 import Footer from "./footer";
-import Home from "./pages/home";
 import Loading from "./pages/loading";
 import Title from "./header/title";
 import PageError from "./pages/page-error";
@@ -14,6 +13,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { CookiePopup, Icon } from "./theme";
 import { useStickyHeader } from "./useStickyHeader";
 
+const Home = loadable(() => import("./pages/home"));
 const Post = loadable(() => import("./pages/post"));
 const List = loadable(() => import("./pages/list/list"));
 

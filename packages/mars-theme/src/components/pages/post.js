@@ -8,7 +8,6 @@ import postStyle from "./post.css";
 const Post = ({ state, actions, libraries }) => {
   const data = state.source.get(state.router.link);
   const post = state.source[data.type][data.id];
-  const author = state.source.author[post.author];
   const date = new Date(post.date);
 
   const Html2React = libraries.html2react.Component;
@@ -80,16 +79,6 @@ const Title = styled.h1`
   @media (min-width: 768px) {
     font-size: 3rem;
   }
-`;
-
-const StyledLink = styled(Link)`
-  padding: 15px 0;
-`;
-
-const Author = styled.p`
-  color: rgba(12, 17, 43, 0.9);
-  font-size: 0.9em;
-  display: inline;
 `;
 
 const DateWrapper = styled.p`
