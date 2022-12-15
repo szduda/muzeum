@@ -1,7 +1,8 @@
 import React, { createContext, useContext } from "react";
 import { connect, styled, css } from "frontity";
 import Map from "../map/map";
-import { H2, H4, Anchor } from "../html2react";
+import { Anchor } from "../html2react";
+import { H2, H4 } from "../headings";
 
 export const OpeningHoursContext = createContext(null);
 export const useOpeningHours = () => useContext(OpeningHoursContext);

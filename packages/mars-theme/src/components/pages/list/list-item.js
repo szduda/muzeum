@@ -1,5 +1,5 @@
-import { connect, styled, css } from "frontity";
-import { H4 } from "../../html2react";
+import { connect, css } from "frontity";
+import { H4 } from "../../headings";
 import FeaturedMedia from "../../featured-media";
 
 export const Item = ({ state, post }) => {

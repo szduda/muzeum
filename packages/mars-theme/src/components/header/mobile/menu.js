@@ -1,6 +1,7 @@
-import { styled, connect, Global } from "frontity";
+import { styled, connect, Global, loadable } from "frontity";
 import { HamburgerIcon } from "./menu-icon";
-import MenuModal from "./menu-modal";
+
+const MenuModal = loadable(() => import('./menu-modal'))
 
 function MobileMenu({ state, actions }) {
   const { isMobileMenuOpen, isHeaderSticky: sticky } = state.theme;

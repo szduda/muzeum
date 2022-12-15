@@ -1,20 +1,21 @@
 import React, { useRef, useEffect } from "react";
-import { Global, css, connect, styled, Head } from "frontity";
+import { Global, css, connect, styled, Head, loadable } from "frontity";
 import Switch from "@frontity/components/switch";
 import Header from "./header/header";
 import Footer from "./footer";
 import Home from "./pages/home";
-import List from "./pages/list/list";
-import Post from "./pages/post";
 import Loading from "./pages/loading";
 import Title from "./header/title";
 import PageError from "./pages/page-error";
 import heroBackgroundUrl from "../assets/gate.jpg";
 import { scrollToAnchor, useMousedown, useMediaQuery } from "../helpers";
-import { useDebouncedCallback } from "use-debounce";
 import faviconUrl from "../assets/favicon.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { CookiePopup, Icon } from "./theme";
+import { useStickyHeader } from "./useStickyHeader";
+
+const Post = loadable(() => import("./pages/post"));
+const List = loadable(() => import("./pages/list/list"));
 
 /**
  * Theme is the root React component of our theme. The one we will export
@@ -23,26 +24,9 @@ import { CookiePopup, Icon } from "./theme";
 const Theme = ({ state, actions }) => {
   // Get information about the current URL.
   const data = state.source.get(state.router.link);
-  const isSticky = state.theme.isHeaderSticky;
+
   const ref = useRef(null);
-
-  const handleScroll = () => {
-    if (ref.current) {
-      if (ref.current.getBoundingClientRect().top <= 100)
-        actions.theme.setSticky();
-      else actions.theme.unsetSticky();
-    }
-  };
-  const debouncedHandleScroll = useDebouncedCallback(handleScroll, 100);
-
-  useEffect(() => {
-    handleScroll();
-    const root = document.querySelector("#root");
-    root.addEventListener("scroll", debouncedHandleScroll);
-    return () =>
-      root.removeEventListener("scroll", () => debouncedHandleScroll);
-  }, [debouncedHandleScroll, state.router.link]);
-
+  const isSticky = useStickyHeader(ref, actions, state);
   const mousedown = useMousedown();
   const isLandscape = useMediaQuery("(max-height: 475px)");
 
@@ -65,18 +49,6 @@ const Theme = ({ state, actions }) => {
         <meta name="description" content={state.frontity.description} />
         <meta name="mobile-web-app-capable" content="yes" />
         <link rel="icon" type="image/png" href={faviconUrl} />
-
-        <link
-          rel="stylesheet"
-          type="text/css"
-          charset="UTF-8"
-          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
-        />
-        <link
-          rel="stylesheet"
-          type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
-        />
       </Head>
 
       <Global styles={getGlobalStyles(bgUrl)} />
@@ -88,7 +60,8 @@ const Theme = ({ state, actions }) => {
         ].join(" ")}
       >
         <Header sticky={isSticky} />
-        {data.isPost || ["/resources/", "/articles/", "/about-us/"].includes(data.route) ? (
+        {data.isPost ||
+        ["/resources/", "/articles/", "/about-us/"].includes(data.route) ? (
           <NoHero />
         ) : (
           <Hero fullHeight={data.isHome}>

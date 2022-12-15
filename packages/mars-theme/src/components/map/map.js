@@ -1,7 +1,8 @@
-import { styled, connect, Global, Head } from "frontity";
+import { styled, connect, Global, Head, loadable } from "frontity";
 import { Icon } from "../theme";
-import MapModal from "./map-modal";
 import { useMediaQuery, getBodyLockStyle } from "../../helpers";
+
+const MapModal = loadable(() => import("./map-modal"));
 
 const Map = ({ state, actions }) => {
   const { isMapOpen, isMobileMenuOpen } = state.theme;
