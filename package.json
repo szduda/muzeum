@@ -2,6 +2,7 @@
   "name": "muzeum",
   "version": "1.0.0",
   "private": true,
+  "sideEffects": false,
   "description": "Frontity project",
   "keywords": [
     "frontity"

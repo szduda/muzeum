@@ -4,8 +4,17 @@ import { H2, H3, H4 } from "./headings";
 
 const Carousel = loadable(() => import("./carousel"));
 const OpeningHours = loadable(() => import("./opening-hours"));
-const TableOfContents = loadable(() => import("./toc"));
+// const TableOfContents = loadable(() => import("./toc"));
 const Steps = loadable(() => import("./steps"));
+
+export const Anchor = Link;
+
+const elements = [
+  ["a", Anchor],
+  ["h2", H2],
+  ["h3", H3],
+  ["h4", H4],
+];
 
 export const init = ({ libraries }) => {
   elements.map(([tag, component]) => {
@@ -28,34 +37,26 @@ export const init = ({ libraries }) => {
     ({ node }) =>
       node.component === "ol" &&
       node.props.className?.includes("steps-section"),
-    null,
-    ({ node }) => {
-      node.component = Steps;
-      return node;
-    }
+    Steps
   );
 
-  const tocEntry = createEntry(
-    ({ node }) =>
-      node.component === "div" &&
-      node.props.className?.includes("table-of-contents"),
-    null,
-    ({ node }) => {
-      node.component = TableOfContents;
-      node.children = node.children[0].children;
-      return node;
-    }
-  );
+  // const tocEntry = createEntry(
+  //   ({ node }) =>
+  //     node.component === "div" &&
+  //     node.props.className?.includes("table-of-contents"),
+  //   null,
+  //   ({ node }) => {
+  //     node.component = TableOfContents;
+  //     node.children = node.children[0].children;
+  //     return node;
+  //   }
+  // );
 
   const openingHours = createEntry(
     ({ node }) =>
       node.component === "div" &&
       node.props.className?.includes("opening-hours"),
-    null,
-    ({ node }) => {
-      node.component = OpeningHours;
-      return node;
-    }
+    OpeningHours
   );
 
   libraries.html2react.processors.push(carouselEntry);
@@ -65,15 +66,6 @@ export const init = ({ libraries }) => {
 };
 
 export default init;
-
-export const Anchor = Link;
-
-const elements = [
-  ["a", Anchor],
-  ["h2", H2],
-  ["h3", H3],
-  ["h4", H4],
-];
 
 const createEntry = (test, component, _processor) => ({
   test:
