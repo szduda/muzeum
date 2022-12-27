@@ -3,8 +3,27 @@ import { useState } from "react";
 import { useOpeningHours } from "./pages/home";
 import { H3, H4 } from "./headings";
 
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const today = new Date();
+
 export const OpeningHours = () => {
-  const [selectedMonth, setSelectedMonth] = useState("December");
+  const [selectedMonth, setSelectedMonth] = useState(
+    monthNames[today.getMonth()]
+  );
   const data = useOpeningHours();
 
   if (!data) return null;
@@ -16,18 +35,17 @@ export const OpeningHours = () => {
   if (!entry) return null;
 
   const monthSelector = (
-    <form
-      css={css`
-        margin: 0 0.5rem;
-      `}
-    >
+    <form>
       <select
         css={css`
-          padding: 0.25rem;
+          padding: 0.5rem 0.75rem;
+          margin: 0 0 3rem;
           font-weight: bold;
-          font-size: 1rem;
+          font-size: 1.25rem;
           border: none;
           background: #f0f0e0;
+          border-right: 0.75rem solid #f0f0f0;
+          cursor: pointer;
         `}
         value={selectedMonth}
         onChange={(event) => setSelectedMonth(event.target.value)}
@@ -52,14 +70,6 @@ export const OpeningHours = () => {
         }
       `}
     >
-      <H3
-        css={css`
-          text-align: center;
-        `}
-      >
-        Opening hours
-      </H3>
-
       <div
         css={css`
           width: 100%;
@@ -71,38 +81,21 @@ export const OpeningHours = () => {
           }
         `}
       >
-        {entry && (
-          <>
-            <div
-              css={css`
-                @media (max-width: 767px) {
-                  padding: 1rem 0 0;
-                }
-              `}
-            >
-              <div
-                css={css`
-                  display: flex;
-                  font-weight: bold;
-                  align-items: center;
-                `}
-              >
-                in
-                {monthSelector}
-                enter between
-              </div>
-              <H4>
-                <span>{entry.from}</span>
-                <span> - </span>
-                <span>{entry.to}</span>
-              </H4>
-            </div>
-            <div>
-              <strong>Leave the Museum before:</strong>
-              <H4>{entry.leaveBefore}</H4>
-            </div>
-          </>
-        )}
+        <div>
+          <H3>Opening hours</H3>
+          {monthSelector}
+        </div>
+        <div>
+          <strong>You can enter between</strong>
+          <H4>
+            <span>{entry.from}</span>
+            <span> - </span>
+            <span>{entry.to}</span>
+          </H4>
+
+          <strong>Leave the Museum before</strong>
+          <H4>{entry.leaveBefore}</H4>
+        </div>
       </div>
     </div>
   );
