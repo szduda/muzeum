@@ -57,6 +57,7 @@ export const RecentPosts = ({ posts = [] }) => (
             `}
           >
             <Image
+              aria-hidden
               src={thumbnailUrl || ""}
               css={css`
                 width: 100%;

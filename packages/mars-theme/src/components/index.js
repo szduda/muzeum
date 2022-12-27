@@ -12,6 +12,7 @@ import faviconUrl from "../assets/favicon.png";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { CookiePopup, LogoIcon } from "./theme";
 import { useStickyHeader } from "./useStickyHeader";
+import { h2style, h3style, h4style } from "./headings";
 
 const Home = loadable(() => import("./pages/home"));
 const Post = loadable(() => import("./pages/post"));
@@ -339,6 +340,18 @@ const getGlobalStyles = (bgUrl) => css`
 
   .w100 {
     width: 100%;
+  }
+
+  .h2 {
+    ${h2style}
+  }
+
+  .h3 {
+    ${h3style}
+  }
+
+  .h4 {
+    ${h4style}
   }
 `;
 

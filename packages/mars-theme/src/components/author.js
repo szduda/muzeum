@@ -28,6 +28,7 @@ export const Author = () => (
     >
       <div>
         <Image
+          alt="Łukasz, a guide educator"
           src={imageUrl}
           css={css`
             width: 100%;
