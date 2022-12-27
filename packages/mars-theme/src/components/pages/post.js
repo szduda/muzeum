@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { connect, styled, Global, css } from "frontity";
-import Link from "../link";
+import Author from "../author";
 import List from "./list";
 import FeaturedMedia from "../featured-media";
 import postStyle from "./post.css";
@@ -42,6 +42,7 @@ const Post = ({ state, actions, libraries }) => {
         <Content>
           <Html2React html={post.content.rendered} />
         </Content>
+        {data.isPost && <Author />}
       </Container>
     </Wrapper>
   ) : null;
@@ -88,6 +89,7 @@ const DateWrapper = styled.p`
   background: #f0f0e0;
   color: #444;
   align-items: center;
+  margin: 0;
 `;
 
 /**
@@ -160,7 +162,7 @@ const Content = styled.div`
     box-sizing: border-box;
     background-color: #f2eedd;
     border-left: 4px solid #888;
-    padding: 3rem max(calc(50% - 320px), 3rem) 1.6rem;
+    padding: 3rem max(calc(50% - 320px), 3rem);
     font-size: 1.25rem;
 
     cite {
