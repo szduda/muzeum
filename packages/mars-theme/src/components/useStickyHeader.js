@@ -9,11 +9,12 @@ export const useStickyHeader = (ref, actions, state) => {
       else actions.theme.unsetSticky();
     }
   };
-  handleScroll();
 
   const debouncedHandleScroll = useDebouncedCallback(handleScroll, 100);
 
   useEffect(() => {
+    handleScroll();
+
     const root = document.querySelector("#root");
     root.addEventListener("scroll", debouncedHandleScroll);
     return () =>

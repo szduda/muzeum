@@ -1,5 +1,5 @@
 import { styled, connect, Global, Head, loadable } from "frontity";
-import { Icon } from "../theme";
+import { CloseIcon, MapIcon } from "../theme";
 import { useMediaQuery, getBodyLockStyle } from "../../helpers";
 
 const MapModal = loadable(() => import("./map-modal"));
@@ -34,10 +34,10 @@ const Map = ({ state, actions }) => {
                 />
               </Head>
               <Global styles={getBodyLockStyle({ padRight: isWideScreen })} />
-              <Icon.Close />
+              <CloseIcon />
             </>
           ) : (
-            <Icon.Map />
+            <MapIcon />
           )}
         </MapToggle>
       )}

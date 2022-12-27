@@ -1,14 +1,17 @@
-import { useRef } from 'react'
+import { useRef } from "react";
 import { styled, connect } from "frontity";
 import Link from "../../link";
-import { Icon } from '../../theme'
-import { SearchContent, SearchToggle } from './search'
-import { SettingsContent, SettingsToggle } from './settings'
+import { ArrowIcon } from "../../theme";
+import { SearchContent, SearchToggle } from "./search";
+import { SettingsToggle } from "./settings";
 
 const MenuModal = ({ state, actions }) => {
   const { menu, isLandscape, isSettingsOpen, search } = state.theme;
-  const { search: { toggle }, toggleSettings } = actions.theme
-  const bottomRef = useRef()
+  const {
+    search: { toggle },
+    toggleSettings,
+  } = actions.theme;
+  const bottomRef = useRef();
 
   return (
     <>
@@ -21,7 +24,7 @@ const MenuModal = ({ state, actions }) => {
             key={name}
             link={link}
             aria-current={state.router.link === link ? "page" : undefined}
-            aria-label={link.includes('mission') ? 'highlight' : undefined}
+            aria-label={link.includes("mission") ? "highlight" : undefined}
           >
             {name}
           </MenuLink>
@@ -43,16 +46,16 @@ const MenuModal = ({ state, actions }) => {
       {/* {!isLandscape && (
         <SettingsWrapper>
           <SettingsToggle onClick={toggleSettings}>
-            <Icon.Gear size={64} color="#d4d4d4" />
+            <GearIcon size={64} color="#d4d4d4" />
           </SettingsToggle>
         </SettingsWrapper>
       )} */}
 
       <ScrollDownButton
-        onClick={() => bottomRef.current.scrollIntoView({ behavior: 'smooth' })}
+        onClick={() => bottomRef.current.scrollIntoView({ behavior: "smooth" })}
         landscape={isLandscape}
       >
-        <Icon.Arrow angle={180} />
+        <ArrowIcon angle={180} />
       </ScrollDownButton>
     </>
   );
@@ -77,12 +80,12 @@ export const MenuLink = styled(Link)`
   box-sizing: border-box;
   border: 2px solid transparent;
   text-decoration: none;
-  
-  color: ${props => props.$highlight ? '#f9c959' : '#fffff0'} !important;
+
+  color: ${(props) => (props.$highlight ? "#f9c959" : "#fffff0")} !important;
   text-align: center;
   font-size: 1.5rem;
   display: inline-flex;
-  align-items:center;
+  align-items: center;
   font-size: 1.5rem;
   line-height: 1.2;
   text-align: center;
@@ -106,7 +109,7 @@ export const MenuLink = styled(Link)`
 `;
 
 const ScrollDownButton = styled.button`
-  ${props => !props.landscape && `display: none;`}
+  ${(props) => !props.landscape && `display: none;`}
   border: 0;
   background: 0;
   position: fixed;
@@ -119,7 +122,7 @@ const ScrollDownButton = styled.button`
     height: 32px;
     fill: #d4d4d4;
   }
-`
+`;
 
 const IconRowWrapper = styled.div`
   display: flex;
@@ -140,7 +143,7 @@ const IconRowWrapper = styled.div`
   > * {
     margin-right: 1rem;
   }
-`
+`;
 
 const SettingsWrapper = styled.div`
   display: flex;
@@ -151,7 +154,7 @@ const SettingsWrapper = styled.div`
   z-index: 4;
   bottom: 0;
   width: 100%;
-`
+`;
 
 const MenuOverlay = styled.div`
   background-color: #444;
@@ -162,6 +165,6 @@ const MenuOverlay = styled.div`
   z-index: 2;
   top: 0;
   left: 0;
-`
+`;
 
 export default connect(MenuModal);

@@ -1,11 +1,11 @@
 import { css } from "frontity";
-import { Icon, Slide } from '../../theme'
-import { MenuContent, MenuLink } from './menu-modal'
+import { GearIcon, Slide } from "../../theme";
+import { MenuContent, MenuLink } from "./menu-modal";
 
 export const SettingsToggle = ({ open, children, ...props }) => (
   <button
     css={css`
-      display: flex; 
+      display: flex;
       align-items: center;
       border: 0;
       background: 0;
@@ -15,21 +15,25 @@ export const SettingsToggle = ({ open, children, ...props }) => (
       svg {
         ${open && `fill: #f9c959;`}
       }
-    `} {...props}>
-    {children || <Icon.Gear />}
+    `}
+    {...props}
+  >
+    {children || <GearIcon />}
   </button>
-)
+);
 
 export const SettingsContent = ({ landscape, open }) => (
   <Slide left opaque={true} open={open}>
-    <MenuContent css={css`
-      height: calc(100vh - ${landscape ? 64 : 162}px); 
-      width: 100%; 
-      background: #555;
-      `}>
+    <MenuContent
+      css={css`
+        height: calc(100vh - ${landscape ? 64 : 162}px);
+        width: 100%;
+        background: #555;
+      `}
+    >
       <MenuLink link={"#"}>Toggle dark mode</MenuLink>
       <MenuLink link={"#"}>Font size</MenuLink>
       <MenuLink link={"#"}>Change language</MenuLink>
     </MenuContent>
   </Slide>
-)
+);

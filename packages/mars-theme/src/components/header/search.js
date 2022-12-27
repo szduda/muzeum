@@ -1,5 +1,5 @@
 import { connect, styled, Global, loadable } from "frontity";
-import { Icon } from "../theme";
+import { SearchIcon } from "../theme";
 import { useMediaQuery, getBodyLockStyle } from "../../helpers";
 import FocusTrap from "focus-trap-react";
 
@@ -26,7 +26,7 @@ const Search = ({ state, actions }) => {
           onClick={actions.theme.search.toggle}
           id={"search-toggle"}
         >
-          <Icon.Search color={open ? "#f9c959" : "#444"} />
+          <SearchIcon color={open ? "#f9c959" : "#444"} />
         </SearchToggle>
       </SearchWrapper>
     </FocusTrap>

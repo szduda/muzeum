@@ -10,7 +10,7 @@ import heroBackgroundUrl from "../assets/gate.jpg";
 import { scrollToAnchor, useMousedown, useMediaQuery } from "../helpers";
 import faviconUrl from "../assets/favicon.png";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { CookiePopup, Icon } from "./theme";
+import { CookiePopup, LogoIcon } from "./theme";
 import { useStickyHeader } from "./useStickyHeader";
 
 const Home = loadable(() => import("./pages/home"));
@@ -66,7 +66,7 @@ const Theme = ({ state, actions }) => {
         ) : (
           <Hero fullHeight={data.isHome}>
             <MobileLogo href="/">
-              <Icon.Logo small />
+              <LogoIcon small />
             </MobileLogo>
             <Switch>
               <HomepageHero when={data.isHome} />

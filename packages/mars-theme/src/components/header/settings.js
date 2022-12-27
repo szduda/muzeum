@@ -1,6 +1,6 @@
 import { connect, styled } from "frontity";
 import Link from "../link";
-import { Icon, Slide } from "../theme";
+import { GearIcon, HelpIcon, Slide } from "../theme";
 
 const Settings = ({ state, actions }) => {
   const { settings, isSettingsOpen } = state.theme;
@@ -13,13 +13,13 @@ const Settings = ({ state, actions }) => {
           <Title>Website language</Title>
           <Title>Settings</Title>
           {settings.map(([name, link, icon]) => {
-            const ItemIcon = icon ? Icon[icon] : Icon.Help
+            const ItemIcon = icon && HelpIcon;
             return (
               <SettingsLink key={name} link={link}>
                 {icon && <ItemIcon />}
                 <span>{name}</span>
               </SettingsLink>
-            )
+            );
           })}
         </SettingsDropdown>
         {isSettingsOpen && <ArrowDecor />}
@@ -28,7 +28,7 @@ const Settings = ({ state, actions }) => {
         open={isSettingsOpen}
         onClick={actions.theme.toggleSettings}
       >
-        <Icon.Gear />
+        <GearIcon />
       </SettingsToggle>
     </SettingsWrapper>
   );

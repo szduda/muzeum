@@ -1,12 +1,10 @@
 import { connect, styled, css, loadable } from "frontity";
 import Link from "../link";
-// import Nav from "./nav"
 import MobileMenu from "./mobile/menu";
-import { Icon, Slide } from "../theme";
-// import Settings from './settings'
+import { LogoIcon, Slide, ArrowIcon } from "../theme";
 import { useMediaQuery } from "../../helpers";
 
-const Search = loadable(() => import("./search"))
+const Search = loadable(() => import("./search"));
 const Nav = loadable(() => import("./nav"));
 
 const Header = ({ state, actions }) => {
@@ -25,7 +23,7 @@ const Header = ({ state, actions }) => {
       {...props}
       name="visitauschwitz.info"
     >
-      <Icon.Logo lighten={isMobileMenuOpen} small />
+      <LogoIcon lighten={isMobileMenuOpen} small />
     </LogoLink>
   );
 
@@ -53,7 +51,7 @@ const Header = ({ state, actions }) => {
                   : actions.theme.search.toggle
               }
             >
-              <Icon.Arrow angle={270} />
+              <ArrowIcon angle={270} />
             </BackButton>
             {isMobileMenuOpen && <Logo />}
           </div>
@@ -63,13 +61,12 @@ const Header = ({ state, actions }) => {
           className="widescreen-only"
           name="visitauschwitz.info"
         >
-          <Icon.Logo />
+          <LogoIcon />
         </LogoLink>
         {isWideScreen && <Nav />}
         {isWideScreen && (
           <IconsRow>
             <Search />
-            {/* <Settings /> */}
           </IconsRow>
         )}
       </Row>
