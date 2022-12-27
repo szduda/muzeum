@@ -1,3 +1,2 @@
 Sitemap: https://visitauschwitz.info/static/sitemap.xml
 User-agent: *
-Noindex: /

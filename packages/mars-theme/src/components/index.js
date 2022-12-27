@@ -45,9 +45,11 @@ const Theme = ({ state, actions }) => {
       <Title />
       <Head>
         <html lang="en" />
-        <meta name="robots" content="noindex,nofollow" />
+        <meta name="robots" content="index,follow" />
         <meta name="description" content={state.frontity.description} />
         <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="og:image" content={bgUrl} />
+        <meta name="twitter:image" content={bgUrl} />
         <link rel="icon" type="image/png" href={faviconUrl} />
       </Head>
 
