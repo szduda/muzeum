@@ -99,6 +99,7 @@ const ResultItem = styled(Link)`
     }
   }
 
+  color: white !important;
   display: flex;
   align-items: center;
   justify-content: center;

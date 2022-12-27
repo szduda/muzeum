@@ -156,8 +156,8 @@ const ResultsWrapper = styled.div`
 
 const Content = styled.div`
   padding: 1rem;
-  overflow: hidden;
-  height: auto;
+  height: calc(100vh - 56px);
+  overflow-y: scroll;
   width: 100%;
   display: flex;
   flex-direction: column;

@@ -14,6 +14,7 @@ export const useSearch = () => {
     const wpUrl = settings.packages.find(p => p.name === '@frontity/wp-source').state.source.url
     const response = await fetch(`${wpUrl}/wp-json/wp/v2/search?search=${encodeURIComponent(term)}`)
     const results = await response.json()
+    console.log(results)
     setResults(results)
   }
   const debouncedFetch = useDebouncedCallback(fetchResults, 500)
