@@ -1,4 +1,4 @@
-import { connect, styled } from "frontity";
+import { connect, styled, css } from "frontity";
 
 export const Footer = ({ state, libraries }) => {
   const Html2React = libraries.html2react.Component;
@@ -11,12 +11,16 @@ export const Footer = ({ state, libraries }) => {
     <FooterWrapper>
       <FooterContent>
         <Row>
-          {html && <Html2React html={data?.content?.rendered} />}
-          <div id="contact">
-            <h4>Contact</h4>
-            {contactPhone && <a href={`tel:${contactPhone}`}>{contactPhone}</a>}
-            {contactMail && <a href={`mailto:${contactMail}`}>{contactMail}</a>}
-          </div>
+          {html && (
+            <div id="footer-links">
+              <Html2React html={data?.content?.rendered} />
+            </div>
+          )}
+          {contactMail && (
+            <div id="contact">
+              <a href={`mailto:${contactMail}`}>{contactMail}</a>
+            </div>
+          )}
         </Row>
         <Copyright>© 2022 visitauschwitz.info</Copyright>
       </FooterContent>
@@ -27,12 +31,11 @@ export const Footer = ({ state, libraries }) => {
 export default connect(Footer);
 
 const Row = styled.div`
-  width: 100%;
-  display: contents;
-
+width: 100%;
   @media (min-width: 768px) {
     display: flex;
-    justify-content: space-between;
+  justify-content: space-between;
+  flex-wrap: wrap;
   }
 `;
 
@@ -94,25 +97,30 @@ const FooterContent = styled.div`
     box-sizing: border-box;
   }
 
-  div#contact {
-    background: #888a;
-    margin: 0;
-    flex-grow: 1;
-    border-radius: 16px;
-    padding: 2rem 1rem;
+  #contact {
     display: flex;
-    flex-direction: column;
     height: fit-content;
+    justify-content: center;
 
     a {
-      font-size: 1.4rem;
-      line-height: 3rem;
-      align-self: flex-start;
-    }
+      box-sizing: border-box;
+      font-size: 1.20rem;
+      line-height: 1.5rem;
+      background: #888a;
+      margin: 0;
+      flex-grow: 1;
+      border-radius: 16px;
+      padding: 1.25rem 0.75rem;
+      word-break: break-word;
+      text-align: center;
+      max-width: 400px;
 
-    h4 {
-      margin-top: 0;
-      color: #afafaf;
+      @media(min-width: 768px) {
+        font-size: 2rem;
+        line-height: 3rem;
+        padding: 2rem 1.5rem;
+        max-width: unset;
+      }
     }
   }
 
@@ -128,23 +136,11 @@ const FooterContent = styled.div`
     }
   }
 
+  #footer-links {
+    margin-right: 4rem;
+  }
+
   @media (min-width: 768px) {
     padding: 8rem 2rem 2rem;
-
-    .wp-block-columns {
-      flex-basis: 50%;
-    }
-
-    .wp-block-column {
-      flex-basis: 200px;
-    }
-
-    div#contact {
-      padding: 2rem;
-
-      a {
-        font-size: 2rem;
-      }
-    }
   }
 `;

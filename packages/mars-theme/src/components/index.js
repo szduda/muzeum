@@ -4,7 +4,6 @@ import Switch from "@frontity/components/switch";
 import Header from "./header/header";
 import Footer from "./footer";
 import Loading from "./pages/loading";
-import Title from "./header/title";
 import PageError from "./pages/page-error";
 import heroBackgroundUrl from "../assets/gate.jpg";
 import { scrollToAnchor, useMousedown, useMediaQuery } from "../helpers";
@@ -43,15 +42,15 @@ const Theme = ({ state, actions }) => {
 
   return (
     <>
-      <Title />
       <Head>
         <html lang="en" />
         <meta name="robots" content="index,follow" />
-        <meta name="description" content={state.frontity.description} />
+        {/* <meta name="description" content={state.frontity.description} /> */}
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="og:image" content={bgUrl} />
         <meta name="twitter:image" content={bgUrl} />
         <link rel="icon" type="image/png" href={faviconUrl} />
+        <title>News and Events Related to Auschwitz Concentration Camp</title>
       </Head>
 
       <Global styles={getGlobalStyles(bgUrl)} />
@@ -74,39 +73,39 @@ const Theme = ({ state, actions }) => {
             <Switch>
               <HomepageHero when={data.isHome} />
               <GenericHero
+                when={data.route === "/tours/"}
+                title={<>Auschwitz Tours:<br/>Prices, Tickets, Guidelines</>}
+                cta="top pick"
+                ctaId="organized"
+                ctaHint="popular tours"
+              />
+              <GenericHero
                 when={data.route === "/arrival/"}
-                title="how to get there"
+                title="How to Get to Auschwitz Memorial"
                 cta="entry"
                 ctaId="entrances"
                 ctaHint="where it starts"
               />
               <GenericHero
                 when={data.route === "/get-ready/"}
-                title="prepare in advance"
+                title="How to Prepare and What to Expect on Site"
                 cta="on site"
                 ctaId="on-site"
                 ctaHint="before entering"
               />
               <GenericHero
                 when={data.route === "/auschwitz-birkenau/"}
-                title="visiting guide"
+                title="Auschwitz Camp Visiting Guide"
                 cta="extras"
                 ctaId="beyond"
                 ctaHint="more on site"
               />
               <GenericHero
                 when={data.route === "/surroundings/"}
-                title="discover the vicinity"
+                title="Discover Places Near the Museum"
                 cta="nature"
                 ctaId="nature"
                 ctaHint="rest nearby"
-              />
-              <GenericHero
-                when={data.route === "/tours/"}
-                title="best ways to visit"
-                cta="top pick"
-                ctaId="organized"
-                ctaHint="popular tours"
               />
               <PageError when={data.isError} />
             </Switch>
@@ -392,7 +391,7 @@ const Hero = styled.div`
     display: flex;
     margin: 0 0 2rem 0;
     align-self: flex-end;
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     line-height: 0.8;
     flex-direction: column;
     color: #fffff0;
@@ -422,6 +421,7 @@ const Hero = styled.div`
       font-size: 4rem;
       align-self: center;
       margin: 72px;
+      max-width: 700px
     }
   }
 `;

@@ -28,7 +28,7 @@ const Title = ({ state }) => {
     // 2. Remove any HTML tags found in the title.
     const cleanTitle = decode(postTitle);
     // 3. Render the proper title.
-    title = `${cleanTitle} - ${state.frontity.title}`;
+    title = `${cleanTitle} - ${title}`;
   } else if (data.is404) {
     // Add titles to 404's.
     title = `404 Not Found - ${state.frontity.title}`;

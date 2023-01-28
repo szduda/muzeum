@@ -1,7 +1,7 @@
 import { css } from "frontity";
 import { useState } from "react";
 import { useOpeningHours } from "./pages/home";
-import { H3, H4 } from "./headings";
+import { H3, h4style } from "./headings";
 
 const monthNames = [
   "January",
@@ -87,14 +87,24 @@ export const OpeningHours = () => {
         </div>
         <div>
           <strong>You can enter between</strong>
-          <H4>
+          <div
+            css={css`
+              ${h4style}
+            `}
+          >
             <span>{entry.from}</span>
             <span> - </span>
             <span>{entry.to}</span>
-          </H4>
+          </div>
 
           <strong>Leave the Museum before</strong>
-          <H4>{entry.leaveBefore}</H4>
+          <div
+            css={css`
+              ${h4style}
+            `}
+          >
+            {entry.leaveBefore}
+          </div>
         </div>
       </div>
     </div>

@@ -69,7 +69,7 @@ export const Item = ({ state, post }) => {
       <H4
         css={css`
           width: 100%;
-          padding: 0.5rem 1rem 1rem;
+          padding: 0.5rem 1rem 1rem !important;
           box-sizing: border-box;
         `}
         dangerouslySetInnerHTML={{ __html: post.title.rendered }}

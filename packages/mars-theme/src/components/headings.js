@@ -2,7 +2,6 @@ import { styled } from "frontity";
 
 export const h2style = `
 &:not(.custom) {
-  text-align: center;
   font-weight: 200;
   font-size: 3.5rem;
   line-height: 1;

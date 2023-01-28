@@ -5,7 +5,7 @@ import Image from "@frontity/components/image";
 
 export const RecentPosts = ({ posts = [] }) => (
   <>
-    <H2>Latest news</H2>
+    <H2 css={css`text-align: center`}>Latest news</H2>
     <div
       css={css`
         display: flex;
@@ -70,15 +70,17 @@ export const RecentPosts = ({ posts = [] }) => (
               css={css`
                 padding: 2rem 1rem 0;
                 width: 100%;
+                display: flex;
+                flex-wrap: wrap;
               `}
             >
               {categories?.map((category) => (
                 <span
                   key={category}
                   css={css`
-                    margin-right: 1rem;
+                    margin: 0 0.5rem 0.5rem 0;
                     padding: 0.25rem 0.5rem;
-                    border-radius: 8px;
+                    border-radius: 4px;
                     background: #f9c959aa;
                   `}
                 >
@@ -89,7 +91,7 @@ export const RecentPosts = ({ posts = [] }) => (
             <H4
               css={css`
                 width: 100%;
-                padding: 1rem 1rem;
+                padding: 0.5rem 1rem 1rem !important;
                 box-sizing: border-box;
               `}
             >
