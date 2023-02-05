@@ -76,7 +76,7 @@ export const MenuLink = styled(Link)`
   width: 100%;
   display: inline-block;
   outline: 0;
-  padding: 0.75rem;
+  padding: 0.75rem 14px;
   box-sizing: border-box;
   border: 2px solid transparent;
   text-decoration: none;

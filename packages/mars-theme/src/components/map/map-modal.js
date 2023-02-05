@@ -1,37 +1,31 @@
-import React, { useMemo, useEffect, useState } from "react";
-import { styled, connect } from "frontity";
+import { forwardRef, useMemo } from "react";
+import { styled } from "frontity";
 import { buildings } from "./buildings";
+import { LocateMeButton, LocationMarker } from "./location";
 
-const MapModal = () => {
-  let MapContainer, TileLayer, Marker, Popup, Polygon, useMap;
+const MapModal = forwardRef(({ onClick }, ref) => {
+  let MapContainer, TileLayer, Marker, Popup, Polygon;
   useMemo(() => {
     MapContainer = require("react-leaflet").MapContainer;
     TileLayer = require("react-leaflet").TileLayer;
     Marker = require("react-leaflet").Marker;
     Popup = require("react-leaflet").Popup;
     Polygon = require("react-leaflet").Polygon;
-    // useMap = require("react-leaflet").useMap;
   }, []);
 
-  const a1cener = [50.0271, 19.203];
-
-  // const map = useMap?.()
-  // useEffect(() => {
-  //   const callback = (position) => {
-  //     if (!position) return;
-  //     const { longitude, latitude } = position.coords;
-  //     const center = [latitude, longitude];
-  //     map.setCenter(center);
-  //   };
-  //   navigator.geolocation.getCurrentPosition(callback);
-  // }, []);
+  const a1center = [50.0271, 19.203];
 
   return (
     <>
-      <Overlay />
+      <Overlay onClick={onClick} />
       <Content>
         <div id="map-container">
-          <MapContainer center={a1cener} zoom={17} scrollWheelZoom={true}>
+          <MapContainer
+            center={a1center}
+            zoom={17}
+            scrollWheelZoom={true}
+            ref={ref}
+          >
             <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -42,12 +36,14 @@ const MapModal = () => {
             <Marker position={[50.0271, 19.203]}>
               <Popup>Auschwitz I</Popup>
             </Marker>
+            <LocationMarker />
           </MapContainer>
         </div>
       </Content>
+      <LocateMeButton mapRef={ref} />
     </>
   );
-};
+});
 
 const Overlay = styled.div`
   background-color: #444d;
@@ -79,17 +75,19 @@ const Content = styled.div`
     width: 100%;
     height: 100%;
     background: #afafaf;
-    max-width: 1280px;
-    max-height: 720px;
 
     > div {
       height: 100%;
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     padding: 4rem;
+  }
+
+  @media (min-width: 1440px) {
+    padding: 6rem;
   }
 `;
 
-export default connect(MapModal);
+export default MapModal;

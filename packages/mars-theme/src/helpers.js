@@ -1,52 +1,52 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-export const scrollToAnchor = id => {
+export const scrollToAnchor = (id) => {
   const yOffset = 0;
   const element = document.querySelector(id);
 
   if (element) {
-    const pageY = document.querySelector('#root').scrollTop;
+    const pageY = document.querySelector("#root").scrollTop;
     const y = element.getBoundingClientRect().top + pageY + yOffset;
-    document.querySelector('#root').scrollTo({ top: y, behavior: 'smooth' });
+    document.querySelector("#root").scrollTo({ top: y, behavior: "smooth" });
   }
-}
+};
 
 export const useMediaQuery = (query) => {
   const [matches, setMatches] = useState();
   useEffect(() => {
     const mediaMatch = window.matchMedia(query);
-    if (!mediaMatch) return
-    setMatches(mediaMatch.matches)
+    if (!mediaMatch) return;
+    setMatches(mediaMatch.matches);
 
-    const handler = e => setMatches(e.matches)
-    mediaMatch.addEventListener('change', handler)
+    const handler = (e) => setMatches(e.matches);
+    mediaMatch.addEventListener("change", handler);
 
-    return () => mediaMatch.removeEventListener('change', handler)
-  })
+    return () => mediaMatch.removeEventListener("change", handler);
+  });
 
-  return matches
+  return matches;
 };
 
 export const useMousedown = () => {
-  const [mousedown, setMousedown] = useState(false)
-  const handlerTrue = () => setMousedown(true)
-  const handlerFalse = () => setMousedown(false)
+  const [mousedown, setMousedown] = useState(false);
+  const handlerTrue = () => setMousedown(true);
+  const handlerFalse = () => setMousedown(false);
 
   useEffect(() => {
-    document.addEventListener('mousedown', handlerTrue)
-    document.addEventListener('keydown', handlerFalse)
+    document.addEventListener("mousedown", handlerTrue);
+    document.addEventListener("keydown", handlerFalse);
     return () => {
-      document.removeEventListener('mousedown', handlerTrue)
-      document.removeEventListener('keydown', handlerFalse)
-    }
-  }, [])
+      document.removeEventListener("mousedown", handlerTrue);
+      document.removeEventListener("keydown", handlerFalse);
+    };
+  }, []);
 
-  return mousedown
-}
+  return mousedown;
+};
 
 export const getBodyLockStyle = ({ padRight = 0 }) => ({
   body: {
     overflowY: "hidden",
-    paddingRight: padRight ? '15px' : 0
-  }
-})
+    paddingRight: padRight ? "15px" : 0,
+  },
+});

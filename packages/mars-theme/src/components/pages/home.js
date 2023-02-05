@@ -17,7 +17,7 @@ const Home = ({ state, libraries }) => {
     try {
       openingHoursData = JSON.parse(page?.openingHours);
     } catch (error) {
-      console.log("JSON ERRROR\n", error);
+      console.error("Fetching opening hours data failed\n", error);
     }
   }
 
@@ -63,7 +63,7 @@ const Container = styled.div`
     padding: 0 1rem 4rem; 
 
     @media (min-width: 768px) {
-      margin: 8rem calc(-50vw + 480px) 0;
+      margin: 4rem calc(-50vw + 480px) 0;
       padding: 2rem calc(50vw - 480px);
     }
 

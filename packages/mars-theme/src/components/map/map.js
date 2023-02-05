@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { styled, connect, Global, Head, loadable } from "frontity";
 import { CloseIcon, MapIcon } from "../theme";
 import { useMediaQuery, getBodyLockStyle } from "../../helpers";
@@ -7,15 +8,20 @@ const MapModal = loadable(() => import("./map-modal"));
 const Map = ({ state, actions }) => {
   const { isMapOpen, isMobileMenuOpen } = state.theme;
   const isWideScreen = useMediaQuery("(min-width: 768px)");
+  const mapRef = useRef();
+
   return (
     <>
       {!isMobileMenuOpen && (
-        <MapToggle
-          isOpen={isMapOpen}
-          onClick={actions.theme.toggleMap}
-          isWideScreen={isWideScreen}
-        >
-          {isMapOpen ? (
+        <>
+          <MapToggle
+            isOpen={isMapOpen}
+            onClick={actions.theme.toggleMap}
+            isWideScreen={isWideScreen}
+          >
+            {isMapOpen ? <CloseIcon /> : <MapIcon />}
+          </MapToggle>
+          {isMapOpen && (
             <>
               <Head>
                 <link
@@ -34,14 +40,16 @@ const Map = ({ state, actions }) => {
                 />
               </Head>
               <Global styles={getBodyLockStyle({ padRight: isWideScreen })} />
-              <CloseIcon />
             </>
-          ) : (
-            <MapIcon />
           )}
-        </MapToggle>
+        </>
       )}
-      {isMapOpen && <MapModal />}
+      {isMapOpen && (
+        <MapModal
+          ref={mapRef}
+          onClick={() => isMapOpen && actions.theme.toggleMap()}
+        />
+      )}
     </>
   );
 };

@@ -59,7 +59,9 @@ const Theme = ({ state, actions }) => {
         className={[
           mousedown ? "mousedown" : "",
           isLandscape ? "landscape" : "",
-        ].join(" ")}
+        ]
+          .filter(Boolean)
+          .join(" ")}
       >
         <Header sticky={isSticky} />
         {data.isPost ||
@@ -74,35 +76,35 @@ const Theme = ({ state, actions }) => {
               <HomepageHero when={data.isHome} />
               <GenericHero
                 when={data.route === "/tours/"}
-                title={<>Auschwitz Tours:<br/>Prices, Tickets, Guidelines</>}
+                title={<>Auschwitz Tours: Tickets, Prices, Tips</>}
                 cta="top pick"
                 ctaId="organized"
                 ctaHint="popular tours"
               />
               <GenericHero
                 when={data.route === "/arrival/"}
-                title="How to Get to Auschwitz Memorial"
+                title="How to Get to Auschwitz Museum"
                 cta="entry"
                 ctaId="entrances"
                 ctaHint="where it starts"
               />
               <GenericHero
                 when={data.route === "/get-ready/"}
-                title="How to Prepare and What to Expect on Site"
+                title="How to Prepare and What to Expect"
                 cta="on site"
                 ctaId="on-site"
                 ctaHint="before entering"
               />
               <GenericHero
                 when={data.route === "/auschwitz-birkenau/"}
-                title="Auschwitz Camp Visiting Guide"
+                title="Auschwitz Memorial Visiting Guide"
                 cta="extras"
                 ctaId="beyond"
                 ctaHint="more on site"
               />
               <GenericHero
                 when={data.route === "/surroundings/"}
-                title="Discover Places Near the Museum"
+                title="Discover Auschwitz Camp Vicinity"
                 cta="nature"
                 ctaId="nature"
                 ctaHint="rest nearby"
@@ -421,7 +423,7 @@ const Hero = styled.div`
       font-size: 4rem;
       align-self: center;
       margin: 72px;
-      max-width: 700px
+      max-width: 700px;
     }
   }
 `;
@@ -465,7 +467,13 @@ const GenericHero = ({ title, cta, ctaId, ctaHint }) => (
 
 const HomepageHero = () => (
   <div>
-    <h1>
+    <h1
+      css={css`
+        @media (min-width: 768px) {
+          transform: scale(1.2);
+        }
+      `}
+    >
       <small>How to visit</small>
       <span
         css={css`

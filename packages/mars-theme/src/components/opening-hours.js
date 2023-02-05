@@ -24,16 +24,14 @@ export const OpeningHours = () => {
   const [selectedMonth, setSelectedMonth] = useState(
     monthNames[today.getMonth()]
   );
+
   const data = useOpeningHours();
-
   if (!data) return null;
-
-  const months = Object.keys(data);
-
+  
   const { entry } = data?.[selectedMonth] ?? {};
-
   if (!entry) return null;
-
+  
+  const months = Object.keys(data);
   const monthSelector = (
     <form>
       <select

@@ -88,11 +88,11 @@ const Container = styled.div`
   z-index: 5;
   background: transparent;
   transition: background-color 600ms ease-out, color 600ms ease-out,
-    backdrop-filter 150ms ease-out;
-  // color: ${(props) => (props.sticky ? "#444" : "#fffff0")};
+  backdrop-filter 150ms ease-out;
   color: #444;
 
   @media (min-width: 960px) {
+    height: 56px;
     background-color: #fffff022;
     backdrop-filter: blur(${(props) => (props.blur ? 10 : 4)}px) saturate(0.5)
       contrast(0.3) brightness(1.1);
@@ -133,7 +133,7 @@ const LogoLink = styled(Link)`
   height: 48px;
   display: block;
   box-sizing: border-box;
-  padding: ${(props) => (props.$small ? 0.75 : 0.5)}rem;
+  padding: ${(props) => (props.$small ? '10px 1rem 0.5rem' : '0.5rem')};
   margin: 0 0 0 1rem;
   z-index: 3;
   transition: opacity 300ms ease-out;

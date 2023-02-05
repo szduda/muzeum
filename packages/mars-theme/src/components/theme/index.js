@@ -5,6 +5,7 @@ export { Search as SearchIcon } from "./icons/search";
 export { Arrow as ArrowIcon } from "./icons/arrow";
 export { Close as CloseIcon } from "./icons/close";
 export { Gear as GearIcon } from "./icons/gear";
+export { Scope as ScopeIcon } from "./icons/scope";
 
 export { CookiePopup } from "./cookie-popup";
 export { Slide } from "./slide";
