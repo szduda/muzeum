@@ -27,10 +27,10 @@ export const OpeningHours = () => {
 
   const data = useOpeningHours();
   if (!data) return null;
-  
+
   const { entry } = data?.[selectedMonth] ?? {};
   if (!entry) return null;
-  
+
   const months = Object.keys(data);
   const monthSelector = (
     <form>
@@ -93,6 +93,15 @@ export const OpeningHours = () => {
             <span>{entry.from}</span>
             <span> - </span>
             <span>{entry.to}</span>
+          </div>
+
+          <strong>With a free pass only after</strong>
+          <div
+            css={css`
+              ${h4style}
+            `}
+          >
+            {entry.freeFrom}
           </div>
 
           <strong>Leave the Museum before</strong>
