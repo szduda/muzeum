@@ -2,22 +2,21 @@ import { forwardRef, useMemo } from "react";
 import { styled } from "frontity";
 import { buildings } from "./buildings";
 import { LocateMeButton, LocationMarker } from "./location";
-import { useMediaQuery } from "../../helpers";
 
-const a1center = [50.0271, 19.203];
-
-const entranceAuschwitz = [50.02772, 19.20164];
+const entranceAuschwitz = [50.02949, 19.20553];
 const entranceBirkenau = [50.03439, 19.18107];
 
-const carparkMuzeum = [50.02826, 19.20075];
+const carparkMuzeum = [50.02997, 19.20587];
 const carparkSzajny = [50.02717, 19.19931];
-const carparkBirkenau = [50.03555, 19.18403];
+const carparkBirkenau1 = [50.03555, 19.18403];
+const carparkBirkenau2 = [50.04003, 19.18164];
 const carparkImperiale = [50.02856, 19.1986];
 const carparkRide = [50.04275, 19.20224];
+const carparkJaracza = [50.03236, 19.19818];
 const carparkRadius = 25;
 const carparkColor = "blue";
 
-const MapModal = forwardRef(({ onClick, isMobile }, ref) => {
+const MapModal = forwardRef(({ onClick, isMobile, currentAnchor }, ref) => {
   let MapContainer,
     TileLayer,
     Marker,
@@ -37,18 +36,16 @@ const MapModal = forwardRef(({ onClick, isMobile }, ref) => {
     Polygon = require("react-leaflet").Polygon;
   }, []);
 
-  const currentAnchor = "car";
-
   const layers = [
     {
-      name: "Buildings",
+      name: "Auschwitz I buildings",
+      anchors: ["A1"],
       markers: Object.keys(buildings).map((slug) => (
         <Polygon key={slug} positions={buildings[slug]} />
       )),
     },
     {
       name: "Museum entrances",
-      anchors: ["car"],
       markers: (
         <>
           <Marker position={entranceAuschwitz}>
@@ -73,7 +70,7 @@ const MapModal = forwardRef(({ onClick, isMobile }, ref) => {
     },
     {
       name: "Parking lots",
-      anchors: ["car"],
+      anchors: ["car", "default"],
       markers: (
         <>
           <CircleMarker
@@ -82,11 +79,24 @@ const MapModal = forwardRef(({ onClick, isMobile }, ref) => {
             radius={carparkRadius}
           >
             <Popup>
-              <h5>Temporarily unavailable</h5>The main Auschwitz parking lot is
-              closed due to construction works. Museum{" "}
-              <a href="https://visitauschwitz.info/arrival/" target="_blank">
-                opening hours.
-              </a>
+              Car – 20 PLN
+              <br />
+              Minibus – 30 PLN
+              <br />
+              Bus – 40 PLN
+              <br />
+              Camper – 90 PLN
+              <br />
+              Motorcycle – 15 PLN
+              <br />
+              <h5>
+                <a
+                  href="https://visitauschwitz.info/get-ready/#on-site"
+                  target="_blank"
+                >
+                  Learn what's on site.
+                </a>
+              </h5>
             </Popup>
           </CircleMarker>
           <CircleMarker
@@ -94,28 +104,52 @@ const MapModal = forwardRef(({ onClick, isMobile }, ref) => {
             pathOptions={{ color: "", fillColor: carparkColor }}
             radius={carparkRadius}
           >
-            <Popup>Prices per day and opening hours.</Popup>
+            <Popup>Józefa Szajny Street parking lot.</Popup>
           </CircleMarker>
           <CircleMarker
             center={carparkImperiale}
             pathOptions={{ color: "", fillColor: carparkColor }}
             radius={carparkRadius}
           >
-            <Popup>Prices per day and opening hours.</Popup>
+            <Popup>Hotel Imperiale parking lot.</Popup>
           </CircleMarker>
           <CircleMarker
-            center={carparkBirkenau}
+            center={carparkBirkenau1}
             pathOptions={{ color: "", fillColor: carparkColor }}
             radius={carparkRadius}
           >
-            <Popup>Prices per day and opening hours.</Popup>
+            <Popup>
+              40 PLN for vehicles not higher than 240 cm and 80 PLN for others.
+            </Popup>
+          </CircleMarker>
+          <CircleMarker
+            center={carparkBirkenau2}
+            pathOptions={{ color: "", fillColor: carparkColor }}
+            radius={carparkRadius}
+          >
+            <Popup>
+              Car (up to 20 people) – 20 PLN
+              <br />
+              Camper – 30 PLN
+              <br />
+              Bus – 40 PLN
+              <br />
+              Motorcycle – 10 PLN
+            </Popup>
           </CircleMarker>
           <CircleMarker
             center={carparkRide}
             pathOptions={{ color: "", fillColor: carparkColor }}
             radius={carparkRadius}
           >
-            <Popup>Prices per day and opening hours.</Popup>
+            <Popup>Park & Ride by the railway station.</Popup>
+          </CircleMarker>
+          <CircleMarker
+            center={carparkJaracza}
+            pathOptions={{ color: "", fillColor: carparkColor }}
+            radius={carparkRadius}
+          >
+            <Popup>Stefana Jaracza Street parking lot.</Popup>
           </CircleMarker>
         </>
       ),
@@ -128,8 +162,8 @@ const MapModal = forwardRef(({ onClick, isMobile }, ref) => {
       <Content>
         <div id="map-container">
           <MapContainer
-            center={a1center}
-            zoom={17}
+            center={entranceAuschwitz}
+            zoom={14}
             scrollWheelZoom={true}
             ref={ref}
           >
@@ -142,7 +176,11 @@ const MapModal = forwardRef(({ onClick, isMobile }, ref) => {
             <LayersControl position="topright" collapsed={isMobile ?? true}>
               {layers.map((layer) => (
                 <LayersControl.Overlay
-                  checked={layer.anchors?.includes(currentAnchor)}
+                  checked={
+                    layer.anchors?.length
+                      ? layer.anchors.includes(currentAnchor || "default")
+                      : true
+                  }
                   name={layer.name}
                   key={layer.name}
                 >
