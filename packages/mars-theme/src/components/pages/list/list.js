@@ -1,48 +1,56 @@
-import { connect, styled, css } from "frontity";
+import { connect, styled, css, Head } from "frontity";
 import Item from "./list-item";
 import Pagination from "./pagination";
 
 const List = ({ state }) => {
   // Get the data of the current list.
   const data = state.source.get(state.router.link);
-  
-  return (
-    <Container>
-      <div
-        css={css`
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          margin: 2rem 0;
 
-          @media (min-width: 1024px) {
-            margin: 2rem -2rem;
-          }
-        `}
-      >
+  return (
+    <>
+      <Head>
+        <meta
+          name="canonical"
+          content={`https://visitauschwitz.info${state.router.link}`}
+        />
+      </Head>
+      <Container>
         <div
           css={css`
             display: flex;
-            justify-content: center;
-            margin: 0 0 2rem;
             flex-direction: column;
-            width: 100%;
+            align-items: center;
+            margin: 2rem 0;
 
-            @media (min-width: 768px) {
-              flex-direction: row;
-              flex-wrap: wrap;
+            @media (min-width: 1024px) {
+              margin: 2rem -2rem;
             }
           `}
         >
-          {data.items.map(({ type, id }) => {
-            const item = state.source[type][id];
+          <div
+            css={css`
+              display: flex;
+              justify-content: center;
+              margin: 0 0 2rem;
+              flex-direction: column;
+              width: 100%;
 
-            return <Item key={item.id} post={item} />;
-          })}
-          <Pagination />
+              @media (min-width: 768px) {
+                flex-direction: row;
+                flex-wrap: wrap;
+              }
+            `}
+          >
+            {data.items.map(({ type, id }) => {
+              const item = state.source[type][id];
+
+              return <Item key={item.id} post={item} />;
+            })}
+            <Pagination />
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </>
   );
 };
 
