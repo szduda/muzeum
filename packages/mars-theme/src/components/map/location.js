@@ -1,5 +1,5 @@
 import { styled } from "frontity";
-import L from ".leaflet-aabcde";
+import L from ".leaflet";
 import scope from "../theme/icons/scope.svg";
 import { ScopeIcon } from "../theme";
 import useGeolocation from "react-hook-geolocation";
