@@ -92,7 +92,7 @@ const Container = styled.div`
   color: #444;
 
   @media (min-width: 960px) {
-    height: 56px;
+    height: 48px;
     background-color: #fffff022;
     backdrop-filter: blur(${(props) => (props.blur ? 10 : 4)}px) saturate(0.5)
       contrast(0.3) brightness(1.1);

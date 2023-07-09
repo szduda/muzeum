@@ -44,7 +44,8 @@ export const SearchContent = connect(({ landscape, open }) => {
           <ResultsWrapper>
             {results.map((item, index) => (
               <ResultItem key={index} delay={index} link={getUrl(item.url)}>
-                {item.title}
+                <h4>{item.title}</h4>
+                <p>{item.snippet}</p>
               </ResultItem>
             ))}
           </ResultsWrapper>

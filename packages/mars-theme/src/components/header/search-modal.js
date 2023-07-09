@@ -3,6 +3,7 @@ import { styled, css, connect } from "frontity";
 import { Input, Form } from "reactstrap";
 import Link from "../link";
 import { CloseIcon } from "../theme";
+import {H4} from '../headings'
 import useSearch from "./useSearch";
 
 const SearchModal = () => {
@@ -33,16 +34,18 @@ const SearchModal = () => {
           <ResultsWrapper>
             {results.map((item, index) => (
               <ResultItem key={index} delay={index} link={getUrl(item.url)}>
-                <span dangerouslySetInnerHTML={{ __html: item.title }} />
+                <H4 dangerouslySetInnerHTML={{ __html: item.title }} css={!item.snippet && css`padding-bottom: 0 !important;`} />
+                <p>{item.snippet}</p>
               </ResultItem>
             ))}
           </ResultsWrapper>
         ) : null}
-        {results.length ? (
+        {/* {!results.length && term && 'No results found.'} */}
+        {/* {results.length ? (
           <AllResultsButton link={`/search/${term}`}>
             See all results
           </AllResultsButton>
-        ) : null}
+        ) : null} */}
       </Content>
       <CloseButton onClick={toggle}>
         <CloseIcon />
@@ -118,32 +121,35 @@ const Wrapper = styled.div`
 `;
 
 const ResultItem = styled(Link)`
-  @keyframes pop {
-    from {
-      transform: scale(0);
-    }
-    to {
-      transform: scale(1);
-    }
-  }
+  // @keyframes pop {
+  //   from {
+  //     transform: scale(0);
+  //   }
+  //   to {
+  //     transform: scale(1);
+  //   }
+  // }
 
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  flex-direction: column;
   box-sizing: border-box;
-  flex-basis: 288px;
+  flex-basis: 70%;
   flex-shrink: 0;
-  height: 240px;
+  // height: 240px;
   background: #f2eedd;
   border-radius: 6px;
   margin: 0 2rem 2rem 0;
   padding: 1rem;
-  animation: pop 200ms ease-out
-    ${(props) => (props.delay ? props.delay * 100 : 0)}ms backwards;
+  // animation: pop 200ms ease-out
+    // ${(props) => (props.delay ? props.delay * 100 : 0)}ms backwards;
 
   :hover {
     background: #e2e2d2;
+  }
+
+  text-decoration: none !important;
+  h4 {
+    text-decoration: underline;
   }
 `;
 
@@ -156,7 +162,7 @@ const ResultsWrapper = styled.div`
 
 const Content = styled.div`
   padding: 1rem;
-  height: calc(100vh - 56px);
+  height: calc(100vh - 48px);
   overflow-y: scroll;
   width: 100%;
   display: flex;
@@ -165,6 +171,6 @@ const Content = styled.div`
   align-items: center;
 
   @media (min-width: 768px) {
-    padding: 4rem 4rem 1rem;
+    padding: 4rem 0 1rem;
   }
 `;

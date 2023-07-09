@@ -3,7 +3,7 @@ import { H4 } from "./headings";
 import Image from "@frontity/components/image";
 
 const imageUrl =
-  "https://noderesources.visitauschwitz.info/wp-content/uploads/2022/12/Lukasz-the-Auschwitz-guide.jpg";
+  "https://noderesources.visitauschwitz.info/wp-content/uploads/2023/06/Lukasz-the-Auschwitz-guide.jpg";
 
 export const Author = () => (
   <div

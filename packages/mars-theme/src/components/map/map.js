@@ -48,6 +48,7 @@ const Map = ({ state, actions }) => {
         <MapModal
           ref={mapRef}
           onClick={() => isMapOpen && actions.theme.toggleMap()}
+          isMobile={!isWideScreen}
         />
       )}
     </>
