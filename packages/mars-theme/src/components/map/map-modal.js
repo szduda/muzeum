@@ -215,7 +215,7 @@ const Content = styled.div`
   left: 0;
   padding: 0;
   overflow: hidden;
-  height: 100vh;
+  height: 100dvh;
   // height: calc(100vh - 52px);
   width: 100%;
   display: flex;

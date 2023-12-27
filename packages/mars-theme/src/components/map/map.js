@@ -20,44 +20,44 @@ const Map = ({ state, actions }) => {
   const isWideScreen = useMediaQuery("(min-width: 768px)");
   const mapRef = useRef();
 
-  // const availableAnchors =
-  //   routeAnchors?.[state.router.link.split("#")?.[0]]?.anchors;
+  const availableAnchors =
+    routeAnchors?.[state.router.link.split("#")?.[0]]?.anchors;
 
-  // const observerRef = useRef(null);
-  // const [currentAnchor, setCurrentAnchor] = useState(
-  //   availableAnchors?.[0] || null
-  // );
+  const observerRef = useRef(null);
+  const [currentAnchor, setCurrentAnchor] = useState(
+    availableAnchors?.[0] || null
+  );
 
-  // useEffect(() => {
-  //   const callback = (entries) => {
-  //     const { target, isIntersecting } = entries?.[0] ?? {};
-  //     const activatedAnchor = target?.id;
+  useEffect(() => {
+    const callback = (entries) => {
+      const { target, isIntersecting } = entries?.[0] ?? {};
+      const activatedAnchor = target?.id;
 
-  //     if (activatedAnchor && isIntersecting) {
-  //       setCurrentAnchor(activatedAnchor);
-  //     }
-  //   };
+      if (activatedAnchor && isIntersecting) {
+        setCurrentAnchor(activatedAnchor);
+      }
+    };
 
-  //   const options = {
-  //     root: document.querySelector("body"),
-  //     rootMargin: "-45%",
-  //     threshold: 0,
-  //   };
+    const options = {
+      root: document.querySelector("body"),
+      rootMargin: "-45%",
+      threshold: 0,
+    };
 
-  //   if (availableAnchors) {
-  //     const observer = new IntersectionObserver(callback, options);
-  //     availableAnchors.map((anchor) => {
-  //       const target = document.querySelector(`#${anchor}`);
-  //       observer.observe(target);
-  //     });
+    if (availableAnchors) {
+      const observer = new IntersectionObserver(callback, options);
+      availableAnchors.map((anchor) => {
+        const target = document.querySelector(`#${anchor}`);
+        observer.observe(target);
+      });
 
-  //     observerRef.current = observer;
-  //   }
+      observerRef.current = observer;
+    }
 
-  //   return () => {
-  //     observerRef.current = null;
-  //   };
-  // }, []);
+    return () => {
+      observerRef.current = null;
+    };
+  }, []);
 
   return (
     <>
@@ -98,7 +98,7 @@ const Map = ({ state, actions }) => {
           ref={mapRef}
           onClick={() => isMapOpen && actions.theme.toggleMap()}
           isMobile={!isWideScreen}
-          // currentAnchor={currentAnchor}
+          currentAnchor={currentAnchor}
         />
       )}
     </>

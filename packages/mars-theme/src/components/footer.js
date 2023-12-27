@@ -22,7 +22,7 @@ export const Footer = ({ state, libraries }) => {
             </div>
           )}
         </Row>
-        <Copyright>© 2022 visitauschwitz.info</Copyright>
+        <Copyright>© {new Date().getFullYear()} visitauschwitz.info</Copyright>
       </FooterContent>
     </FooterWrapper>
   );
@@ -31,11 +31,11 @@ export const Footer = ({ state, libraries }) => {
 export default connect(Footer);
 
 const Row = styled.div`
-width: 100%;
+  width: 100%;
   @media (min-width: 768px) {
     display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 `;
 
@@ -104,7 +104,7 @@ const FooterContent = styled.div`
 
     a {
       box-sizing: border-box;
-      font-size: 1.20rem;
+      font-size: 1.2rem;
       line-height: 1.5rem;
       background: #888a;
       margin: 0;
@@ -115,7 +115,7 @@ const FooterContent = styled.div`
       text-align: center;
       max-width: 400px;
 
-      @media(min-width: 768px) {
+      @media (min-width: 768px) {
         font-size: 2rem;
         line-height: 3rem;
         padding: 2rem 1.5rem;
